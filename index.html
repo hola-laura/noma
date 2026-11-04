@@ -12,10 +12,12 @@ html{scroll-behavior:smooth}
 body{margin:0;background:#FFEFE6}
 a{color:inherit}a:hover{opacity:.78}
 .sector{transition:background .15s,color .15s}
+.sectors{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:700px){.sectors{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .sector:hover{background:#3A120A!important;color:#FFFFFF!important}
-.gallery-stage{position:relative;width:100%;max-width:528px;margin-inline:auto;aspect-ratio:528/606;min-width:0}
+.gallery-stage{position:relative;width:100%;max-width:440px;margin-inline:auto;aspect-ratio:528/606;min-width:0}
 .gallery{isolation:isolate;position:absolute;left:0;top:0;width:528px;height:606px;transform:scale(var(--gallery-scale,.6));transform-origin:top left}
-.gallery-card{position:absolute;padding:0;background:transparent;border:0;border-radius:24px;overflow:hidden;will-change:translate,rotate,transform;backface-visibility:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;-webkit-tap-highlight-color:transparent}
+.gallery-card{position:absolute;padding:0;background:#FFFFFF;border:0;border-radius:24px;overflow:hidden;will-change:translate,rotate,transform;backface-visibility:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;-webkit-tap-highlight-color:transparent}
 .gallery-card[data-slot="0"]{left:56px;top:43px;width:388px;height:484px;transform:rotate(-15.35deg)}
 .gallery-card[data-slot="1"]{left:56px;top:48px;width:388px;height:493px;transform:rotate(-7.8deg)}
 .gallery-card[data-slot="2"]{left:62px;top:45px;width:398px;height:501px;transform:rotate(7deg)}
@@ -30,36 +32,38 @@ a{color:inherit}a:hover{opacity:.78}
 </head>
 <body>
 <div id="app"></div>
-<script type="text/plain" id="tpl"><div style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; color: {{ t.ink }}; background: {{ t.bg }}; font-size: 19px; line-height: 1.45">
+<script type="text/plain" id="tpl"><div style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; color: {{ t.ink }}; background: {{ t.bg }}; font-size: 18px; line-height: 1.5">
 
 <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+<div style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column">
 <header>
-<div style="max-width: 1360px; margin: 0 auto; padding: 20px 24px">
+<div style="max-width: 1120px; margin: 0 auto; padding: 20px 24px">
 <span style="font-size: 32px; font-weight: 700; line-height: 1; letter-spacing: -0.03em">noma.</span>
 </div>
 </header>
-<section>
-<div style="max-width: 1360px; margin: 0 auto; padding: 40px 24px 72px; display: flex; flex-direction: column; gap: 28px">
-<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(52px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em; color: {{ t.h }}">Hola, soy Laura.</h1>
-<p style="margin: 0; max-width: 32em; font-size: clamp(20px, 1.9vw, 26px); line-height: 1.35; text-wrap: pretty">Vivo en Urgel y llevo años diseñando productos digitales para banca, ecommerce y food delivery. Ahora ayudo a los negocios del barrio a ganar clientes y tiempo.</p>
-<h2 style="margin: 28px 0 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.1">¿Qué negocio tienes?</h2>
-<div role="group" aria-label="Elige tu tipo de negocio" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px">
+<section style="flex: 1; display: flex; align-items: center">
+<div style="flex: 1; min-width: 0; max-width: 1120px; margin: 0 auto; padding: clamp(8px, 2.5vh, 32px) 24px; display: flex; flex-direction: column; gap: clamp(12px, 2.4vh, 24px)">
+<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, min(6.6vw, 10vh), 84px); line-height: 1.04; letter-spacing: -0.02em; color: {{ t.h }}">Hola, soy Laura.</h1>
+<p style="margin: 0; max-width: 32em; font-size: clamp(16px, min(1.6vw, 2.4vh), 22px); line-height: 1.35; text-wrap: pretty">Vivo en Urgel y llevo años diseñando productos digitales para banca, ecommerce y food delivery. Ahora ayudo a los negocios del barrio a ganar clientes y tiempo.</p>
+<h2 style="margin: clamp(2px, 1.6vh, 16px) 0 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(23px, min(2.6vw, 3.8vh), 34px); line-height: 1.1">¿Qué negocio tienes?</h2>
+<div role="group" aria-label="Elige tu tipo de negocio" class="sectors">
 <sc-for list="{{ sectors }}" as="item" hint-placeholder-count="10">
-<button type="button" class="sector" onClick="{{ item.pick }}" style="min-height: 92px; padding: 18px 22px; border: none; border-radius: 18px; background: #FFFFFF; color: {{ t.ink }}; font-family: 'Young Serif', Georgia, serif; font-size: 23px; line-height: 1.15; text-align: left; cursor: pointer">{{ item.label }}</button>
+<button type="button" class="sector" onClick="{{ item.pick }}" style="min-height: clamp(52px, 9vh, 84px); padding: 8px 14px; border: none; border-radius: 14px; background: #FFFFFF; color: {{ t.ink }}; font-family: 'Young Serif', Georgia, serif; font-size: clamp(16px, min(1.6vw, 2.5vh), 20px); line-height: 1.15; text-align: left; cursor: pointer">{{ item.label }}</button>
 </sc-for>
 </div>
 </div>
 </section>
 <section aria-label="Oferta" style="background: {{ t.a }}; color: {{ t.on }}">
-<div style="max-width: 1360px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 40px">
-<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.2">Los 20 primeros negocios del barrio pagan la mitad en su primer servicio.</p>
+<div style="max-width: 1120px; margin: 0 auto; padding: clamp(12px, 2.4vh, 24px) 24px">
+<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(16px, 2vw, 26px); line-height: 1.2">Los 20 primeros negocios del barrio pagan la mitad en su primer servicio.</p>
 </div>
 </section>
+</div>
 </sc-if>
 
 <sc-if value="{{ isPage }}" hint-placeholder-val="{{ false }}">
 <header>
-<nav aria-label="Principal" style="max-width: 1360px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
+<nav aria-label="Principal" style="max-width: 1120px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
 <a href="#inicio" aria-label="noma, inicio" style="font-size: 32px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; text-decoration: none">noma.</a>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; font-weight: 500; font-size: 17px">
 <a href="#servicios" style="text-decoration: none; padding: 10px 0">Servicios</a>
@@ -71,26 +75,26 @@ a{color:inherit}a:hover{opacity:.78}
 </header>
 
 <section id="inicio">
-<div style="max-width: 1360px; margin: 0 auto; padding: 32px 24px 40px; display: flex; flex-direction: column; gap: 28px">
+<div style="max-width: 1120px; margin: 0 auto; padding: 32px 24px 40px; display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px">
 <span style="font-weight: 600">{{ s.label }}</span>
 <button type="button" onClick="{{ reset }}" style="min-height: 44px; padding: 0; border: none; background: none; color: {{ t.ink }}; font: inherit; text-decoration: underline; cursor: pointer">Cambiar de negocio</button>
 </div>
-<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(50px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em; color: {{ t.h }}">{{ s.h1a }}<br>{{ s.h1b }}</h1>
+<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(46px, 6.6vw, 84px); line-height: 1.04; letter-spacing: -0.02em; color: {{ t.h }}">{{ s.h1a }}<br>{{ s.h1b }}</h1>
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 48px">
-<p style="margin: 0; flex: 1 1 420px; max-width: 30em; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.4; text-wrap: pretty">{{ s.sub }}</p>
+<p style="margin: 0; flex: 1 1 420px; max-width: 30em; font-size: clamp(18px, 1.5vw, 20px); line-height: 1.4; text-wrap: pretty">{{ s.sub }}</p>
 <a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font-weight: 600; text-decoration: none">Cuéntame tu negocio</a>
 </div>
 </div>
 
-<div style="max-width: 1360px; margin: 0 auto; padding: 0 24px">
-<div style="background: {{ t.a }}; color: {{ t.on }}; border-radius: 28px; padding: clamp(20px, 4.5vw, 64px); display: flex; flex-direction: column; gap: 28px">
-<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.15">{{ s.dh }}</p>
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
+<div style="background: {{ t.a }}; color: {{ t.on }}; border-radius: 28px; padding: clamp(20px, 3.4vw, 40px); display: flex; flex-direction: column; gap: 28px">
+<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.15">{{ s.dh }}</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 20px">
 
 <div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px {{ t.line }}">
 <p style="margin: 0; font-size: 15px; font-weight: 600; color: {{ t.mut }}">Lo que ve tu cliente</p>
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 30px; font-weight: 400; line-height: 1.15">{{ s.c1 }}</h2>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 26px; font-weight: 400; line-height: 1.15">{{ s.c1 }}</h2>
 <p style="margin: 0; color: {{ t.mut }}">{{ s.c2 }}</p>
 <div role="group" aria-label="Opciones" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
 <sc-for list="{{ opts }}" as="item" hint-placeholder-count="4">
@@ -102,7 +106,7 @@ a{color:inherit}a:hover{opacity:.78}
 
 <div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px {{ t.line }}">
 <p style="margin: 0; font-size: 15px; font-weight: 600; color: {{ t.mut }}">Lo que te llega a ti</p>
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 30px; font-weight: 400; line-height: 1.15">{{ s.got }} {{ chosen }}</h2>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 26px; font-weight: 400; line-height: 1.15">{{ s.got }} {{ chosen }}</h2>
 <p style="margin: 0; color: {{ t.mut }}">{{ s.note }}</p>
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
 <sc-for list="{{ agenda }}" as="row" hint-placeholder-count="4">
@@ -117,26 +121,26 @@ a{color:inherit}a:hover{opacity:.78}
 </section>
 
 <section id="servicios">
-<div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px 0; display: flex; flex-direction: column; gap: 128px">
+<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px 0; display: flex; flex-direction: column; gap: 96px">
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
 <div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Una web que te representa</h2>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Una web que te representa</h2>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.wText }}</p>
 </div>
-<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px)">
+<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 2.6vw, 32px)">
 <div style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px {{ t.line }}">
 <div style="padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; font-size: 15px"><strong>Tu negocio</strong><span style="color: {{ t.mut }}">{{ s.wNav }}</span></div>
 <div style="background: {{ t.a }}; color: {{ t.on }}; padding: 44px 24px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start">
-<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.08">{{ s.wHead }}</p>
+<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(26px, 2.4vw, 32px); line-height: 1.08">{{ s.wHead }}</p>
 <span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-size: 16px; font-weight: 600">{{ s.wBtn }}</span>
 </div>
 </div>
 </div>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
-<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px)">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
+<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 2.6vw, 32px)">
 <div role="img" aria-label="Ejemplo de perfil de Instagram con seis publicaciones diseñadas" style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px {{ t.line }}">
 <div style="padding: 14px 16px; display: flex; align-items: center; gap: 12px">
 <div style="width: 44px; height: 44px; flex: none; border-radius: 50%; background: {{ t.a }}; color: {{ t.on }}; display: flex; align-items: center; justify-content: center; font-family: 'Young Serif', Georgia, serif; font-size: 22px">T</div>
@@ -150,17 +154,17 @@ a{color:inherit}a:hover{opacity:.78}
 </div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Tus redes, resueltas todo el mes</h2>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Tus redes, resueltas todo el mes</h2>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.sText }}</p>
 </div>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
 <div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Lo repetitivo, que se haga solo</h2>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Lo repetitivo, que se haga solo</h2>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.fText }}</p>
 </div>
-<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px); display: flex; flex-direction: column; gap: 10px">
+<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 2.6vw, 32px); display: flex; flex-direction: column; gap: 10px">
 <sc-for list="{{ flow }}" as="f" hint-placeholder-count="4">
 <div style="{{ f.css }}"><span style="font-weight: 600">{{ f.text }}</span><span style="font-size: 16px">Automático</span></div>
 </sc-for>
@@ -171,9 +175,9 @@ a{color:inherit}a:hover{opacity:.78}
 </section>
 
 <section id="precios">
-<div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px">
 <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 72px">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Precios claros</h2>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Precios claros</h2>
 <p style="margin: 0; flex: 0 1 26em; text-wrap: pretty">Los 20 primeros negocios del barrio pagan la mitad en su primer servicio. Para empezar, te recomendaría: <strong>{{ s.rec }}</strong>.</p>
 </div>
 <table style="width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums">
@@ -222,7 +226,7 @@ a{color:inherit}a:hover{opacity:.78}
 </section>
 
 <section id="laura" style="background: {{ t.soft }}; overflow-x: clip">
-<div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
+<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
 <div class="gallery-stage" style="color: {{ t.h }}"><div class="gallery" aria-label="Algunas fotos de Laura">
 <button type="button" class="gallery-card" data-slot="3" aria-label="Foto 1, Laura trabajando con su portátil. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-working.jpg" alt="" width="768" height="511"></button>
 <button type="button" class="gallery-card" data-slot="2" aria-label="Foto 2, Laura hablando en un evento. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-speaking.jpg" alt="" width="1987" height="663"></button>
@@ -232,7 +236,7 @@ a{color:inherit}a:hover{opacity:.78}
 <span class="gallery-help" style="color: {{ t.mut }}">Arrastra o toca para barajar ↔</span>
 </div></div>
 <div style="display: flex; flex-direction: column; gap: 24px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Tu vecina, no una agencia</h2>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Tu vecina, no una agencia</h2>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">He diseñado productos digitales para Monzo, Just Eat y RLDatix. También he publicado mi propia app, Drivo Test, y construyo webs con gestor de contenido para pequeños profesionales.</p>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">Hablas siempre conmigo, y te lo dejo preparado para que no dependas de nadie.</p>
 <a href="https://hola-laura.github.io/laura/" style="font-weight: 600; padding: 10px 0">Ver mi portfolio</a>
@@ -241,15 +245,15 @@ a{color:inherit}a:hover{opacity:.78}
 </section>
 
 <section id="contacto" style="background: {{ t.a }}; color: {{ t.on }}">
-<div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(50px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em">¿Qué te quita tiempo?</h2>
-<p style="margin: 0; max-width: 30em; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.4; text-wrap: pretty">Cuéntamelo en 15 minutos, por teléfono o videollamada. Gratis y sin compromiso.</p>
+<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(46px, 6.6vw, 84px); line-height: 1.04; letter-spacing: -0.02em">¿Qué te quita tiempo?</h2>
+<p style="margin: 0; max-width: 30em; font-size: clamp(18px, 1.5vw, 20px); line-height: 1.4; text-wrap: pretty">Cuéntamelo en 15 minutos, por teléfono o videollamada. Gratis y sin compromiso.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px">
 <a href="mailto:lrsmpdr@gmail.com?subject=Quiero%20mejorar%20mi%20negocio" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-weight: 600; text-decoration: none">Escríbeme</a>
 <a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; border: 2px solid {{ t.on }}; box-sizing: border-box; color: {{ t.on }}; font-weight: 600; text-decoration: none">WhatsApp [TU NÚMERO]</a>
 </div>
 </div>
-<div style="max-width: 1360px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 32px; font-size: 16px">
+<div style="max-width: 1120px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 32px; font-size: 16px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <span style="font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: -0.03em">noma.</span>
 <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em">DESIGN · AI · AUTOMATION</span>
@@ -392,6 +396,9 @@ const initGallery = () => {
   const fit = () => stage.style.setProperty('--gallery-scale', stage.clientWidth / 528);
   fit();
   const cards = [...deck.querySelectorAll('.gallery-card')];
+  deck.querySelectorAll('img').forEach((img) => {
+    if (img.complete && !img.naturalWidth) img.remove(); else img.addEventListener('error', () => img.remove());
+  });
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let order = [...cards].reverse(), drag = null, busy = false, paintFrame = 0, generation = 0;
   const animations = new Map();
