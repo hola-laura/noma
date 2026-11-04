@@ -13,6 +13,19 @@ body{margin:0;background:#FFEFE6}
 a{color:inherit}a:hover{opacity:.78}
 .sector{transition:background .15s,color .15s}
 .sector:hover{background:#3A120A!important;color:#FFFFFF!important}
+.gallery-stage{position:relative;width:100%;max-width:528px;margin-inline:auto;aspect-ratio:528/606;min-width:0}
+.gallery{isolation:isolate;position:absolute;left:0;top:0;width:528px;height:606px;transform:scale(var(--gallery-scale,.6));transform-origin:top left}
+.gallery-card{position:absolute;padding:0;background:transparent;border:0;border-radius:24px;overflow:hidden;will-change:translate,rotate,transform;backface-visibility:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;-webkit-tap-highlight-color:transparent}
+.gallery-card[data-slot="0"]{left:56px;top:43px;width:388px;height:484px;transform:rotate(-15.35deg)}
+.gallery-card[data-slot="1"]{left:56px;top:48px;width:388px;height:493px;transform:rotate(-7.8deg)}
+.gallery-card[data-slot="2"]{left:62px;top:45px;width:398px;height:501px;transform:rotate(7deg)}
+.gallery-card[data-slot="3"]{left:54px;top:49px;width:398px;height:501px}
+.gallery-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.gallery-card img[src$="laura-speaking.jpg"]{inset:auto;width:1987px;height:663px;left:-738px;top:-78px;max-width:none}
+.gallery-card.is-dragging{cursor:grabbing;box-shadow:0 24px 40px -16px rgba(0,0,0,.3)}
+.gallery-card:focus-visible{outline:3px solid currentColor;outline-offset:6px}
+.gallery-sticker{position:absolute;z-index:100;top:85px;left:337px;padding:7px 19px;border-radius:24px;border:2px solid;background:#FFFFFF;font-size:21px;line-height:26px;white-space:nowrap;font-weight:700;pointer-events:none;transform:translateZ(0) rotate(-7.74deg)}
+.gallery-help{position:absolute;top:574px;left:72px;width:380px;text-align:center;font-size:15px;pointer-events:none}
 </style>
 </head>
 <body>
@@ -208,9 +221,16 @@ a{color:inherit}a:hover{opacity:.78}
 </div>
 </section>
 
-<section id="laura" style="background: {{ t.soft }}">
+<section id="laura" style="background: {{ t.soft }}; overflow-x: clip">
 <div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
-<div style="aspect-ratio: 4 / 5; max-height: 640px; width: 100%; border-radius: 24px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; color: {{ t.mut }}">[TU FOTO]</div>
+<div class="gallery-stage" style="color: {{ t.h }}"><div class="gallery" aria-label="Algunas fotos de Laura">
+<button type="button" class="gallery-card" data-slot="3" aria-label="Foto 1, Laura trabajando con su portátil. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-working.jpg" alt="" width="768" height="511"></button>
+<button type="button" class="gallery-card" data-slot="2" aria-label="Foto 2, Laura hablando en un evento. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-speaking.jpg" alt="" width="1987" height="663"></button>
+<button type="button" class="gallery-card" data-slot="1" aria-label="Foto 3, retrato de Laura. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-portrait.jpg" alt="" width="506" height="506"></button>
+<button type="button" class="gallery-card" data-slot="0" aria-label="Foto 4, Laura junto a un mural pintado. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-mural.jpg" alt="" width="487" height="599"></button>
+<span class="gallery-sticker">Hola, soy Laura</span>
+<span class="gallery-help" style="color: {{ t.mut }}">Arrastra o toca para barajar ↔</span>
+</div></div>
 <div style="display: flex; flex-direction: column; gap: 24px; align-items: flex-start">
 <h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Tu vecina, no una agencia</h2>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">He diseñado productos digitales para Monzo, Just Eat y RLDatix. También he publicado mi propia app, Drivo Test, y construyo webs con gestor de contenido para pequeños profesionales.</p>
@@ -364,8 +384,128 @@ const THEMES = {
   otro: mkTheme('#C93417', '#FFFFFF', '#C93417', '#3A120A', '#6E4A40', '#FFD9C7', '#FFEFE6', '58, 18, 10')
 };
 
+const initGallery = () => {
+  const deck = document.querySelector('.gallery');
+  if (!deck || deck.dataset.ready) return;
+  deck.dataset.ready = '1';
+  const stage = deck.closest('.gallery-stage');
+  const fit = () => stage.style.setProperty('--gallery-scale', stage.clientWidth / 528);
+  fit();
+  const cards = [...deck.querySelectorAll('.gallery-card')];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let order = [...cards].reverse(), drag = null, busy = false, paintFrame = 0, generation = 0;
+  const animations = new Map();
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const layout = () => order.forEach((card, i) => { card.dataset.slot = i; card.style.zIndex = i + 1; });
+  const stop = (card) => { const a = animations.get(card); if (a) a.cancel(); animations.delete(card); };
+  const position = (card, x, y, angle) => { card.style.translate = x + 'px ' + y + 'px'; card.style.rotate = angle + 'deg'; };
+  const animate = async (card, frames, duration, easing = 'linear') => {
+    stop(card);
+    if (reduced.matches) return;
+    const animation = card.animate(frames, { duration, easing, fill: 'forwards' });
+    animations.set(card, animation);
+    try { await animation.finished; } catch (e) {}
+    if (animations.get(card) === animation) {
+      const last = frames[frames.length - 1];
+      card.style.translate = last.translate; card.style.rotate = last.rotate;
+      animations.delete(card); animation.cancel();
+    }
+  };
+  const spring = (card, x, y, angle = 0) => {
+    if (reduced.matches) { position(card, 0, 0, 0); return Promise.resolve(); }
+    const frames = [], frequency = 17, damping = 0.78, damped = frequency * Math.sqrt(1 - damping * damping);
+    for (let i = 0; i <= 48; i++) {
+      const t = i / 48 * 0.68;
+      const remaining = Math.exp(-damping * frequency * t) * (Math.cos(damped * t) + damping * frequency / damped * Math.sin(damped * t));
+      frames.push({ translate: (x * remaining) + 'px ' + (y * remaining) + 'px', rotate: (angle * remaining) + 'deg', offset: i / 48 });
+    }
+    frames[48] = { translate: '0px 0px', rotate: '0deg', offset: 1 };
+    return animate(card, frames, 680);
+  };
+  const reorder = (card) => {
+    const top = order[order.length - 1] === card;
+    order = order.filter((item) => item !== card);
+    if (top) order.unshift(card); else order.push(card);
+    layout();
+  };
+  const shuffle = async (card, x = 0, y = 0, angle = 0) => {
+    if (busy) return;
+    busy = true;
+    const token = ++generation;
+    if (order[order.length - 1] === card && !reduced.matches) {
+      card.style.zIndex = 5;
+      const scale = deck.getBoundingClientRect().width / deck.offsetWidth;
+      const direction = Math.abs(x) > 5 ? Math.sign(x) : -1;
+      const outX = direction * Math.max(Math.abs(x) + 36, card.getBoundingClientRect().width / scale + 28);
+      const outY = y - 18, outAngle = direction * 9;
+      await animate(card, [{ translate: x + 'px ' + y + 'px', rotate: angle + 'deg' }, { translate: outX + 'px ' + outY + 'px', rotate: outAngle + 'deg' }], Math.abs(x) > 5 ? 140 : 220, 'cubic-bezier(.2,.65,.3,1)');
+      if (token !== generation) return;
+      reorder(card);
+      busy = false;
+      await spring(card, outX, outY, outAngle);
+    } else {
+      reorder(card);
+      await spring(card, x, y, angle);
+    }
+    if (token === generation) busy = false;
+  };
+  const paint = () => { paintFrame = 0; if (drag && drag.moved) position(drag.card, drag.x, drag.y, drag.angle); };
+  const release = (event, cancelled = false) => {
+    if (!drag || (event && event.pointerId !== drag.id)) return;
+    cancelAnimationFrame(paintFrame); paintFrame = 0;
+    const active = drag;
+    drag = null;
+    active.card.classList.remove('is-dragging');
+    if (active.card.hasPointerCapture(active.id)) active.card.releasePointerCapture(active.id);
+    position(active.card, active.x, active.y, active.angle);
+    if (!cancelled && (!active.moved || Math.abs(active.dx) > 52 || (active.type !== 'touch' && Math.abs(active.dy) > 65))) {
+      shuffle(active.card, active.x, active.y, active.angle);
+    } else { layout(); spring(active.card, active.x, active.y, active.angle); }
+  };
+  cards.forEach((card) => {
+    card.addEventListener('dragstart', (e) => e.preventDefault());
+    card.addEventListener('pointerdown', (e) => {
+      if (!e.isPrimary || e.button !== 0 || drag || busy) return;
+      const visual = getComputedStyle(card);
+      const coordinates = visual.translate.split(/\s+/).map(parseFloat);
+      const baseX = Number.isFinite(coordinates[0]) ? coordinates[0] : 0;
+      const baseY = Number.isFinite(coordinates[1]) ? coordinates[1] : 0;
+      const baseAngle = parseFloat(visual.rotate) || 0;
+      stop(card);
+      position(card, baseX, baseY, baseAngle);
+      drag = { baseX, baseY, baseAngle, card, id: e.pointerId, startX: e.clientX, startY: e.clientY, x: baseX, y: baseY, dx: 0, dy: 0, angle: baseAngle, scale: deck.getBoundingClientRect().width / deck.offsetWidth, type: e.pointerType, moved: false };
+      card.setPointerCapture(e.pointerId);
+    });
+    card.addEventListener('pointermove', (e) => {
+      if (!drag || drag.id !== e.pointerId) return;
+      const dx = e.clientX - drag.startX, dy = e.clientY - drag.startY;
+      if (drag.type === 'touch' && !drag.moved && Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { release(e, true); return; }
+      if (!drag.moved && Math.hypot(dx, dy) < 4) return;
+      drag.moved = true; drag.dx = dx; drag.dy = dy;
+      const resist = (value, limit) => Math.abs(value) <= limit ? value : Math.sign(value) * (limit + (Math.abs(value) - limit) * 0.18);
+      drag.x = drag.baseX + resist(dx, 210) / drag.scale;
+      drag.y = drag.baseY + resist(dy, 140) / drag.scale;
+      drag.angle = reduced.matches ? 0 : clamp(drag.baseAngle + dx * 0.035, -9, 9);
+      card.classList.add('is-dragging');
+      card.style.zIndex = 5;
+      if (!paintFrame) paintFrame = requestAnimationFrame(paint);
+    });
+    card.addEventListener('pointerup', release);
+    card.addEventListener('pointercancel', (e) => release(e, true));
+    card.addEventListener('lostpointercapture', (e) => release(e, true));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!drag) shuffle(card); }
+      if (e.key === 'Escape') release(null, true);
+    });
+  });
+  new ResizeObserver(() => { fit(); release(null, true); generation++; busy = false; cards.forEach((card) => { stop(card); position(card, 0, 0, 0); }); layout(); }).observe(stage);
+  layout();
+};
+
 class Component extends DCLogic {
   state = { sector: null, chosen: 1 };
+  componentDidMount() { initGallery(); }
+  componentDidUpdate() { initGallery(); }
   renderVals() {
     const top = () => { try { window.scrollTo(0, 0); } catch (e) {} };
     const sectors = SECTORS.map((x) => ({ label: x.label, pick: () => { this.setState({ sector: x.id, chosen: 1 }); top(); } }));
@@ -403,7 +543,7 @@ const esc=v=>String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'
 function holes(h,v){return h.replace(/onClick="\{\{\s*([\w.$]+)\s*\}\}"/g,(m,p)=>{acts.push(get(v,p));return 'data-act="'+(acts.length-1)+'"'}).replace(/\{\{\s*([\w.$]+)\s*\}\}/g,(m,p)=>{const x=get(v,p);return x==null?m:esc(x)})}
 function draw(){const v=c.renderVals();acts.length=0;let h=TPL.replace(/<sc-if value="\{\{\s*(\w+)\s*\}\}"[^>]*>([\s\S]*?)<\/sc-if>/g,(m,n,b)=>v[n]?b:'');
 h=h.replace(/<sc-for list="\{\{\s*(\w+)\s*\}\}" as="(\w+)"[^>]*>([\s\S]*?)<\/sc-for>/g,(m,l,as,b)=>v[l].map(it=>holes(b,{...v,[as]:it})).join(''));
-root.innerHTML=holes(h,v)}
+root.innerHTML=holes(h,v);if(c.componentDidUpdate)c.componentDidUpdate()}
 root.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b)acts[+b.dataset.act]()});
 draw();
 </script>
