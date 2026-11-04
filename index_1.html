@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>noma. · Web, reservas y redes para tu negocio</title>
+<meta name="description" content="Web, reservas y redes para pequeños negocios de Urgel, Oporto y Marqués de Vadillo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFEFE6}
+a{color:inherit}a:hover{opacity:.78}
+.sector{transition:background .15s,color .15s}
+.sector:hover{background:#3A120A!important;color:#FFFFFF!important}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/plain" id="tpl"><div style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; color: #3A120A; background: #FFEFE6; font-size: 19px; line-height: 1.45">
+
+<sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+<header>
+<div style="max-width: 1360px; margin: 0 auto; padding: 20px 24px">
+<span style="font-size: 32px; font-weight: 700; line-height: 1; letter-spacing: -0.03em">noma.</span>
+</div>
+</header>
+<section>
+<div style="max-width: 1360px; margin: 0 auto; padding: 40px 24px 72px; display: flex; flex-direction: column; gap: 28px">
+<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(52px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em; color: {{accent}}">Hola, soy Laura.</h1>
+<p style="margin: 0; max-width: 32em; font-size: clamp(20px, 1.9vw, 26px); line-height: 1.35; text-wrap: pretty">Vivo en Urgel y llevo años diseñando productos digitales para banca, ecommerce y food delivery. Ahora ayudo a los negocios del barrio a ganar clientes y tiempo.</p>
+<h2 style="margin: 28px 0 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.1">¿Qué negocio tienes?</h2>
+<div role="group" aria-label="Elige tu tipo de negocio" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px">
+<sc-for list="{{ sectors }}" as="item" hint-placeholder-count="10">
+<button type="button" class="sector" onClick="{{ item.pick }}" style="min-height: 92px; padding: 18px 22px; border: none; border-radius: 18px; background: #FFFFFF; color: #3A120A; font-family: 'Young Serif', Georgia, serif; font-size: 23px; line-height: 1.15; text-align: left; cursor: pointer">{{ item.label }}</button>
+</sc-for>
+</div>
+</div>
+</section>
+<section aria-label="Oferta" style="background: {{accent}}; color: #FFFFFF">
+<div style="max-width: 1360px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 40px">
+<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.2">Los 20 primeros negocios del barrio pagan la mitad en su primer servicio.</p>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isPage }}" hint-placeholder-val="{{ false }}">
+<header>
+<nav aria-label="Principal" style="max-width: 1360px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
+<a href="#inicio" aria-label="noma, inicio" style="font-size: 32px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; text-decoration: none">noma.</a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; font-weight: 500; font-size: 17px">
+<a href="#servicios" style="text-decoration: none; padding: 10px 0">Servicios</a>
+<a href="#precios" style="text-decoration: none; padding: 10px 0">Precios</a>
+<a href="#laura" style="text-decoration: none; padding: 10px 0">Quién soy</a>
+<a href="#contacto" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 999px; background: {{accent}}; color: #FFFFFF; font-weight: 600">Hablemos</a>
+</div>
+</nav>
+</header>
+
+<section id="inicio">
+<div style="max-width: 1360px; margin: 0 auto; padding: 32px 24px 40px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px">
+<span style="font-weight: 600">{{ s.label }}</span>
+<button type="button" onClick="{{ reset }}" style="min-height: 44px; padding: 0; border: none; background: none; color: #3A120A; font: inherit; text-decoration: underline; cursor: pointer">Cambiar de negocio</button>
+</div>
+<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(50px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em; color: {{accent}}">{{ s.h1a }}<br>{{ s.h1b }}</h1>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 48px">
+<p style="margin: 0; flex: 1 1 420px; max-width: 30em; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.4; text-wrap: pretty">{{ s.sub }}</p>
+<a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: {{accent}}; color: #FFFFFF; font-weight: 600; text-decoration: none">Cuéntame tu negocio</a>
+</div>
+</div>
+
+<div style="max-width: 1360px; margin: 0 auto; padding: 0 24px">
+<div style="background: {{accent}}; color: #FFFFFF; border-radius: 28px; padding: clamp(20px, 4.5vw, 64px); display: flex; flex-direction: column; gap: 28px">
+<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.15">{{ s.dh }}</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 20px">
+
+<div style="background: #FFFFFF; color: #3A120A; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px rgba(58, 18, 10, 0.2)">
+<p style="margin: 0; font-size: 15px; font-weight: 600; color: #6E4A40">Lo que ve tu cliente</p>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 30px; font-weight: 400; line-height: 1.15">{{ s.c1 }}</h2>
+<p style="margin: 0; color: #6E4A40">{{ s.c2 }}</p>
+<div role="group" aria-label="Opciones" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{ opts }}" as="item" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{ item.pressed }}" onClick="{{ item.pick }}" style="{{ item.css }}">{{ item.text }}</button>
+</sc-for>
+</div>
+<p style="margin: auto 0 0; padding: 14px 20px; text-align: center; line-height: 24px; border-radius: 999px; background: #3A120A; color: #FFFFFF; font-weight: 600">{{ s.btn }} {{ chosen }}</p>
+</div>
+
+<div style="background: #FFFFFF; color: #3A120A; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px rgba(58, 18, 10, 0.2)">
+<p style="margin: 0; font-size: 15px; font-weight: 600; color: #6E4A40">Lo que te llega a ti</p>
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 30px; font-weight: 400; line-height: 1.15">{{ s.got }} {{ chosen }}</h2>
+<p style="margin: 0; color: #6E4A40">{{ s.note }}</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{ agenda }}" as="row" hint-placeholder-count="4">
+<li style="{{ row.css }}"><span style="flex: none; width: 3.2em; font-weight: 600; font-variant-numeric: tabular-nums">{{ row.t }}</span><span>{{ row.w }}</span></li>
+</sc-for>
+</ul>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section id="servicios">
+<div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px 0; display: flex; flex-direction: column; gap: 128px">
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Una web que te representa</h2>
+<p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.wText }}</p>
+</div>
+<div style="background: #FFD9C7; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px)">
+<div style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px rgba(58, 18, 10, 0.12)">
+<div style="padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; font-size: 15px"><strong>Tu negocio</strong><span style="color: #6E4A40">{{ s.wNav }}</span></div>
+<div style="background: {{accent}}; color: #FFFFFF; padding: 44px 24px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start">
+<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.08">{{ s.wHead }}</p>
+<span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #FFFFFF; color: #3A120A; font-size: 16px; font-weight: 600">{{ s.wBtn }}</span>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
+<div style="background: #FFD9C7; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px)">
+<div role="img" aria-label="Ejemplo de perfil de Instagram con seis publicaciones diseñadas" style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px rgba(58, 18, 10, 0.12)">
+<div style="padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+<div style="width: 44px; height: 44px; flex: none; border-radius: 50%; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Young Serif', Georgia, serif; font-size: 22px">T</div>
+<div style="display: flex; flex-direction: column; line-height: 1.25; font-size: 15px"><strong>tu_negocio</strong><span style="color: #6E4A40">Publicaciones de este mes</span></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; font-family: 'Young Serif', Georgia, serif; font-size: clamp(11px, 1.5vw, 21px); line-height: 1.15">
+<sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
+<div style="{{ p.css }}"><span style="padding: 9%">{{ p.text }}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Tus redes, resueltas todo el mes</h2>
+<p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.sText }}</p>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Lo repetitivo, que se haga solo</h2>
+<p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.fText }}</p>
+</div>
+<div style="background: #FFD9C7; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px); display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{ flow }}" as="f" hint-placeholder-count="4">
+<div style="{{ f.css }}"><span style="font-weight: 600">{{ f.text }}</span><span style="font-size: 16px">Automático</span></div>
+</sc-for>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="precios">
+<div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 72px">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Precios claros</h2>
+<p style="margin: 0; flex: 0 1 26em; text-wrap: pretty">Los 20 primeros negocios del barrio pagan la mitad en su primer servicio. Para empezar, te recomendaría: <strong>{{ s.rec }}</strong>.</p>
+</div>
+<table style="width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums">
+<thead>
+<tr style="font-size: 16px; color: #6E4A40; text-align: left">
+<th scope="col" style="padding: 12px 6px 12px 0; font-weight: 500">Servicio</th>
+<th scope="col" style="padding: 12px 6px; font-weight: 500; text-align: right">Precio</th>
+<th scope="col" style="padding: 12px 0 12px 6px; font-weight: 500; text-align: right">Primer servicio</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Reservas online</span><span style="display: block; color: #6E4A40; font-size: 17px">Con calendario y emails automáticos</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">600 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">300 €</span></td>
+</tr>
+<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Web sencilla</span><span style="display: block; color: #6E4A40; font-size: 17px">Una página</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">800 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">400 €</span></td>
+</tr>
+<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Automatización sencilla</span><span style="display: block; color: #6E4A40; font-size: 17px">Una tarea, de principio a fin</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">350 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">175 €</span></td>
+</tr>
+<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Gestión básica de redes</span><span style="display: block; color: #6E4A40; font-size: 17px">8 publicaciones al mes</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">350 €/mes</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">175 €</span></td>
+</tr>
+<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Calendario de contenidos</span><span style="display: block; color: #6E4A40; font-size: 17px">Todo el mes planificado</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">200 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">100 €</span></td>
+</tr>
+<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Diseño de publicaciones</span><span style="display: block; color: #6E4A40; font-size: 17px">4 piezas listas para subir</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">160 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">80 €</span></td>
+</tr>
+</tbody>
+</table>
+<p style="margin: 0; max-width: 46em; font-size: 16px; color: #6E4A40; text-wrap: pretty">Precios orientativos para servicios sencillos, sin IVA. El descuento mensual se aplica solo al primer mes. Dominios, hosting, licencias y herramientas de terceros no incluidos. Webs avanzadas y software a medida: presupuesto personalizado.</p>
+</div>
+</section>
+
+<section id="laura" style="background: #FFD9C7">
+<div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
+<div style="aspect-ratio: 4 / 5; max-height: 640px; width: 100%; border-radius: 24px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #6E4A40">[TU FOTO]</div>
+<div style="display: flex; flex-direction: column; gap: 24px; align-items: flex-start">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Tu vecina, no una agencia</h2>
+<p style="margin: 0; max-width: 28em; text-wrap: pretty">He diseñado productos digitales para Monzo, Just Eat y RLDatix. También he publicado mi propia app, Drivo Test, y construyo webs con gestor de contenido para pequeños profesionales.</p>
+<p style="margin: 0; max-width: 28em; text-wrap: pretty">Hablas siempre conmigo, y te lo dejo preparado para que no dependas de nadie.</p>
+<a href="https://hola-laura.github.io/laura/" style="font-weight: 600; padding: 10px 0">Ver mi portfolio</a>
+</div>
+</div>
+</section>
+
+<section id="contacto" style="background: {{accent}}; color: #FFFFFF">
+<div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(50px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em">¿Qué te quita tiempo?</h2>
+<p style="margin: 0; max-width: 30em; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.4; text-wrap: pretty">Cuéntamelo en 15 minutos, por teléfono o videollamada. Gratis y sin compromiso.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="mailto:lrsmpdr@gmail.com?subject=Quiero%20mejorar%20mi%20negocio" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: #FFFFFF; color: #3A120A; font-weight: 600; text-decoration: none">Escríbeme</a>
+<a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; border: 2px solid #FFFFFF; box-sizing: border-box; color: #FFFFFF; font-weight: 600; text-decoration: none">WhatsApp [TU NÚMERO]</a>
+</div>
+</div>
+<div style="max-width: 1360px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 32px; font-size: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: -0.03em">noma.</span>
+<span style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em">DESIGN · AI · AUTOMATION</span>
+<span style="padding-top: 8px">Laura Sampedro de la Rosa</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px 24px">
+<a href="mailto:lrsmpdr@gmail.com" style="padding: 10px 0">lrsmpdr@gmail.com</a>
+<a href="https://www.linkedin.com/in/laura-sampedro/" style="padding: 10px 0">LinkedIn</a>
+</div>
+</div>
+</section>
+</sc-if>
+
+</div></script>
+<script>
+class DCLogic{constructor(){this.props={}}setState(s){Object.assign(this.state,s);draw()}}
+
+const SECTORS = [
+  { id: 'pelu', label: 'Peluquería o estética', h1a: 'Menos teléfono.', h1b: 'Más clientes.',
+    sub: 'Tus clientas reservan desde el móvil, la cita llega sola a tu agenda y tú sigues con las manos en lo tuyo.',
+    dh: 'Así llega una reserva. Elige una hora.', c1: 'Corte y color', c2: 'Salón de ejemplo · Jueves · 1 hora',
+    opts: ['11:30', '12:30', '17:00', '18:30'], btn: 'Reservar jueves a las', got: 'Nueva reserva, jueves', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
+    agenda: [['10:00', 'Marta, mechas'], ['13:30', 'Lucía, corte'], ['16:00', 'Elena, color']], newRow: 'Tu clienta, corte y color',
+    wText: 'Con tus servicios, tus precios y tu horario, y un botón para reservar desde el móvil.', wNav: 'Servicios · Precios · Reservar', wHead: 'Abierto hoy hasta las 20:00', wBtn: 'Reservar cita',
+    sText: 'Decido contigo qué publicar, lo diseño y lo dejo programado. Tú sigues con tus clientas.',
+    posts: [['Antes y después', 20092122], ['3 trucos para que tu color dure más'], ['Martes de color', 4981476], ['Te presentamos a Marta', 3993320], ['Ahora también abrimos los sábados'], ['Reserva tu cita desde el móvil', 7195805]],
+    fText: 'Recordatorios para que nadie se olvide de su cita y menos huecos vacíos en tu agenda.',
+    flow: ['Entra una reserva', 'Se añade a tu calendario', 'Tu clienta recibe la confirmación', 'Recordatorio el día antes'], rec: 'Reservas online' },
+  { id: 'rest', label: 'Restaurante o bar', h1a: 'Mesas llenas.', h1b: 'Menos llamadas.',
+    sub: 'Tu carta en el móvil, reservas sin coger el teléfono en pleno servicio y redes que abren el apetito.',
+    dh: 'Así llega una reserva de mesa. Elige una hora.', c1: 'Mesa para 4', c2: 'Restaurante de ejemplo · Sábado · Cena',
+    opts: ['20:30', '21:00', '21:30', '22:00'], btn: 'Reservar sábado a las', got: 'Nueva mesa, sábado', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
+    agenda: [['20:00', 'Ana, 2 personas'], ['20:30', 'Pablo, 6 personas'], ['22:00', 'Sara, 4 personas']], newRow: 'Mesa para 4',
+    wText: 'Con tu carta siempre al día, tu horario, cómo llegar y un botón para reservar mesa.', wNav: 'Carta · Horario · Reservar', wHead: 'Menú del día, hoy a las 13:30', wBtn: 'Ver la carta',
+    sText: 'Platos del día, novedades y promociones listas para publicar, para que te vean antes de la hora de comer.',
+    posts: [['El plato de la semana', 27287003], ['Menú del día: ya está aquí'], ['Para compartir', 14823753], ['Conoce nuestra cocina'], ['Reserva tu mesa para el sábado', 12181619], ['Abrimos también los domingos']],
+    fText: 'Confirmamos cada reserva y recordamos la mesa a tu cliente para evitar sillas vacías.',
+    flow: ['Entra una reserva de mesa', 'Se añade a tu calendario', 'Tu cliente recibe la confirmación', 'Recordatorio el mismo día'], rec: 'Web sencilla con tu carta' },
+  { id: 'idio', label: 'Academia de idiomas', h1a: 'Más alumnos.', h1b: 'Menos papeleo.',
+    sub: 'Que cada interesado encuentre su grupo, pida su prueba de nivel y se inscriba sin que tengas que contestar uno a uno.',
+    dh: 'Así llega un alumno nuevo. Elige un horario.', c1: 'Prueba de nivel de inglés', c2: 'Academia de ejemplo · Lunes · 20 minutos',
+    opts: ['10:00', '12:00', '17:30', '19:00'], btn: 'Reservar lunes a las', got: 'Nueva prueba, lunes', note: 'En tu correo y en tu calendario. Instrucciones ya enviadas.',
+    agenda: [['09:00', 'Javier, francés B1'], ['11:00', 'Clara, inglés A2'], ['18:00', 'Hugo, inglés B2']], newRow: 'Nuevo alumno, inglés',
+    wText: 'Con tus cursos, niveles y horarios claros, y un formulario para pedir la prueba de nivel.', wNav: 'Cursos · Horarios · Prueba de nivel', wHead: 'Empieza el nuevo trimestre', wBtn: 'Pedir prueba de nivel',
+    sText: 'Consejos para aprender, novedades de cursos y plazas abiertas para que piensen en ti cuando las necesiten.',
+    posts: [['Abierta la matrícula', 37739901], ['5 frases para tu próximo viaje'], ['¿Qué nivel tienes?', 14814047], ['Plazas libres en inglés B1'], ['Vocabulario de la semana', 8500618], ['Grupos reducidos por las tardes']],
+    fText: 'Inscripciones, recordatorios de clase y avisos de cambios de horario sin escribir a cada alumno.',
+    flow: ['Entra una solicitud', 'Se añade a tu lista de alumnos', 'El alumno recibe la información', 'Recordatorio antes de la prueba'], rec: 'Automatización sencilla' },
+  { id: 'elec', label: 'Electricista', h1a: 'Que te encuentren.', h1b: 'Que te llamen.',
+    sub: 'Una web clara para que te elijan cuando busquen electricista cerca y un formulario para no perder avisos mientras trabajas.',
+    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Revisar cuadro eléctrico', c2: 'Electricista de ejemplo · Con foto de la avería',
+    opts: ['Hoy, 17:00', 'Mañana, 9:00', 'Mañana, 12:00', 'Viernes, 10:00'], btn: 'Pedir visita:', got: 'Nuevo aviso:', note: 'En tu correo, con la dirección y la foto. Respuesta ya enviada.',
+    agenda: [['09:30', 'Reforma de cocina'], ['12:00', 'Enchufes, Oporto'], ['16:00', 'Boletín eléctrico']], newRow: 'Cuadro eléctrico',
+    wText: 'Con tus servicios, tu zona de trabajo, trabajos hechos y un botón para llamar o pedir presupuesto.', wNav: 'Servicios · Zona · Presupuesto', wHead: 'Tu electricista en el barrio', wBtn: 'Pedir presupuesto',
+    sText: 'Trabajos terminados y consejos prácticos para que el barrio te tenga presente antes de necesitarte.',
+    posts: [['Trabajo de esta semana', 34526423], ['Cuándo cambiar tu cuadro eléctrico'], ['Instalación terminada', 33694016], ['3 señales de una avería'], ['Reparamos en el barrio', 9242887], ['Pide tu presupuesto']],
+    fText: 'Cada aviso llega ordenado, con sus datos y fotos, y tu cliente sabe que lo has recibido.',
+    flow: ['Entra un aviso con foto', 'Se guarda en tu lista de trabajos', 'Tu cliente recibe la confirmación', 'Recordatorio del presupuesto'], rec: 'Web sencilla' },
+  { id: 'font', label: 'Fontanero', h1a: 'Una fuga.', h1b: 'Y te llaman a ti.',
+    sub: 'Que seas el primero al que encuentran cuando hay una urgencia, y que ningún aviso se pierda mientras tienes las manos ocupadas.',
+    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Fuga en el baño', c2: 'Fontanero de ejemplo · Con foto de la avería',
+    opts: ['Lo antes posible', 'Hoy, 18:00', 'Mañana, 9:00', 'Mañana, 12:00'], btn: 'Pedir visita:', got: 'Nuevo aviso:', note: 'En tu correo, con la dirección y la foto. Respuesta ya enviada.',
+    agenda: [['09:00', 'Cambio de grifo'], ['11:30', 'Calentador, Urgel'], ['16:30', 'Desatasco']], newRow: 'Fuga en el baño',
+    wText: 'Con tus servicios, tu zona, tus horarios de urgencias y tu teléfono siempre a la vista.', wNav: 'Servicios · Urgencias · Contacto', wHead: 'Fugas y averías en tu barrio', wBtn: 'Llamar ahora',
+    sText: 'Trabajos resueltos y consejos sencillos para que se acuerden de ti cuando algo falle en casa.',
+    posts: [['Avería resuelta', 35290675], ['Qué hacer si tienes una fuga'], ['Instalación nueva', 8488035], ['Cuida tu calentador en invierno'], ['Trabajamos en tu barrio', 33388390], ['Pide tu presupuesto']],
+    fText: 'Cada aviso llega ordenado y tu cliente recibe respuesta aunque estés debajo de un fregadero.',
+    flow: ['Entra un aviso con foto', 'Se guarda en tu lista de trabajos', 'Tu cliente recibe respuesta', 'Recordatorio del presupuesto'], rec: 'Web sencilla' },
+  { id: 'tall', label: 'Taller mecánico', h1a: 'Menos papeles.', h1b: 'Más coches.',
+    sub: 'Citas para revisión desde el móvil, avisos cuando el coche está listo y menos llamadas para preguntar cómo va.',
+    dh: 'Así llega una cita. Elige una hora.', c1: 'Revisión y cambio de aceite', c2: 'Taller de ejemplo · Miércoles',
+    opts: ['8:30', '10:00', '12:00', '16:00'], btn: 'Reservar miércoles a las', got: 'Nueva cita, miércoles', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
+    agenda: [['09:00', 'Seat Ibiza, frenos'], ['11:00', 'Ford Focus, ITV'], ['15:00', 'Renault Clio, aceite']], newRow: 'Revisión y aceite',
+    wText: 'Con tus servicios, tus precios orientativos, opiniones reales y un botón para pedir cita.', wNav: 'Servicios · Precios · Cita', wHead: 'Tu coche, en buenas manos', wBtn: 'Pedir cita',
+    sText: 'Consejos de mantenimiento y avisos de temporada para que tus clientes vuelvan antes de la ITV.',
+    posts: [['Prepara tu coche para el invierno', 8478259], ['Cuándo cambiar el aceite'], ['Trabajo de la semana', 6870319], ['Revisión antes de la ITV'], ['Te lo dejamos listo', 8478228], ['Pide cita desde el móvil']],
+    fText: 'Avisa automáticamente de que el coche está listo y recuerda la próxima revisión.',
+    flow: ['Entra una cita', 'Se añade a tu calendario', 'Aviso de coche listo', 'Recordatorio de próxima revisión'], rec: 'Reservas online' },
+  { id: 'clin', label: 'Fisio o clínica', h1a: 'Agenda llena.', h1b: 'Menos ausencias.',
+    sub: 'Tus pacientes piden cita sin llamar, reciben su recordatorio y tu consulta deja de vivir pegada al teléfono.',
+    dh: 'Así llega una cita. Elige una hora.', c1: 'Sesión de fisioterapia', c2: 'Clínica de ejemplo · Martes · 50 minutos',
+    opts: ['9:00', '11:00', '16:30', '18:00'], btn: 'Reservar martes a las', got: 'Nueva cita, martes', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
+    agenda: [['10:00', 'Paciente, primera visita'], ['12:00', 'Paciente, revisión'], ['17:30', 'Paciente, sesión']], newRow: 'Paciente, sesión',
+    wText: 'Con tus tratamientos, tu equipo y un botón para pedir cita, explicado en palabras sencillas.', wNav: 'Tratamientos · Equipo · Cita', wHead: 'Vuelve a moverte sin dolor', wBtn: 'Pedir cita',
+    sText: 'Consejos, ejercicios sencillos y novedades de la consulta, revisados por ti antes de publicarlos.',
+    posts: [['Estiramiento de la semana', 5793917], ['3 hábitos para cuidar tu espalda'], ['Conoce a tu fisio', 20860588], ['Horarios de tarde disponibles'], ['Tu primera sesión', 20860610], ['Pide cita desde el móvil']],
+    fText: 'Recordatorios para reducir ausencias y menos llamadas para confirmar cada cita.',
+    flow: ['Entra una cita', 'Se añade a tu calendario', 'El paciente recibe la confirmación', 'Recordatorio el día antes'], rec: 'Reservas online' },
+  { id: 'gym', label: 'Gimnasio o estudio', h1a: 'Más socios.', h1b: 'Menos gestiones.',
+    sub: 'Clases que se reservan solas, avisos cuando cambia un horario y redes que hacen ganas de empezar.',
+    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Clase de pilates', c2: 'Estudio de ejemplo · Jueves · 50 minutos',
+    opts: ['9:00', '12:00', '18:00', '20:00'], btn: 'Reservar jueves a las', got: 'Nueva plaza, jueves', note: 'En tu correo y en tu lista de clase. Confirmación ya enviada.',
+    agenda: [['10:00', 'Yoga, 8 plazas'], ['13:00', 'Fuerza, 6 plazas'], ['19:00', 'Pilates, 10 plazas']], newRow: 'Pilates, 1 plaza',
+    wText: 'Con tus clases, tu horario, tus tarifas y un botón para probar una clase.', wNav: 'Clases · Horario · Tarifas', wHead: 'Tu primera clase te espera', wBtn: 'Reservar clase',
+    sText: 'Horarios, ejercicios y novedades del estudio para que tu comunidad siga activa entre clases.',
+    posts: [['Horario de la semana', 3838705], ['Un ejercicio para hoy'], ['Nueva clase de fuerza', 32610333], ['Plazas libres por la tarde'], ['Empieza esta semana', 2261483], ['Reserva desde el móvil']],
+    fText: 'Reservas de clases, listas de espera y avisos de cambios sin escribir a cada persona.',
+    flow: ['Entra una reserva de clase', 'Se añade a tu lista', 'Recibe la confirmación', 'Recordatorio antes de clase'], rec: 'Reservas online' },
+  { id: 'tien', label: 'Tienda de barrio', h1a: 'Tu tienda,', h1b: 'también online.',
+    sub: 'Que te encuentren en Google, vean lo que tienes y puedan encargártelo sin venir antes a preguntar.',
+    dh: 'Así llega un encargo. Elige cuándo recogerlo.', c1: 'Encargo para recoger', c2: 'Tienda de ejemplo · Pago en tienda',
+    opts: ['Hoy, 19:00', 'Mañana, 11:00', 'Mañana, 18:00', 'Sábado, 12:00'], btn: 'Encargar para', got: 'Nuevo encargo:', note: 'En tu correo, con el detalle del pedido. Confirmación ya enviada.',
+    agenda: [['10:30', 'Encargo de Rosa'], ['13:00', 'Recogida de Tomás'], ['18:30', 'Encargo de Inés']], newRow: 'Nuevo encargo',
+    wText: 'Con tu catálogo, tu horario, cómo llegar y un formulario para hacer encargos.', wNav: 'Catálogo · Horario · Encargos', wHead: 'Lo de siempre, también desde el móvil', wBtn: 'Ver catálogo',
+    sText: 'Novedades, productos y promociones listos para Instagram, Facebook y tu ficha de Google.',
+    posts: [['Novedades de esta semana', 14933973], ['Hoy recomendamos'], ['Conócenos', 8475169], ['Promoción del fin de semana'], ['Gente del barrio', 36729739], ['Haz tu encargo por WhatsApp']],
+    fText: 'Encargos ordenados, aviso cuando están listos y catálogo fácil de actualizar.',
+    flow: ['Entra un encargo', 'Se guarda en tu lista', 'Tu cliente recibe la confirmación', 'Aviso cuando esté listo'], rec: 'Web sencilla' },
+  { id: 'otro', label: 'Otro negocio', h1a: 'Menos tareas.', h1b: 'Más clientes.',
+    sub: 'Cuéntame qué haces y buscamos juntos qué te ayudaría más: tu web, tus reservas, tus redes o quitarte tareas repetitivas.',
+    dh: 'Así llega un cliente nuevo. Elige cuándo.', c1: 'Primera consulta', c2: 'Negocio de ejemplo · Jueves · 30 minutos',
+    opts: ['10:00', '12:00', '16:00', '18:00'], btn: 'Reservar jueves a las', got: 'Nueva solicitud, jueves', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
+    agenda: [['09:30', 'Reunión con cliente'], ['13:00', 'Presupuesto pendiente'], ['17:00', 'Entrega de pedido']], newRow: 'Cliente nuevo',
+    wText: 'Clara, rápida en el móvil y fácil de cambiar, con un gestor para que la lleves tú.', wNav: 'Servicios · Quiénes somos · Contacto', wHead: 'Lo que haces, bien explicado', wBtn: 'Contactar',
+    sText: 'Decido contigo qué publicar, lo diseño y lo dejo programado en Instagram o Facebook. Tú sigues a lo tuyo.',
+    posts: [['Así trabajamos', 36729740], ['3 cosas que no sabías'], ['Nuestro equipo', 8117465], ['Novedades del mes'], ['En tu barrio', 18999439], ['Escríbenos sin compromiso']],
+    fText: 'Si copias los mismos datos cada día o contestas siempre lo mismo, buscamos cómo quitártelo de encima.',
+    flow: ['Entra una solicitud', 'Se guarda en tu lista', 'Tu cliente recibe la respuesta', 'Recordatorio de seguimiento'], rec: 'lo vemos juntas según tu negocio' }
+];
+
+class Component extends DCLogic {
+  state = { sector: null, chosen: 1 };
+  renderVals() {
+    const accent = this.props.accent ?? '#C93417';
+    const INK = '#3A120A';
+    const top = () => { try { window.scrollTo(0, 0); } catch (e) {} };
+    const sectors = SECTORS.map((x) => ({ label: x.label, pick: () => { this.setState({ sector: x.id, chosen: 1 }); top(); } }));
+    const s = SECTORS.find((x) => x.id === this.state.sector) || SECTORS[0];
+    const chosen = s.opts[this.state.chosen];
+    const optBase = 'min-height: 52px; padding: 6px 8px; border-radius: 14px; font: inherit; font-size: 17px; font-weight: 600; cursor: pointer; border: 2px solid; transition: background 0.15s; ';
+    const opts = s.opts.map((text, i) => {
+      const on = i === this.state.chosen;
+      return { text, pressed: on ? 'true' : 'false',
+        css: optBase + (on ? 'background: ' + accent + '; border-color: ' + accent + '; color: #FFFFFF' : 'background: #FFFFFF; border-color: #EBCDBF; color: ' + INK),
+        pick: () => this.setState({ chosen: i }) };
+    });
+    const rowBase = 'display: flex; gap: 14px; padding: 12px 14px; border-radius: 12px; ';
+    const agenda = s.agenda.map((r) => ({ t: r[0], w: r[1], css: rowBase + 'background: transparent' }))
+      .concat([{ t: 'Nuevo', w: s.newRow, css: rowBase + 'background: #FFD9C7' }]);
+    const tiles = ['#3A120A', accent, '#3A120A', accent, '#3A120A', accent];
+    const posts = s.posts.map((p, i) => {
+      const photo = p[1] ? 'linear-gradient(rgba(58, 18, 10, 0.52), rgba(58, 18, 10, 0.52)), url(https://images.pexels.com/photos/' + p[1] + '/pexels-photo-' + p[1] + '.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop) center / cover, ' : '';
+      return { text: p[0], css: 'aspect-ratio: 1; overflow: hidden; color: #FFFFFF; display: flex; align-items: flex-end; background: ' + photo + tiles[i] };
+    });
+    const last = s.flow.length - 1;
+    const flow = s.flow.map((text, i) => ({ text,
+      css: 'border-radius: 14px; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; ' + (i === last ? 'background: ' + accent + '; color: #FFFFFF' : 'background: #FFFFFF') }));
+    return { accent, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
+      reset: () => { this.setState({ sector: null, chosen: 1 }); top(); } };
+  }
+}
+
+const TPL=document.getElementById('tpl').textContent;
+const get=(o,p)=>p.split('.').reduce((a,k)=>a==null?a:a[k],o);
+const c=new Component(),root=document.getElementById('app'),acts=[];
+const esc=v=>String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+function holes(h,v){return h.replace(/onClick="\{\{\s*([\w.$]+)\s*\}\}"/g,(m,p)=>{acts.push(get(v,p));return 'data-act="'+(acts.length-1)+'"'}).replace(/\{\{\s*([\w.$]+)\s*\}\}/g,(m,p)=>{const x=get(v,p);return x==null?m:esc(x)})}
+function draw(){const v=c.renderVals();acts.length=0;let h=TPL.replace(/<sc-if value="\{\{\s*(\w+)\s*\}\}"[^>]*>([\s\S]*?)<\/sc-if>/g,(m,n,b)=>v[n]?b:'');
+h=h.replace(/<sc-for list="\{\{\s*(\w+)\s*\}\}" as="(\w+)"[^>]*>([\s\S]*?)<\/sc-for>/g,(m,l,as,b)=>v[l].map(it=>holes(b,{...v,[as]:it})).join(''));
+root.innerHTML=holes(h,v)}
+root.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b)acts[+b.dataset.act]()});
+draw();
+</script>
+</body>
+</html>
