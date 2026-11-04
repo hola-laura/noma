@@ -17,7 +17,7 @@ a{color:inherit}a:hover{opacity:.78}
 </head>
 <body>
 <div id="app"></div>
-<script type="text/plain" id="tpl"><div style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; color: #3A120A; background: #FFEFE6; font-size: 19px; line-height: 1.45">
+<script type="text/plain" id="tpl"><div style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; color: {{ t.ink }}; background: {{ t.bg }}; font-size: 19px; line-height: 1.45">
 
 <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
 <header>
@@ -27,17 +27,17 @@ a{color:inherit}a:hover{opacity:.78}
 </header>
 <section>
 <div style="max-width: 1360px; margin: 0 auto; padding: 40px 24px 72px; display: flex; flex-direction: column; gap: 28px">
-<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(52px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em; color: {{accent}}">Hola, soy Laura.</h1>
+<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(52px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em; color: {{ t.h }}">Hola, soy Laura.</h1>
 <p style="margin: 0; max-width: 32em; font-size: clamp(20px, 1.9vw, 26px); line-height: 1.35; text-wrap: pretty">Vivo en Urgel y llevo años diseñando productos digitales para banca, ecommerce y food delivery. Ahora ayudo a los negocios del barrio a ganar clientes y tiempo.</p>
 <h2 style="margin: 28px 0 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.1">¿Qué negocio tienes?</h2>
 <div role="group" aria-label="Elige tu tipo de negocio" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px">
 <sc-for list="{{ sectors }}" as="item" hint-placeholder-count="10">
-<button type="button" class="sector" onClick="{{ item.pick }}" style="min-height: 92px; padding: 18px 22px; border: none; border-radius: 18px; background: #FFFFFF; color: #3A120A; font-family: 'Young Serif', Georgia, serif; font-size: 23px; line-height: 1.15; text-align: left; cursor: pointer">{{ item.label }}</button>
+<button type="button" class="sector" onClick="{{ item.pick }}" style="min-height: 92px; padding: 18px 22px; border: none; border-radius: 18px; background: #FFFFFF; color: {{ t.ink }}; font-family: 'Young Serif', Georgia, serif; font-size: 23px; line-height: 1.15; text-align: left; cursor: pointer">{{ item.label }}</button>
 </sc-for>
 </div>
 </div>
 </section>
-<section aria-label="Oferta" style="background: {{accent}}; color: #FFFFFF">
+<section aria-label="Oferta" style="background: {{ t.a }}; color: {{ t.on }}">
 <div style="max-width: 1360px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 40px">
 <p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.2">Los 20 primeros negocios del barrio pagan la mitad en su primer servicio.</p>
 </div>
@@ -52,7 +52,7 @@ a{color:inherit}a:hover{opacity:.78}
 <a href="#servicios" style="text-decoration: none; padding: 10px 0">Servicios</a>
 <a href="#precios" style="text-decoration: none; padding: 10px 0">Precios</a>
 <a href="#laura" style="text-decoration: none; padding: 10px 0">Quién soy</a>
-<a href="#contacto" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 999px; background: {{accent}}; color: #FFFFFF; font-weight: 600">Hablemos</a>
+<a href="#contacto" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font-weight: 600">Hablemos</a>
 </div>
 </nav>
 </header>
@@ -61,36 +61,36 @@ a{color:inherit}a:hover{opacity:.78}
 <div style="max-width: 1360px; margin: 0 auto; padding: 32px 24px 40px; display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px">
 <span style="font-weight: 600">{{ s.label }}</span>
-<button type="button" onClick="{{ reset }}" style="min-height: 44px; padding: 0; border: none; background: none; color: #3A120A; font: inherit; text-decoration: underline; cursor: pointer">Cambiar de negocio</button>
+<button type="button" onClick="{{ reset }}" style="min-height: 44px; padding: 0; border: none; background: none; color: {{ t.ink }}; font: inherit; text-decoration: underline; cursor: pointer">Cambiar de negocio</button>
 </div>
-<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(50px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em; color: {{accent}}">{{ s.h1a }}<br>{{ s.h1b }}</h1>
+<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(50px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em; color: {{ t.h }}">{{ s.h1a }}<br>{{ s.h1b }}</h1>
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 48px">
 <p style="margin: 0; flex: 1 1 420px; max-width: 30em; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.4; text-wrap: pretty">{{ s.sub }}</p>
-<a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: {{accent}}; color: #FFFFFF; font-weight: 600; text-decoration: none">Cuéntame tu negocio</a>
+<a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font-weight: 600; text-decoration: none">Cuéntame tu negocio</a>
 </div>
 </div>
 
 <div style="max-width: 1360px; margin: 0 auto; padding: 0 24px">
-<div style="background: {{accent}}; color: #FFFFFF; border-radius: 28px; padding: clamp(20px, 4.5vw, 64px); display: flex; flex-direction: column; gap: 28px">
+<div style="background: {{ t.a }}; color: {{ t.on }}; border-radius: 28px; padding: clamp(20px, 4.5vw, 64px); display: flex; flex-direction: column; gap: 28px">
 <p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.15">{{ s.dh }}</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 20px">
 
-<div style="background: #FFFFFF; color: #3A120A; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px rgba(58, 18, 10, 0.2)">
-<p style="margin: 0; font-size: 15px; font-weight: 600; color: #6E4A40">Lo que ve tu cliente</p>
+<div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px {{ t.line }}">
+<p style="margin: 0; font-size: 15px; font-weight: 600; color: {{ t.mut }}">Lo que ve tu cliente</p>
 <h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 30px; font-weight: 400; line-height: 1.15">{{ s.c1 }}</h2>
-<p style="margin: 0; color: #6E4A40">{{ s.c2 }}</p>
+<p style="margin: 0; color: {{ t.mut }}">{{ s.c2 }}</p>
 <div role="group" aria-label="Opciones" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
 <sc-for list="{{ opts }}" as="item" hint-placeholder-count="4">
 <button type="button" aria-pressed="{{ item.pressed }}" onClick="{{ item.pick }}" style="{{ item.css }}">{{ item.text }}</button>
 </sc-for>
 </div>
-<p style="margin: auto 0 0; padding: 14px 20px; text-align: center; line-height: 24px; border-radius: 999px; background: #3A120A; color: #FFFFFF; font-weight: 600">{{ s.btn }} {{ chosen }}</p>
+<p style="margin: auto 0 0; padding: 14px 20px; text-align: center; line-height: 24px; border-radius: 999px; background: {{ t.ink }}; color: #FFFFFF; font-weight: 600">{{ s.btn }} {{ chosen }}</p>
 </div>
 
-<div style="background: #FFFFFF; color: #3A120A; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px rgba(58, 18, 10, 0.2)">
-<p style="margin: 0; font-size: 15px; font-weight: 600; color: #6E4A40">Lo que te llega a ti</p>
+<div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px {{ t.line }}">
+<p style="margin: 0; font-size: 15px; font-weight: 600; color: {{ t.mut }}">Lo que te llega a ti</p>
 <h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 30px; font-weight: 400; line-height: 1.15">{{ s.got }} {{ chosen }}</h2>
-<p style="margin: 0; color: #6E4A40">{{ s.note }}</p>
+<p style="margin: 0; color: {{ t.mut }}">{{ s.note }}</p>
 <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
 <sc-for list="{{ agenda }}" as="row" hint-placeholder-count="4">
 <li style="{{ row.css }}"><span style="flex: none; width: 3.2em; font-weight: 600; font-variant-numeric: tabular-nums">{{ row.t }}</span><span>{{ row.w }}</span></li>
@@ -111,23 +111,23 @@ a{color:inherit}a:hover{opacity:.78}
 <h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Una web que te representa</h2>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.wText }}</p>
 </div>
-<div style="background: #FFD9C7; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px)">
-<div style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px rgba(58, 18, 10, 0.12)">
-<div style="padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; font-size: 15px"><strong>Tu negocio</strong><span style="color: #6E4A40">{{ s.wNav }}</span></div>
-<div style="background: {{accent}}; color: #FFFFFF; padding: 44px 24px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start">
+<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px)">
+<div style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px {{ t.line }}">
+<div style="padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; font-size: 15px"><strong>Tu negocio</strong><span style="color: {{ t.mut }}">{{ s.wNav }}</span></div>
+<div style="background: {{ t.a }}; color: {{ t.on }}; padding: 44px 24px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start">
 <p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.08">{{ s.wHead }}</p>
-<span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #FFFFFF; color: #3A120A; font-size: 16px; font-weight: 600">{{ s.wBtn }}</span>
+<span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-size: 16px; font-weight: 600">{{ s.wBtn }}</span>
 </div>
 </div>
 </div>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
-<div style="background: #FFD9C7; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px)">
-<div role="img" aria-label="Ejemplo de perfil de Instagram con seis publicaciones diseñadas" style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px rgba(58, 18, 10, 0.12)">
+<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px)">
+<div role="img" aria-label="Ejemplo de perfil de Instagram con seis publicaciones diseñadas" style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px {{ t.line }}">
 <div style="padding: 14px 16px; display: flex; align-items: center; gap: 12px">
-<div style="width: 44px; height: 44px; flex: none; border-radius: 50%; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Young Serif', Georgia, serif; font-size: 22px">T</div>
-<div style="display: flex; flex-direction: column; line-height: 1.25; font-size: 15px"><strong>tu_negocio</strong><span style="color: #6E4A40">Publicaciones de este mes</span></div>
+<div style="width: 44px; height: 44px; flex: none; border-radius: 50%; background: {{ t.a }}; color: {{ t.on }}; display: flex; align-items: center; justify-content: center; font-family: 'Young Serif', Georgia, serif; font-size: 22px">T</div>
+<div style="display: flex; flex-direction: column; line-height: 1.25; font-size: 15px"><strong>tu_negocio</strong><span style="color: {{ t.mut }}">Publicaciones de este mes</span></div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; font-family: 'Young Serif', Georgia, serif; font-size: clamp(11px, 1.5vw, 21px); line-height: 1.15">
 <sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
@@ -147,7 +147,7 @@ a{color:inherit}a:hover{opacity:.78}
 <h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Lo repetitivo, que se haga solo</h2>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.fText }}</p>
 </div>
-<div style="background: #FFD9C7; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px); display: flex; flex-direction: column; gap: 10px">
+<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 3.5vw, 44px); display: flex; flex-direction: column; gap: 10px">
 <sc-for list="{{ flow }}" as="f" hint-placeholder-count="4">
 <div style="{{ f.css }}"><span style="font-weight: 600">{{ f.text }}</span><span style="font-size: 16px">Automático</span></div>
 </sc-for>
@@ -165,52 +165,52 @@ a{color:inherit}a:hover{opacity:.78}
 </div>
 <table style="width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums">
 <thead>
-<tr style="font-size: 16px; color: #6E4A40; text-align: left">
+<tr style="font-size: 16px; color: {{ t.mut }}; text-align: left">
 <th scope="col" style="padding: 12px 6px 12px 0; font-weight: 500">Servicio</th>
 <th scope="col" style="padding: 12px 6px; font-weight: 500; text-align: right">Precio</th>
 <th scope="col" style="padding: 12px 0 12px 6px; font-weight: 500; text-align: right">Primer servicio</th>
 </tr>
 </thead>
 <tbody>
-<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Reservas online</span><span style="display: block; color: #6E4A40; font-size: 17px">Con calendario y emails automáticos</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">600 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">300 €</span></td>
+<tr style="border-top: 1px solid {{ t.line }}">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Reservas online</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">Con calendario y emails automáticos</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">600 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">300 €</span></td>
 </tr>
-<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Web sencilla</span><span style="display: block; color: #6E4A40; font-size: 17px">Una página</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">800 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">400 €</span></td>
+<tr style="border-top: 1px solid {{ t.line }}">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Web sencilla</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">Una página</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">800 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">400 €</span></td>
 </tr>
-<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Automatización sencilla</span><span style="display: block; color: #6E4A40; font-size: 17px">Una tarea, de principio a fin</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">350 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">175 €</span></td>
+<tr style="border-top: 1px solid {{ t.line }}">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Automatización sencilla</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">Una tarea, de principio a fin</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">350 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">175 €</span></td>
 </tr>
-<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Gestión básica de redes</span><span style="display: block; color: #6E4A40; font-size: 17px">8 publicaciones al mes</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">350 €/mes</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">175 €</span></td>
+<tr style="border-top: 1px solid {{ t.line }}">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Gestión básica de redes</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">8 publicaciones al mes</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">350 €/mes</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">175 €</span></td>
 </tr>
-<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Calendario de contenidos</span><span style="display: block; color: #6E4A40; font-size: 17px">Todo el mes planificado</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">200 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">100 €</span></td>
+<tr style="border-top: 1px solid {{ t.line }}">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Calendario de contenidos</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">Todo el mes planificado</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">200 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">100 €</span></td>
 </tr>
-<tr style="border-top: 1px solid rgba(58, 18, 10, 0.2)">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Diseño de publicaciones</span><span style="display: block; color: #6E4A40; font-size: 17px">4 piezas listas para subir</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: #6E4A40">160 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: #FFD9C7; font-weight: 700">80 €</span></td>
+<tr style="border-top: 1px solid {{ t.line }}">
+<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Diseño de publicaciones</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">4 piezas listas para subir</span></th>
+<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">160 €</td>
+<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">80 €</span></td>
 </tr>
 </tbody>
 </table>
-<p style="margin: 0; max-width: 46em; font-size: 16px; color: #6E4A40; text-wrap: pretty">Precios orientativos para servicios sencillos, sin IVA. El descuento mensual se aplica solo al primer mes. Dominios, hosting, licencias y herramientas de terceros no incluidos. Webs avanzadas y software a medida: presupuesto personalizado.</p>
+<p style="margin: 0; max-width: 46em; font-size: 16px; color: {{ t.mut }}; text-wrap: pretty">Precios orientativos para servicios sencillos, sin IVA. El descuento mensual se aplica solo al primer mes. Dominios, hosting, licencias y herramientas de terceros no incluidos. Webs avanzadas y software a medida: presupuesto personalizado.</p>
 </div>
 </section>
 
-<section id="laura" style="background: #FFD9C7">
+<section id="laura" style="background: {{ t.soft }}">
 <div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 40px 72px; align-items: center">
-<div style="aspect-ratio: 4 / 5; max-height: 640px; width: 100%; border-radius: 24px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #6E4A40">[TU FOTO]</div>
+<div style="aspect-ratio: 4 / 5; max-height: 640px; width: 100%; border-radius: 24px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; color: {{ t.mut }}">[TU FOTO]</div>
 <div style="display: flex; flex-direction: column; gap: 24px; align-items: flex-start">
 <h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.06; letter-spacing: -0.015em">Tu vecina, no una agencia</h2>
 <p style="margin: 0; max-width: 28em; text-wrap: pretty">He diseñado productos digitales para Monzo, Just Eat y RLDatix. También he publicado mi propia app, Drivo Test, y construyo webs con gestor de contenido para pequeños profesionales.</p>
@@ -220,13 +220,13 @@ a{color:inherit}a:hover{opacity:.78}
 </div>
 </section>
 
-<section id="contacto" style="background: {{accent}}; color: #FFFFFF">
+<section id="contacto" style="background: {{ t.a }}; color: {{ t.on }}">
 <div style="max-width: 1360px; margin: 0 auto; padding: 128px 24px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start">
 <h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(50px, 9.2vw, 132px); line-height: 1.04; letter-spacing: -0.02em">¿Qué te quita tiempo?</h2>
 <p style="margin: 0; max-width: 30em; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.4; text-wrap: pretty">Cuéntamelo en 15 minutos, por teléfono o videollamada. Gratis y sin compromiso.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px">
-<a href="mailto:lrsmpdr@gmail.com?subject=Quiero%20mejorar%20mi%20negocio" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: #FFFFFF; color: #3A120A; font-weight: 600; text-decoration: none">Escríbeme</a>
-<a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; border: 2px solid #FFFFFF; box-sizing: border-box; color: #FFFFFF; font-weight: 600; text-decoration: none">WhatsApp [TU NÚMERO]</a>
+<a href="mailto:lrsmpdr@gmail.com?subject=Quiero%20mejorar%20mi%20negocio" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-weight: 600; text-decoration: none">Escríbeme</a>
+<a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; border: 2px solid {{ t.on }}; box-sizing: border-box; color: {{ t.on }}; font-weight: 600; text-decoration: none">WhatsApp [TU NÚMERO]</a>
 </div>
 </div>
 <div style="max-width: 1360px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 32px; font-size: 16px">
@@ -350,34 +350,48 @@ const SECTORS = [
     flow: ['Entra una solicitud', 'Se guarda en tu lista', 'Tu cliente recibe la respuesta', 'Recordatorio de seguimiento'], rec: 'lo vemos juntas según tu negocio' }
 ];
 
+const mkTheme = (a, on, h, ink, mut, soft, bg, rgb) => ({ a, on, h, ink, mut, soft, bg, rgb, line: 'rgba(' + rgb + ', 0.18)' });
+const THEMES = {
+  pelu: mkTheme('#B8325F', '#FFFFFF', '#B8325F', '#3D0F22', '#6F4657', '#FBD5E1', '#FFF0F5', '61, 15, 34'),
+  rest: mkTheme('#C2410C', '#FFFFFF', '#C2410C', '#3B1706', '#6D4A33', '#FFDDB8', '#FFF3E6', '59, 23, 6'),
+  idio: mkTheme('#5B3FC4', '#FFFFFF', '#5B3FC4', '#1F1547', '#544C7A', '#DDD6FB', '#F3F1FF', '31, 21, 71'),
+  elec: mkTheme('#FFC21A', '#221C06', '#221C06', '#221C06', '#665B2A', '#FFEBA6', '#FFF9E0', '34, 28, 6'),
+  font: mkTheme('#0B5CAD', '#FFFFFF', '#0B5CAD', '#072A4D', '#40607F', '#CFE6FA', '#EEF7FF', '7, 42, 77'),
+  tall: mkTheme('#37474F', '#FFFFFF', '#37474F', '#1B2529', '#4E5F67', '#D6DEE2', '#F2F5F6', '27, 37, 41'),
+  clin: mkTheme('#0F766E', '#FFFFFF', '#0F766E', '#06332F', '#3D6460', '#C9EFE9', '#EFFAF8', '6, 51, 47'),
+  gym: mkTheme('#C8102E', '#FFFFFF', '#C8102E', '#3A0710', '#70404A', '#FFD3D9', '#FFF1F2', '58, 7, 16'),
+  tien: mkTheme('#2E7D32', '#FFFFFF', '#2E7D32', '#12331A', '#47644C', '#D3EBCF', '#F2FAF0', '18, 51, 26'),
+  otro: mkTheme('#C93417', '#FFFFFF', '#C93417', '#3A120A', '#6E4A40', '#FFD9C7', '#FFEFE6', '58, 18, 10')
+};
+
 class Component extends DCLogic {
   state = { sector: null, chosen: 1 };
   renderVals() {
-    const accent = this.props.accent ?? '#C93417';
-    const INK = '#3A120A';
     const top = () => { try { window.scrollTo(0, 0); } catch (e) {} };
     const sectors = SECTORS.map((x) => ({ label: x.label, pick: () => { this.setState({ sector: x.id, chosen: 1 }); top(); } }));
     const s = SECTORS.find((x) => x.id === this.state.sector) || SECTORS[0];
+    const base = THEMES[this.state.sector] || THEMES.otro;
+    const t = this.state.sector && this.state.sector !== 'otro' ? base : { ...base, a: this.props.accent ?? base.a, h: this.props.accent ?? base.h };
     const chosen = s.opts[this.state.chosen];
     const optBase = 'min-height: 52px; padding: 6px 8px; border-radius: 14px; font: inherit; font-size: 17px; font-weight: 600; cursor: pointer; border: 2px solid; transition: background 0.15s; ';
     const opts = s.opts.map((text, i) => {
       const on = i === this.state.chosen;
       return { text, pressed: on ? 'true' : 'false',
-        css: optBase + (on ? 'background: ' + accent + '; border-color: ' + accent + '; color: #FFFFFF' : 'background: #FFFFFF; border-color: #EBCDBF; color: ' + INK),
+        css: optBase + (on ? 'background: ' + t.a + '; border-color: ' + t.a + '; color: ' + t.on : 'background: #FFFFFF; border-color: ' + t.soft + '; color: ' + t.ink),
         pick: () => this.setState({ chosen: i }) };
     });
     const rowBase = 'display: flex; gap: 14px; padding: 12px 14px; border-radius: 12px; ';
     const agenda = s.agenda.map((r) => ({ t: r[0], w: r[1], css: rowBase + 'background: transparent' }))
-      .concat([{ t: 'Nuevo', w: s.newRow, css: rowBase + 'background: #FFD9C7' }]);
-    const tiles = ['#3A120A', accent, '#3A120A', accent, '#3A120A', accent];
-    const posts = s.posts.map((p, i) => {
-      const photo = p[1] ? 'linear-gradient(rgba(58, 18, 10, 0.52), rgba(58, 18, 10, 0.52)), url(https://images.pexels.com/photos/' + p[1] + '/pexels-photo-' + p[1] + '.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop) center / cover, ' : '';
-      return { text: p[0], css: 'aspect-ratio: 1; overflow: hidden; color: #FFFFFF; display: flex; align-items: flex-end; background: ' + photo + tiles[i] };
+      .concat([{ t: 'Nuevo', w: s.newRow, css: rowBase + 'background: ' + t.soft }]);
+    const posts = s.posts.map((p) => {
+      const veil = 'rgba(' + t.rgb + ', 0.52)';
+      const photo = p[1] ? 'linear-gradient(' + veil + ', ' + veil + '), url(https://images.pexels.com/photos/' + p[1] + '/pexels-photo-' + p[1] + '.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop) center / cover, ' : '';
+      return { text: p[0], css: 'aspect-ratio: 1; overflow: hidden; color: #FFFFFF; display: flex; align-items: flex-end; background: ' + photo + t.ink };
     });
     const last = s.flow.length - 1;
     const flow = s.flow.map((text, i) => ({ text,
-      css: 'border-radius: 14px; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; ' + (i === last ? 'background: ' + accent + '; color: #FFFFFF' : 'background: #FFFFFF') }));
-    return { accent, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
+      css: 'border-radius: 14px; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; ' + (i === last ? 'background: ' + t.a + '; color: ' + t.on : 'background: #FFFFFF') }));
+    return { t, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
       reset: () => { this.setState({ sector: null, chosen: 1 }); top(); } };
   }
 }
