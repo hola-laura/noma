@@ -245,6 +245,43 @@ h1{font-size:clamp(44px,min(7.6vw,12.4vh),100px);line-height:1.02;margin-bottom:
 .lienzo.doble{flex-direction:column}.lienzo.doble>.web:first-child{width:100%}
 }
 
+/* lista de proyectos */
+.lista{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(40px,6vw,88px);align-items:start;margin-bottom:clamp(48px,6vw,72px)}
+#pl{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--line)}
+.pb{position:relative;width:100%;min-height:58px;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 0;border:0;border-top:1px solid var(--line);background:none;color:var(--ink);text-align:left;cursor:pointer;font:400 clamp(25px,2.7vw,34px)/1.15 var(--serif);transition:padding .35s var(--punto),color .25s}
+.pb small{font:400 12px var(--mono);letter-spacing:.02em;color:var(--mut);text-align:right;flex:none}
+.pb::before{content:"";position:absolute;left:0;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--a);transform:scale(0);transition:transform .35s var(--bote)}
+.pb.on{padding-left:26px}.pb.on::before{transform:none}
+#pl:hover .pb:not(.on){color:#A8A8A3}
+.vis{position:sticky;top:104px;aspect-ratio:1/1.04;max-height:calc(100vh - 136px);width:100%;border-radius:28px;overflow:hidden;background:var(--piedra)}
+.capa{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:clamp(24px,3vw,44px);background:var(--piedra);clip-path:circle(0 at 42px 42px);transition:clip-path .8s var(--punto)}
+.capa.on{clip-path:circle(150% at 42px 42px)}
+.capa.negro,.pm-v.negro{background:var(--ink)}
+.capa.negro img,.pm-v.negro img{width:min(100%,380px);border-radius:14px}
+.capa.tipo,.pm-v.tipo{flex-direction:column;background:var(--ink);color:#fff}
+.tn{font:400 clamp(38px,5vw,64px)/1 var(--serif);letter-spacing:-.02em;text-align:center}
+.capa .web{max-width:100%}.capa.dos,.pm-v.dos{gap:16px}.capa.dos .movil,.pm-v.dos .movil{width:min(44%,190px)}
+.capa .pres,.pm-v .pres{margin-bottom:22px}.capa .flujo,.pm-v .flujo{margin-bottom:22px}
+.todos{margin-bottom:clamp(96px,13vw,176px)}
+html:has(dialog[open]){overflow:hidden}
+#pm{width:min(1000px,calc(100% - 32px));max-height:calc(100dvh - 40px);padding:0;border:0;border-radius:28px;overflow:auto;background:#fff;color:var(--ink)}
+#pm::backdrop{background:rgba(17,17,17,.56);backdrop-filter:blur(5px)}
+#pm[open]{animation:pop .5s var(--bote)}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}}
+.pm-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(600px,calc(100dvh - 40px))}
+.pm-v{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(24px,3vw,40px);background:var(--piedra);min-height:260px}
+.pm-t{padding:clamp(32px,4.4vw,60px) clamp(28px,4vw,56px);display:flex;flex-direction:column;align-items:flex-start}
+.pm-t .mono{display:block;margin-bottom:16px}
+.pm-t h3{font-size:clamp(30px,3.4vw,42px);line-height:1.06;margin-bottom:18px;padding-right:32px}
+.pm-t p{color:var(--mut)}.pm-t .tuyo{width:100%}.pm-t .tuyo:empty{display:none}
+#pmS ul{list-style:none;margin:16px 0 0;padding:0;font-size:15px;color:var(--mut)}
+#pmS li{display:flex;gap:10px;padding:4px 0}#pmS li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--a);margin-top:.6em;flex:none}
+.sig{margin-top:auto;padding-top:32px;border:0;background:none;cursor:pointer;font:500 16px var(--sans);color:var(--ink)}.sig::after{display:none}
+.pm-x{position:absolute;right:16px;top:16px;z-index:2;width:44px;height:44px;border:0;border-radius:50%;background:var(--piedra);cursor:pointer;transition:transform .35s var(--punto)}
+.pm-x:hover{transform:rotate(90deg)}
+.pm-x::before,.pm-x::after{content:"";position:absolute;left:14px;right:14px;top:21px;height:2px;background:var(--ink);transform:rotate(45deg)}.pm-x::after{transform:rotate(-45deg)}
+@media (max-width:860px){.lista{grid-template-columns:minmax(0,1fr)}.vis{display:none}.pm-g{grid-template-columns:minmax(0,1fr);min-height:0}}
+
 /* cómo */
 .como .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(48px,8vw,120px)}
 .pasos{position:relative;list-style:none;margin:0;padding:0 0 0 56px}
@@ -370,75 +407,23 @@ html{scroll-behavior:auto}
 </div></section>
 
 <section class="trabajo" id="trabajos"><div class="wrap">
-<div class="tit r"><h2>Trabajo real, para gente real<i class="pt"></i></h2><p class="lead">He diseñado para empresas grandes y para profesionales que trabajan solos. Esa experiencia es la que pongo al servicio de tu negocio.</p></div>
-<div class="nombres r"><span>Monzo</span><span>Just Eat</span><span>RLDatix</span><span>intu</span><span>Skippr</span><span>Pass the Jam</span><span>Erika</span><span>Correcto</span><span>Vennre</span><span>JOBBA</span><span>Mattern Guide</span><span>Drivo Test</span></div>
-
-<article class="caso">
-<div class="txt r"><span class="mono">WEB Y PANEL · GUÍA DE MONTAÑA</span><h3>Una web que su dueño cambia sin tocar código</h3>
-<p>Diseñé y construí la web de Mattern Guide, un gestor de contenidos y una primera automatización. Daniel puede actualizar sus salidas, plazas y textos él solo.</p>
-<p class="tuyo"><b>En tu negocio:</b> una web con tus servicios y horarios que puedes cambiar cuando quieras.</p>
-<div class="lks"><a class="lk" href="https://hola-laura.github.io/daniel-mattern-web/" target="_blank" rel="noopener"><i></i>Ver la web</a><a class="lk" href="https://hola-laura.github.io/daniel-mattern-web/admin.html" target="_blank" rel="noopener"><i></i>Ver el panel</a></div></div>
-<div class="lienzo doble r"><div class="web"><img loading="lazy" src="https://hola-laura.github.io/laura/assets/mountain-guide/website.webp" alt="Página de inicio de la web de Mattern Guide"></div><div class="web flota" data-par=".06"><img loading="lazy" src="https://hola-laura.github.io/laura/assets/mountain-guide/panel.webp" alt="Panel de gestión de contenidos de Mattern Guide"></div></div>
-</article>
-
-<article class="caso inv">
-<div class="txt r"><span class="mono">SOFTWARE A MEDIDA · EMPRESA DE CONSTRUCCIÓN</span><h3>Presupuestos en un solo sitio, no en mil hojas</h3>
-<p>Diseñé un software para que una empresa de construcción prepare sus presupuestos: partidas, cantidades, precios y total, listo para enviar al cliente.</p>
-<p class="tuyo"><b>En tu negocio:</b> si repites una tarea cada semana, puede tener su propia herramienta sencilla.</p></div>
-<div class="lienzo r"><div class="pres"><header><h4>Reforma de baño</h4><span class="mono" style="margin:0">Nº 204</span></header>
-<div class="fp"><span>Demolición y retirada</span><span>640€</span></div><div class="fp"><span>Fontanería</span><span>980€</span></div><div class="fp"><span>Alicatado, 18 m²</span><span>1.080€</span></div><div class="fp"><span>Pintura, 24 m²</span><span>288€</span></div><div class="fp"><span>IVA 21%</span><span>627,48€</span></div>
-<footer><div class="tot"><span data-de="0" data-a="3615">3.615</span>,48€</div><span class="ui">Enviar al cliente</span></footer></div><span class="nota-ui">Interfaz recreada como ejemplo</span></div>
-</article>
-
-<article class="caso">
-<div class="txt r"><span class="mono">AUTOMATIZACIÓN · AGENCIA DE MARKETING LOCAL</span><h3>Citas que se organizan solas</h3>
-<p>Automaticé la gestión de citas de una agencia de marketing local, desde que entra un contacto hasta el recordatorio.</p>
-<p class="tuyo"><b>En tu negocio:</b> menos mensajes de ida y vuelta, y menos citas olvidadas.</p></div>
-<div class="lienzo r" style="flex-direction:column"><ol class="flujo" id="flujo"><li>Entra un contacto<small>09:12</small></li><li>Recibe un mensaje<small>09:12</small></li><li>Elige su hora<small>09:30</small></li><li>Se guarda en el calendario<small>09:30</small></li><li>Recordatorio el día antes<small>Auto</small></li></ol><span class="nota-ui">Interfaz recreada como ejemplo</span></div>
-</article>
-
-<article class="caso inv">
-<div class="txt r"><span class="mono">FOUNDING DESIGNER · SKIPPR</span><h3>El diseño de una startup desde el principio</h3>
-<p>Fui founding designer de Skippr y les ayudé a diseñar su primera herramienta.</p>
-<p class="tuyo"><b>En tu negocio:</b> sé empezar de cero y convertir una idea en algo que la gente entiende.</p>
-<div class="lks"><a class="lk" href="https://www.skippr.ai/" target="_blank" rel="noopener"><i></i>Ver Skippr</a></div></div>
-<div class="lienzo negro r"><img loading="lazy" src="https://www.skippr.ai/og-image.png" alt="Logotipo de Skippr"></div>
-</article>
-
-<article class="caso">
-<div class="txt r"><span class="mono">DISEÑO · MONZO</span><h3>Diseño en Monzo</h3>
-<p>Trabajé como diseñadora de producto en Monzo, haciendo que cosas complicadas se entiendan a la primera.</p>
-<p class="tuyo"><b>En tu negocio:</b> lo mismo, aplicado a lo que tus clientes necesitan entender y hacer.</p>
-<div class="lks"><a class="lk" href="https://hola-laura.github.io/laura/index.html#case-studies" target="_blank" rel="noopener"><i></i>Ver mi portfolio</a></div></div>
-<div class="lienzo foto-l r"><img class="foto" loading="lazy" src="https://hola-laura.github.io/laura/assets/flex/flex-focus-view.jpg" alt="Persona usando la app de Monzo en el móvil"></div>
-</article>
-
-<article class="caso inv">
-<div class="txt r"><span class="mono">APP PROPIA · DRIVO TEST</span><h3>Mi propia app, publicada en el App Store</h3>
-<p>Investigué, diseñé y construí una app gratuita para ayudar a estudiantes en España a entender la teoría de conducir.</p>
-<p class="tuyo"><b>En tu negocio:</b> lo que te propongo, sé hacerlo y lanzarlo de principio a fin.</p>
-<div class="lks"><a class="lk" href="https://apps.apple.com/es/app/drivo-test/id6813126362" target="_blank" rel="noopener"><i></i>Ver en el App Store</a><a class="lk" href="https://hola-laura.github.io/laura/case-study-drivo.html" target="_blank" rel="noopener"><i></i>Leer la historia</a></div></div>
-<div class="lienzo dos r"><img class="movil" loading="lazy" src="https://hola-laura.github.io/laura/assets/drivo/home-ios.png" alt="Inicio de Drivo Test"><img class="movil" loading="lazy" src="https://hola-laura.github.io/laura/assets/drivo/library-ios.png" alt="Biblioteca de preguntas de Drivo Test"></div>
-</article>
-
-<div class="mini3">
-<a class="mini r" href="https://hola-laura.github.io/laura/case-study-rldatix.html" target="_blank" rel="noopener"><figure><img loading="lazy" src="https://hola-laura.github.io/laura/assets/rldatix/interface.png" alt="Interfaz de RLDatix"></figure><span class="mono">RLDATIX</span><h4>Herramientas sanitarias en un solo producto</h4><p>El 96% de los participantes completó las tareas clave sin ayuda.</p></a>
-<a class="mini r" href="https://hola-laura.github.io/laura/case-study-just-eat.html" target="_blank" rel="noopener"><figure><img loading="lazy" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/d2148e109663737.5fd8f758238b4.png" alt="Intranet de Just Eat"></figure><span class="mono">JUST EAT</span><h4>La primera intranet para toda la empresa</h4><p>Noticias, herramientas y conocimiento en un único espacio.</p></a>
-<a class="mini r" href="https://hola-laura.github.io/laura/case-study-intu.html" target="_blank" rel="noopener"><figure><img loading="lazy" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/39941f94922721.5fd8f70be9544.png" alt="Family Club de intu"></figure><span class="mono">INTU</span><h4>Más fácil unirse a Family Club</h4><p>Un club para familias que por fin se entendía.</p></a>
-</div>
-
-<div class="startups r">
-<div><span class="mono">STARTUPS</span><h3>Diseño desde el primer día</h3><p class="sn">Skippr · Pass the Jam · Erika · Correcto · Vennre · JOBBA</p></div>
-<ul><li>Founding designer: visión y conceptos para inversores</li><li>Rediseño de los recorridos clave</li><li>Prototipos interactivos, interacción y nueva UI</li><li>Design system</li><li>Evaluación heurística de los recorridos actuales</li><li>Mejoras de UX y de métricas según objetivos de negocio</li><li>Planes de investigación y test de usabilidad</li><li>Contratación de producto y diseño</li><li>Priorización y workshops</li></ul>
-</div>
-
+<div class="tit r"><h2>Trabajo real, para gente real<i class="pt"></i></h2><p class="lead">He diseñado para empresas grandes y para profesionales que trabajan solos. Pasa por cada nombre para verlo, o púlsalo para saber más.</p></div>
+<div class="lista r"><ul id="pl"></ul><div class="vis" id="vis" aria-hidden="true"></div></div>
+<div class="todos r"><a class="btn" data-mag href="proyectos.html">Ver todos los proyectos</a></div>
 <h2 class="tit2 r">Cómo te puedo ayudar<i class="pt"></i></h2>
 <div class="ayuda">
 <div class="r"><h3>Que te encuentren</h3><p>Una web clara, hecha para el móvil y fácil de mantener.</p></div>
 <div class="r"><h3>Que te reserven</h3><p>Reservas, citas y recordatorios que funcionan sin que estés pendiente.</p></div>
 <div class="r"><h3>Que te ahorres tiempo</h3><p>Herramientas y automatizaciones para las tareas que repites cada semana.</p></div>
 </div>
-</div></section>
+</div>
+<template id="t-pres"><div class="pres"><header><h4>Reforma de baño</h4><span class="mono" style="margin:0">Nº 204</span></header>
+<div class="fp"><span>Demolición y retirada</span><span>640€</span></div><div class="fp"><span>Fontanería</span><span>980€</span></div><div class="fp"><span>Alicatado, 18 m²</span><span>1.080€</span></div><div class="fp"><span>Pintura, 24 m²</span><span>288€</span></div><div class="fp"><span>IVA 21%</span><span>627,48€</span></div>
+<footer><div class="tot"><span data-de="0" data-a="3615">3.615</span>,48€</div><span class="ui">Enviar al cliente</span></footer></div></template>
+<template id="t-flujo"><ol class="flujo"><li>Entra un contacto<small>09:12</small></li><li>Recibe un mensaje<small>09:12</small></li><li>Elige su hora<small>09:30</small></li><li>Se guarda en el calendario<small>09:30</small></li><li>Recordatorio el día antes<small>Auto</small></li></ol></template>
+</section>
+
+<dialog id="pm" aria-labelledby="pmT"><button class="pm-x" id="pmX" type="button" aria-label="Cerrar"></button><div class="pm-g"><div class="pm-v en" id="pmV"></div><div class="pm-t"><span class="mono" id="pmR"></span><h3 id="pmT"></h3><p id="pmP"></p><div id="pmS"></div><p class="tuyo" id="pmY"></p><div class="lks" id="pmL"></div><button class="lk sig" id="pmN" type="button"><i></i>Siguiente proyecto</button></div></div></dialog>
 
 <section id="precios"><div class="wrap">
 <div class="tit r"><h2>Precios claros<i class="pt"></i></h2><p class="lead">Para empezar, te recomendaría: <strong id="rec" style="color:var(--ink);font-weight:600"></strong>.</p></div>
@@ -532,7 +517,7 @@ html{scroll-behavior:auto}
 const SECTORS = [
   { id: 'pelu', label: 'Peluquería o estética', h1a: 'Menos teléfono.', h1b: 'Más clientes.',
     sub: 'Tus clientas reservan desde el móvil, la cita llega sola a tu agenda y tú sigues con las manos en lo tuyo.',
-    dh: 'Así llega una reserva. Elige una hora.', c1: 'Corte y color', c2: 'Salón de ejemplo · Jueves · 1 hora',
+    dh: 'Así llega una reserva. Elige una hora.', c1: 'Corte y color', c2: 'Jueves · 1 hora',
     opts: ['11:30', '12:30', '17:00', '18:30'], btn: 'Reservar jueves a las', got: 'Nueva reserva, jueves', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['10:00', 'Marta, mechas'], ['13:30', 'Lucía, corte'], ['16:00', 'Elena, color']], newRow: 'Tu clienta, corte y color',
     wText: 'Con tus servicios, tus precios y tu horario, y un botón para reservar desde el móvil.', wNav: 'Servicios · Precios · Reservar', wHead: 'Abierto hoy hasta las 20:00', wBtn: 'Reservar cita',
@@ -542,7 +527,7 @@ const SECTORS = [
     flow: ['Entra una reserva', 'Se añade a tu calendario', 'Tu clienta recibe la confirmación', 'Recordatorio el día antes'], rec: 'Reservas online' },
   { id: 'rest', label: 'Restaurante o bar', h1a: 'Mesas llenas.', h1b: 'Menos llamadas.',
     sub: 'Tu carta en el móvil, reservas sin coger el teléfono en pleno servicio y redes que abren el apetito.',
-    dh: 'Así llega una reserva de mesa. Elige una hora.', c1: 'Mesa para 4', c2: 'Restaurante de ejemplo · Sábado · Cena',
+    dh: 'Así llega una reserva de mesa. Elige una hora.', c1: 'Mesa para 4', c2: 'Sábado · Cena',
     opts: ['20:30', '21:00', '21:30', '22:00'], btn: 'Reservar sábado a las', got: 'Nueva mesa, sábado', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['20:00', 'Ana, 2 personas'], ['20:30', 'Pablo, 6 personas'], ['22:00', 'Sara, 4 personas']], newRow: 'Mesa para 4',
     wText: 'Con tu carta siempre al día, tu horario, cómo llegar y un botón para reservar mesa.', wNav: 'Carta · Horario · Reservar', wHead: 'Menú del día, hoy a las 13:30', wBtn: 'Ver la carta',
@@ -552,7 +537,7 @@ const SECTORS = [
     flow: ['Entra una reserva de mesa', 'Se añade a tu calendario', 'Tu cliente recibe la confirmación', 'Recordatorio el mismo día'], rec: 'Web sencilla con tu carta' },
   { id: 'idio', label: 'Academia de idiomas', h1a: 'Más alumnos.', h1b: 'Menos papeleo.',
     sub: 'Que cada interesado encuentre su grupo, pida su prueba de nivel y se inscriba sin que tengas que contestar uno a uno.',
-    dh: 'Así llega un alumno nuevo. Elige un horario.', c1: 'Prueba de nivel de inglés', c2: 'Academia de ejemplo · Lunes · 20 minutos',
+    dh: 'Así llega un alumno nuevo. Elige un horario.', c1: 'Prueba de nivel de inglés', c2: 'Lunes · 20 minutos',
     opts: ['10:00', '12:00', '17:30', '19:00'], btn: 'Reservar lunes a las', got: 'Nueva prueba, lunes', note: 'En tu correo y en tu calendario. Instrucciones ya enviadas.',
     agenda: [['09:00', 'Javier, francés B1'], ['11:00', 'Clara, inglés A2'], ['18:00', 'Hugo, inglés B2']], newRow: 'Nuevo alumno, inglés',
     wText: 'Con tus cursos, niveles y horarios claros, y un formulario para pedir la prueba de nivel.', wNav: 'Cursos · Horarios · Prueba de nivel', wHead: 'Empieza el nuevo trimestre', wBtn: 'Pedir prueba de nivel',
@@ -562,7 +547,7 @@ const SECTORS = [
     flow: ['Entra una solicitud', 'Se añade a tu lista de alumnos', 'El alumno recibe la información', 'Recordatorio antes de la prueba'], rec: 'Automatización sencilla' },
   { id: 'elec', label: 'Electricista', h1a: 'Que te encuentren.', h1b: 'Que te llamen.',
     sub: 'Una web clara para que te elijan cuando busquen electricista cerca y un formulario para no perder avisos mientras trabajas.',
-    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Revisar cuadro eléctrico', c2: 'Electricista de ejemplo · Con foto de la avería',
+    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Revisar cuadro eléctrico', c2: 'Con foto de la avería',
     opts: ['Hoy, 17:00', 'Mañana, 9:00', 'Mañana, 12:00', 'Viernes, 10:00'], btn: 'Pedir visita:', got: 'Nuevo aviso:', note: 'En tu correo, con la dirección y la foto. Respuesta ya enviada.',
     agenda: [['09:30', 'Reforma de cocina'], ['12:00', 'Enchufes, Oporto'], ['16:00', 'Boletín eléctrico']], newRow: 'Cuadro eléctrico',
     wText: 'Con tus servicios, tu zona de trabajo, trabajos hechos y un botón para llamar o pedir presupuesto.', wNav: 'Servicios · Zona · Presupuesto', wHead: 'Tu electricista en el barrio', wBtn: 'Pedir presupuesto',
@@ -572,7 +557,7 @@ const SECTORS = [
     flow: ['Entra un aviso con foto', 'Se guarda en tu lista de trabajos', 'Tu cliente recibe la confirmación', 'Recordatorio del presupuesto'], rec: 'Web sencilla' },
   { id: 'font', label: 'Fontanero', h1a: 'Una fuga.', h1b: 'Y te llaman a ti.',
     sub: 'Que seas el primero al que encuentran cuando hay una urgencia, y que ningún aviso se pierda mientras tienes las manos ocupadas.',
-    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Fuga en el baño', c2: 'Fontanero de ejemplo · Con foto de la avería',
+    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Fuga en el baño', c2: 'Con foto de la avería',
     opts: ['Lo antes posible', 'Hoy, 18:00', 'Mañana, 9:00', 'Mañana, 12:00'], btn: 'Pedir visita:', got: 'Nuevo aviso:', note: 'En tu correo, con la dirección y la foto. Respuesta ya enviada.',
     agenda: [['09:00', 'Cambio de grifo'], ['11:30', 'Calentador, Urgel'], ['16:30', 'Desatasco']], newRow: 'Fuga en el baño',
     wText: 'Con tus servicios, tu zona, tus horarios de urgencias y tu teléfono siempre a la vista.', wNav: 'Servicios · Urgencias · Contacto', wHead: 'Fugas y averías en tu barrio', wBtn: 'Llamar ahora',
@@ -582,7 +567,7 @@ const SECTORS = [
     flow: ['Entra un aviso con foto', 'Se guarda en tu lista de trabajos', 'Tu cliente recibe respuesta', 'Recordatorio del presupuesto'], rec: 'Web sencilla' },
   { id: 'tall', label: 'Taller mecánico', h1a: 'Menos papeles.', h1b: 'Más coches.',
     sub: 'Citas para revisión desde el móvil, avisos cuando el coche está listo y menos llamadas para preguntar cómo va.',
-    dh: 'Así llega una cita. Elige una hora.', c1: 'Revisión y cambio de aceite', c2: 'Taller de ejemplo · Miércoles',
+    dh: 'Así llega una cita. Elige una hora.', c1: 'Revisión y cambio de aceite', c2: 'Miércoles',
     opts: ['8:30', '10:00', '12:00', '16:00'], btn: 'Reservar miércoles a las', got: 'Nueva cita, miércoles', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['09:00', 'Seat Ibiza, frenos'], ['11:00', 'Ford Focus, ITV'], ['15:00', 'Renault Clio, aceite']], newRow: 'Revisión y aceite',
     wText: 'Con tus servicios, tus precios orientativos, opiniones reales y un botón para pedir cita.', wNav: 'Servicios · Precios · Cita', wHead: 'Tu coche, en buenas manos', wBtn: 'Pedir cita',
@@ -592,7 +577,7 @@ const SECTORS = [
     flow: ['Entra una cita', 'Se añade a tu calendario', 'Aviso de coche listo', 'Recordatorio de próxima revisión'], rec: 'Reservas online' },
   { id: 'clin', label: 'Fisio o clínica', h1a: 'Agenda llena.', h1b: 'Menos ausencias.',
     sub: 'Tus pacientes piden cita sin llamar, reciben su recordatorio y tu consulta deja de vivir pegada al teléfono.',
-    dh: 'Así llega una cita. Elige una hora.', c1: 'Sesión de fisioterapia', c2: 'Clínica de ejemplo · Martes · 50 minutos',
+    dh: 'Así llega una cita. Elige una hora.', c1: 'Sesión de fisioterapia', c2: 'Martes · 50 minutos',
     opts: ['9:00', '11:00', '16:30', '18:00'], btn: 'Reservar martes a las', got: 'Nueva cita, martes', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['10:00', 'Paciente, primera visita'], ['12:00', 'Paciente, revisión'], ['17:30', 'Paciente, sesión']], newRow: 'Paciente, sesión',
     wText: 'Con tus tratamientos, tu equipo y un botón para pedir cita, explicado en palabras sencillas.', wNav: 'Tratamientos · Equipo · Cita', wHead: 'Vuelve a moverte sin dolor', wBtn: 'Pedir cita',
@@ -602,7 +587,7 @@ const SECTORS = [
     flow: ['Entra una cita', 'Se añade a tu calendario', 'El paciente recibe la confirmación', 'Recordatorio el día antes'], rec: 'Reservas online' },
   { id: 'gym', label: 'Gimnasio o estudio', h1a: 'Más socios.', h1b: 'Menos gestiones.',
     sub: 'Clases que se reservan solas, avisos cuando cambia un horario y redes que hacen ganas de empezar.',
-    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Clase de pilates', c2: 'Estudio de ejemplo · Jueves · 50 minutos',
+    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Clase de pilates', c2: 'Jueves · 50 minutos',
     opts: ['9:00', '12:00', '18:00', '20:00'], btn: 'Reservar jueves a las', got: 'Nueva plaza, jueves', note: 'En tu correo y en tu lista de clase. Confirmación ya enviada.',
     agenda: [['10:00', 'Yoga, 8 plazas'], ['13:00', 'Fuerza, 6 plazas'], ['19:00', 'Pilates, 10 plazas']], newRow: 'Pilates, 1 plaza',
     wText: 'Con tus clases, tu horario, tus tarifas y un botón para probar una clase.', wNav: 'Clases · Horario · Tarifas', wHead: 'Tu primera clase te espera', wBtn: 'Reservar clase',
@@ -612,7 +597,7 @@ const SECTORS = [
     flow: ['Entra una reserva de clase', 'Se añade a tu lista', 'Recibe la confirmación', 'Recordatorio antes de clase'], rec: 'Reservas online' },
   { id: 'tien', label: 'Tienda local', h1a: 'Tu tienda,', h1b: 'también online.',
     sub: 'Que te encuentren en Google, vean lo que tienes y puedan encargártelo sin venir antes a preguntar.',
-    dh: 'Así llega un encargo. Elige cuándo recogerlo.', c1: 'Encargo para recoger', c2: 'Tienda de ejemplo · Pago en tienda',
+    dh: 'Así llega un encargo. Elige cuándo recogerlo.', c1: 'Encargo para recoger', c2: 'Pago en tienda',
     opts: ['Hoy, 19:00', 'Mañana, 11:00', 'Mañana, 18:00', 'Sábado, 12:00'], btn: 'Encargar para', got: 'Nuevo encargo:', note: 'En tu correo, con el detalle del pedido. Confirmación ya enviada.',
     agenda: [['10:30', 'Encargo de Rosa'], ['13:00', 'Recogida de Tomás'], ['18:30', 'Encargo de Inés']], newRow: 'Nuevo encargo',
     wText: 'Con tu catálogo, tu horario, cómo llegar y un formulario para hacer encargos.', wNav: 'Catálogo · Horario · Encargos', wHead: 'Lo de siempre, también desde el móvil', wBtn: 'Ver catálogo',
@@ -622,7 +607,7 @@ const SECTORS = [
     flow: ['Entra un encargo', 'Se guarda en tu lista', 'Tu cliente recibe la confirmación', 'Aviso cuando esté listo'], rec: 'Web sencilla' },
   { id: 'otro', label: 'Otro negocio', h1a: 'Menos tareas.', h1b: 'Más clientes.',
     sub: 'Cuéntame qué haces y buscamos juntos qué te ayudaría más: tu web, tus reservas, tus redes o quitarte tareas repetitivas.',
-    dh: 'Así llega un cliente nuevo. Elige cuándo.', c1: 'Primera consulta', c2: 'Negocio de ejemplo · Jueves · 30 minutos',
+    dh: 'Así llega un cliente nuevo. Elige cuándo.', c1: 'Primera consulta', c2: 'Jueves · 30 minutos',
     opts: ['10:00', '12:00', '16:00', '18:00'], btn: 'Reservar jueves a las', got: 'Nueva solicitud, jueves', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['09:30', 'Reunión con cliente'], ['13:00', 'Presupuesto pendiente'], ['17:00', 'Entrega de pedido']], newRow: 'Cliente nuevo',
     wText: 'Clara, rápida en el móvil y fácil de cambiar, con un gestor para que la lleves tú.', wNav: 'Servicios · Quiénes somos · Contacto', wHead: 'Lo que haces, bien explicado', wBtn: 'Contactar',
@@ -632,7 +617,7 @@ const SECTORS = [
     flow: ['Entra una solicitud', 'Se guarda en tu lista', 'Tu cliente recibe la respuesta', 'Recordatorio de seguimiento'], rec: 'lo vemos juntas según tu negocio' },
   { id: 'pilates', hidden: true, label: 'Centro de pilates', h1a: 'Clases llenas.', h1b: 'Menos mensajes.',
     sub: 'Tus alumnos reservan su clase desde el móvil y reciben los cambios de horario sin que tengas que escribir a cada uno.',
-    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Pilates reformer', c2: 'Estudio de ejemplo · Jueves · 50 minutos',
+    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Pilates reformer', c2: 'Jueves · 50 minutos',
     opts: ['9:00', '12:00', '18:00', '20:00'], btn: 'Reservar jueves a las', got: 'Nueva plaza, jueves', note: 'En tu lista de clase y en tu correo. Confirmación ya enviada.',
     agenda: [['10:00', 'Reformer, 5 plazas'], ['13:00', 'Suelo, 8 plazas'], ['19:00', 'Reformer, 6 plazas']], newRow: 'Reformer, 1 plaza',
     wText: 'Con tus clases, tu horario, tus tarifas y un botón para reservar la primera clase.', wNav: 'Clases · Horario · Tarifas', wHead: 'Tu primera clase te espera', wBtn: 'Reservar clase',
@@ -642,7 +627,7 @@ const SECTORS = [
     flow: ['Entra una reserva de clase', 'Se añade a tu lista', 'Recibe la confirmación', 'Recordatorio antes de clase'], rec: 'Reservas online' },
   { id: 'academiapeluqueria', hidden: true, label: 'Academia de peluquería', h1a: 'Cursos llenos.', h1b: 'Menos consultas.',
     sub: 'Que cada interesado vea tus cursos, pida información y reciba respuesta al momento, aunque estés en clase.',
-    dh: 'Así llega una solicitud. Elige un curso.', c1: 'Información de cursos', c2: 'Academia de ejemplo · Respuesta automática',
+    dh: 'Así llega una solicitud. Elige un curso.', c1: 'Información de cursos', c2: 'Respuesta automática',
     opts: ['Peluquería', 'Barbería', 'Colorimetría', 'Intensivo'], btn: 'Pedir información:', got: 'Nueva solicitud:', note: 'En tu correo, con sus datos. Información ya enviada.',
     agenda: [['10:00', 'Nuria, intensivo'], ['12:30', 'Óscar, barbería'], ['17:00', 'Sonia, colorimetría']], newRow: 'Solicitud de curso',
     wText: 'Con tus cursos, fechas, precios e instalaciones, y un formulario para pedir información.', wNav: 'Cursos · Fechas · Inscripción', wHead: 'Aprende peluquería con práctica real', wBtn: 'Ver cursos',
@@ -742,8 +727,36 @@ const pals=[...$('frase').children];
 /* tarjetas de precio que siguen al ratón */
 if(fino&&!quieto)document.querySelectorAll('.plan').forEach((c)=>{c.addEventListener('mousemove',(e)=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transition='transform .12s linear';c.style.transform='rotateY('+x*7+'deg) rotateX('+(-y*7)+'deg) translateZ(10px)'});c.addEventListener('mouseleave',()=>{c.style.transition='';c.style.transform=''})});
 
-/* recorrido de la automatizacion */
-const fl=$('flujo'),aj=()=>fl.style.setProperty('--dist',(fl.lastElementChild.offsetTop-fl.firstElementChild.offsetTop)+'px');aj();addEventListener('resize',aj);
+/* proyectos: lista, visual y modal */
+const PF='https://hola-laura.github.io/laura/';
+const wb=(u,a)=>'<div class="web"><img loading="lazy" src="'+u+'" alt="'+a+'"></div>';
+const fo=(u,a)=>'<img class="foto" loading="lazy" src="'+u+'" alt="'+a+'">';
+const SV=['Founding designer: visión y conceptos para inversores','Rediseño de los recorridos clave','Prototipos interactivos, interacción y nueva UI','Design system','Evaluación heurística de los recorridos actuales','Mejoras de UX y de métricas según objetivos de negocio','Planes de investigación y test de usabilidad','Contratación de producto y diseño','Priorización y workshops'];
+const st=(n)=>({n,r:'STARTUP',c:'tipo',t:'Diseño para startups',p:n+' es una de las startups con las que he trabajado. Estos son algunos de los servicios que he hecho para startups:',serv:1,l:[['Ver todos los proyectos','proyectos.html']]});
+const PROY=[
+{n:'Mattern Guide',r:'WEB Y PANEL',v:wb(PF+'assets/mountain-guide/website.webp','Web de Mattern Guide'),t:'Una web que su dueño cambia sin tocar código',p:'Diseñé y construí la web de Mattern Guide, un gestor de contenidos y una primera automatización.',y:'una web con tus servicios y horarios que puedes cambiar cuando quieras.',l:[['Ver la web','https://hola-laura.github.io/daniel-mattern-web/'],['Ver el panel','https://hola-laura.github.io/daniel-mattern-web/admin.html'],['Leer la historia',PF+'case-study-mountain-guide.html']]},
+{n:'Empresa de construcción',r:'SOFTWARE',tpl:'t-pres',t:'Presupuestos en un solo sitio',p:'Diseñé un software para que una empresa de construcción prepare sus presupuestos: partidas, cantidades, precios y total.',y:'si repites una tarea cada semana, puede tener su propia herramienta sencilla.',l:[]},
+{n:'Agencia de marketing local',r:'AUTOMATIZACIÓN',tpl:'t-flujo',t:'Citas que se organizan solas',p:'Automaticé la gestión de citas de una agencia de marketing local, desde que entra un contacto hasta el recordatorio.',y:'menos mensajes de ida y vuelta, y menos citas olvidadas.',l:[]},
+{n:'Monzo',r:'DISEÑO',v:fo(PF+'assets/flex/flex-focus-view.jpg','Persona usando la app de Monzo'),t:'Diseño en Monzo',p:'Trabajé como diseñadora de producto en Monzo, haciendo que cosas complicadas se entiendan a la primera.',y:'lo mismo, aplicado a lo que tus clientes necesitan entender y hacer.',l:[['Ver mi portfolio',PF+'index.html#case-studies']]},
+{n:'Skippr',r:'FOUNDING DESIGNER',c:'negro',v:'<img loading="lazy" src="https://www.skippr.ai/og-image.png" alt="Logotipo de Skippr">',t:'El diseño de una startup desde el principio',p:'Fui founding designer de Skippr y les ayudé a diseñar su primera herramienta.',y:'sé empezar de cero y convertir una idea en algo que la gente entiende.',l:[['Ver Skippr','https://www.skippr.ai/']]},
+{n:'Drivo Test',r:'APP PROPIA',c:'dos',v:'<img class="movil" loading="lazy" src="'+PF+'assets/drivo/home-ios.png" alt="Inicio de Drivo Test"><img class="movil" loading="lazy" src="'+PF+'assets/drivo/library-ios.png" alt="Preguntas de Drivo Test">',t:'Mi propia app, publicada en el App Store',p:'Investigué, diseñé y construí una app gratuita para ayudar a estudiantes en España a entender la teoría de conducir.',y:'lo que te propongo, sé hacerlo y lanzarlo de principio a fin.',l:[['Ver en el App Store','https://apps.apple.com/es/app/drivo-test/id6813126362'],['Leer la historia',PF+'case-study-drivo.html']]},
+{n:'Just Eat',r:'INTRANET',v:fo('https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/d2148e109663737.5fd8f758238b4.png','Intranet de Just Eat'),t:'La primera intranet para toda la empresa',p:'Diseñé The Kitchen, un único espacio con las noticias, las herramientas y el conocimiento de la empresa.',l:[['Leer la historia',PF+'case-study-just-eat.html']]},
+{n:'RLDatix',r:'SOFTWARE SANITARIO',v:fo(PF+'assets/rldatix/interface.png','Interfaz de RLDatix'),t:'Herramientas sanitarias en un solo producto',p:'Rediseñé un flujo complejo de gestión de riesgos sanitarios. En las pruebas, el 96% de los participantes completó las tareas clave sin ayuda.',l:[['Leer la historia',PF+'case-study-rldatix.html']]},
+{n:'intu',r:'WEB',v:wb('https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/39941f94922721.5fd8f70be9544.png','Family Club de intu'),t:'Más fácil unirse a Family Club',p:'Rediseñé el club para familias de intu para que la gente entendiera sus ventajas y se animara a unirse.',l:[['Leer la historia',PF+'case-study-intu.html']]},
+st('Pass the Jam'),st('Erika'),st('Correcto'),st('Vennre'),st('JOBBA')];
+const visP=(p)=>p.tpl?$(p.tpl).innerHTML:p.v||('<p class="tn">'+p.n+'<i class="pt"></i></p>');
+const ajF=(r)=>r.querySelectorAll('.flujo').forEach((f)=>f.style.setProperty('--dist',(f.lastElementChild.offsetTop-f.firstElementChild.offsetTop)+'px'));
+$('pl').innerHTML=PROY.map((p,i)=>'<li><button class="pb" type="button" data-i="'+i+'"><span>'+p.n+'</span><small>'+p.r+'</small></button></li>').join('');
+$('vis').innerHTML=PROY.map((p)=>'<div class="capa en '+(p.c||'')+'">'+visP(p)+'</div>').join('');
+const capas=[...$('vis').children],pbs=[...$('pl').querySelectorAll('.pb')];let act=-1,zz=1;
+const activa=(i)=>{if(i===act)return;const c=capas[i];pbs.forEach((b,k)=>b.classList.toggle('on',k===i));const prev=capas[act];act=i;c.style.zIndex=++zz;c.classList.add('on');if(prev)setTimeout(()=>{if(capas[act]!==prev)prev.classList.remove('on')},820)};
+activa(0);ajF($('vis'));addEventListener('resize',()=>ajF($('vis')));
+$('pl').addEventListener('pointerover',(e)=>{const b=e.target.closest('.pb');if(b&&e.pointerType!=='touch')activa(+b.dataset.i)});
+$('pl').addEventListener('focusin',(e)=>{const b=e.target.closest('.pb');if(b)activa(+b.dataset.i)});
+let pmI=0;const abre=(i)=>{pmI=i;const p=PROY[i],m=$('pm');$('pmV').className='pm-v en '+(p.c||'');$('pmV').innerHTML=visP(p);$('pmR').textContent=p.r;$('pmT').textContent=p.t;$('pmP').textContent=p.p;$('pmS').innerHTML=p.serv?'<ul>'+SV.map((x)=>'<li>'+x+'</li>').join('')+'</ul>':'';$('pmY').innerHTML=p.y?'<b>En tu negocio:</b> '+p.y:'';$('pmL').innerHTML=p.l.map((l)=>'<a class="lk" href="'+l[1]+'"'+(l[1].startsWith('http')?' target="_blank" rel="noopener"':'')+'><i></i>'+l[0]+'</a>').join('');if(!m.open)m.showModal();m.scrollTop=0;ajF($('pmV'))};
+$('pl').addEventListener('click',(e)=>{const b=e.target.closest('.pb');if(b)abre(+b.dataset.i)});
+$('pmX').addEventListener('click',()=>$('pm').close());$('pmN').addEventListener('click',()=>abre((pmI+1)%PROY.length));
+$('pm').addEventListener('click',(e)=>{if(e.target===$('pm'))$('pm').close()});
 
 /* mazo de fotos */
 const fotos=[...$('mazo').querySelectorAll('img')];const pos=['-50%,-50%) rotate(0deg','-44%,-53%) rotate(4deg','-56%,-48%) rotate(-5deg','-50%,-46%) rotate(8deg'];
