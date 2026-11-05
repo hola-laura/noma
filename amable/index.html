@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Young+Serif&display=swap" rel="stylesheet">
 <style>
 :root{--a:#004833;--on:#fff;--h:#004833;--ink:#111111;--mut:#4A5550;--soft:#FDE480;--dark:#004833;
---yeso:#FFFFFF;--piedra:#F4F6F1;--line:rgba(17,17,17,.12);--rosa:#FDE480;
+--yeso:#FFFFFF;--piedra:#F4F6F1;--line:rgba(17,17,17,.12);--rosa:var(--soft);--c2:#A8C8F8;--c3:#FCB0F8;
 --serif:'Young Serif',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',ui-monospace,monospace;
 --punto:cubic-bezier(.2,.8,.2,1);--bote:cubic-bezier(.34,1.56,.64,1);--g:clamp(24px,6vw,80px);--w:1240px}
 *{box-sizing:border-box}
@@ -369,15 +369,15 @@ html{scroll-behavior:auto}
 
 /* amable: paleta alternativa */
 .hero{background:var(--soft);transition:background .4s}.nav{background:rgba(255,255,255,.92)}
-.demo{background:#A8C8F8}.demo .lead,.demo .tit p{color:#111}
-.oferta{background:#FCB0F8}.oferta,.oferta p{color:#111}
-.sobre{background:#FDE480}.sobre p{color:#111}
-.lienzo,#vis .capa{background:#A8C8F8}.lienzo.negro{background:#004833}
-.plan.top{background:#004833;border-color:#004833;--a:#FDE480}.startups{background:#004833}
-.contacto,.pie{--a:#FDE480}
+.demo{background:var(--c2)}.demo .lead,.demo .tit p{color:#111}
+.oferta{background:var(--c3)}.oferta,.oferta p{color:#111}
+.sobre{background:var(--soft)}.sobre p{color:#111}
+.lienzo,#vis .capa{background:var(--c2)}.lienzo.negro{background:var(--dark)}
+.plan.top{background:var(--dark);border-color:var(--dark);--a:var(--soft)}.startups{background:var(--dark)}
+.contacto,.pie{--a:var(--soft)}
 .btn,.btn.inv{--bg:var(--a);--fg:var(--on);--fill:var(--on);--fgh:var(--a)}
-.btn.claro{--bg:#fff;--fill:#004833;--fgh:#fff}
-.plan.top .btn,.salidas .btn,.btn[style*="--bg:#fff"]{--bg:#fff;--fg:#111;--fill:#004833;--fgh:#fff}
+.btn.claro{--bg:#fff;--fill:var(--a);--fgh:var(--on)}
+.plan.top .btn,.salidas .btn,.btn[style*="--bg:#fff"]{--bg:#fff;--fg:#111;--fill:var(--dark);--fgh:#fff}
 </style>
 </head>
 <body>
@@ -675,7 +675,7 @@ let cur=null;
 const conPunto=(t)=>t.endsWith('.')?t.slice(0,-1)+'<i class="pt"></i>':t;
 const clip=()=>'<span class="clip"><video muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video></span>';
 const pintaTema=(id)=>{const t=THEMES[id]||THEMES.otro,r=document.documentElement.style;
-r.setProperty('--a',t.a);r.setProperty('--on',t.on);r.setProperty('--h',t.h);r.setProperty('--soft',id==='otro'?'#FDE480':t.soft);};
+r.setProperty('--a',t.a);r.setProperty('--on',t.on);r.setProperty('--h',t.h);r.setProperty('--soft',id==='otro'?'#FDE480':t.soft);r.setProperty('--dark',id==='otro'?'#004833':t.ink);r.setProperty('--c2',id==='otro'?'#A8C8F8':t.bg);r.setProperty('--c3',id==='otro'?'#FCB0F8':t.soft);};
 const pinta=(id)=>{const s=SECTORS.find((x)=>x.id===id)||SECTORS.find((x)=>x.id==='otro');cur=s;
 pintaTema(s.id);
 $('l1').innerHTML='<span>'+conPunto(s.h1a)+'</span>';$('l2').innerHTML=clip()+'<span>'+conPunto(s.h1b)+'</span>';
