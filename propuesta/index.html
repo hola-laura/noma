@@ -52,7 +52,6 @@ h2{font-size:clamp(36px,5.2vw,64px);line-height:1.04}
 
 /* hero */
 .hero{min-height:100svh;display:flex;align-items:center;padding:120px 0 56px}
-.hola{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--mut);margin-bottom:clamp(14px,3vh,26px)}
 h1{font-size:clamp(44px,min(7.6vw,12.4vh),100px);line-height:1.02;margin-bottom:clamp(14px,2.6vh,24px)}
 .ln{display:block;overflow:hidden;padding-bottom:.13em;margin-bottom:-.13em}
 .ln>span{display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:0 .22em;transform:translateY(112%);transition:transform .8s var(--punto)}
@@ -184,7 +183,7 @@ h1{font-size:clamp(44px,min(7.6vw,12.4vh),100px);line-height:1.02;margin-bottom:
 .sobre{background:var(--piedra)}
 .sobre .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,8vw,120px);align-items:center}
 .mazo{position:relative;height:clamp(340px,40vw,480px);border:0;background:none;padding:0;cursor:pointer;width:100%}
-.mazo img{position:absolute;left:50%;top:50%;width:62%;height:86%;object-fit:cover;border-radius:18px;background:var(--soft);box-shadow:0 18px 40px -24px rgba(23,18,15,.6);transition:transform .6s var(--punto),opacity .4s}
+.mazo img{position:absolute;left:50%;top:50%;width:70%;height:92%;object-fit:cover;object-position:50% 22%;border-radius:18px;background:var(--soft);box-shadow:0 18px 40px -24px rgba(23,18,15,.6);transition:transform .6s var(--punto),opacity .4s}
 .sobre p{margin-top:20px;color:var(--mut);max-width:30em}
 
 /* faq */
@@ -209,6 +208,8 @@ details p{padding:0 40px 30px 0;color:var(--mut);animation:sube .35s var(--punto
 .campo span{display:block;font-size:15px;color:#BDB5AD;margin-bottom:5px}
 .campo input,.campo textarea{width:100%;min-height:58px;padding:16px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.06);color:#fff;transition:border-color .2s,background .2s;resize:vertical}
 .campo input:focus,.campo textarea:focus{outline:0;border-color:#fff;background:rgba(255,255,255,.11)}
+.priv{font-size:15px;color:#B9B9B4;margin-bottom:16px}.priv a{color:#fff}
+.ack{display:flex;align-items:flex-start;gap:12px;font-size:15px;margin-bottom:28px;color:#fff}.ack input{width:20px;height:20px;flex:none;margin:2px 0 0;accent-color:var(--a)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .err{margin-top:10px;color:#FFB9A6;font-size:15px}
 .gracias{font:400 clamp(28px,3.4vw,40px)/1.1 var(--serif)}
@@ -265,7 +266,6 @@ html{scroll-behavior:auto}
 <main id="inicio">
 <section class="hero"><div class="wrap">
 <aside class="aviso" id="aviso" aria-hidden="true"><i></i><div><b id="avT"></b><span id="avS"></span></div></aside>
-<p class="hola">Urgel · Oporto · Marqués de Vadillo</p>
 <h1 id="h1" aria-live="polite"><span class="ln"><span id="l1"></span></span><span class="ln"><span id="l2"></span></span></h1>
 <p class="bajada" id="sub"></p>
 <p class="elige">¿Qué negocio tienes?</p>
@@ -340,10 +340,10 @@ html{scroll-behavior:auto}
 
 <section class="sobre" id="laura"><div class="wrap">
 <button class="mazo r" id="mazo" aria-label="Pasar a la siguiente foto de Laura">
-<img src="https://hola-laura.github.io/laura/assets/home/laura-mural.jpg" alt=""><img src="https://hola-laura.github.io/laura/assets/home/laura-speaking.jpg" alt=""><img src="https://hola-laura.github.io/laura/assets/home/laura-working.jpg" alt=""><img src="https://hola-laura.github.io/laura/assets/home/laura-portrait.jpg" alt="Laura">
+<img src="laura-mural.jpg" alt=""><img src="laura-speaking.jpg" alt=""><img src="laura-working.jpg" alt=""><img src="laura-portrait.jpg" alt="Laura">
 </button>
 <div class="r"><h2>Una vecina que sabe de esto<i class="pt"></i></h2>
-<p>Hola, soy Laura. Vivo en Urgel y llevo años diseñando productos digitales para banca, ecommerce y food delivery.</p>
+<p>Hola, soy Laura. Vivo en Carabanchel y llevo años diseñando productos digitales para banca, ecommerce y food delivery.</p>
 <p>He diseñado productos digitales para Monzo, Just Eat y RLDatix. También he publicado mi propia app, Drivo Test, y construyo webs con gestor de contenido para pequeños profesionales.</p></div>
 </div></section>
 
@@ -367,6 +367,8 @@ html{scroll-behavior:auto}
 <label class="campo"><span>Tu negocio</span><input name="negocio" required autocomplete="organization"></label>
 <label class="campo"><span>Qué quieres mejorar</span><textarea name="mejora" rows="3" required></textarea></label>
 <label class="campo"><span>Tu teléfono o email</span><input name="contacto" required></label>
+<p class="priv">Responsable: Laura Sampedro de la Rosa. Usaré estos datos solo para responderte y los conservaré hasta seis meses después del último contacto. <a href="/noma/privacidad.html" target="_blank" rel="noopener">Lee la política de privacidad</a>.</p>
+<label class="ack"><input type="checkbox" name="privacy_ack" required><span>He leído la información de privacidad.</span></label>
 <button class="btn" data-mag id="enviar" type="submit" style="--bg:#fff;--fg:var(--ink)">Enviar</button>
 <p class="err" id="err" hidden role="alert"></p>
 </form>
@@ -374,7 +376,7 @@ html{scroll-behavior:auto}
 
 <footer class="pie"><div class="wrap">
 <div class="gigante" id="gigante" aria-hidden="true">noma<i class="pt"></i></div>
-<div class="legal"><span class="mono">Design · AI · Automation</span><span class="mono">Urgel · Oporto · Marqués de Vadillo, Madrid</span></div>
+<div class="legal"><span class="mono">Design · AI · Automation</span><a class="mono" href="/noma/privacidad.html">Privacidad</a><span class="mono">Urgel · Oporto · Marqués de Vadillo, Madrid</span></div>
 </div></footer>
 
 <div class="barrido" id="barrido"></div>
@@ -623,6 +625,7 @@ document.querySelectorAll('[data-mag]').forEach((b)=>{b.addEventListener('mousem
 $('f').addEventListener('submit',async(e)=>{e.preventDefault();const f=e.target,er=$('err'),b=$('enviar');er.hidden=true;
 const v=(k)=>f.elements[k].value.trim();
 if(!v('negocio')||!v('mejora')||!v('contacto')){er.textContent='Rellena los tres campos, por favor.';er.hidden=false;return}
+if(!f.elements.privacy_ack.checked){er.textContent='Marca la casilla de privacidad, por favor.';er.hidden=false;return}
 b.disabled=true;b.style.width=b.offsetWidth+'px';void b.offsetWidth;b.classList.add('va');b.lastChild.textContent='Enviando…';
 try{const r=await fetch(FORM_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({origen:'Propuesta',sector:cur.label,negocio:v('negocio'),mensaje:v('mejora'),contacto:v('contacto'),web:v('web')})});
 const d=await r.json();if(!d.ok)throw 0;f.innerHTML='<p class="gracias">He recibido tu consulta<i class="pt"></i></p><p class="lead" style="margin-top:10px;color:#BDB5AD">Te contesto lo antes posible.</p>'}
