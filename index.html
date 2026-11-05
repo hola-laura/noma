@@ -509,13 +509,26 @@ const initGallery = () => {
   layout();
 };
 
+const urlSector = () => {
+  try { const v = new URLSearchParams(location.search).get('sector'); return SECTORS.some((x) => x.id === v) ? v : null; } catch (e) { return null; }
+};
+const syncUrl = (id) => {
+  try { const u = new URL(location.href); if (id) u.searchParams.set('sector', id); else u.searchParams.delete('sector'); history.pushState(null, '', u); } catch (e) {}
+};
+let navBound = false;
+const bindNav = (c) => {
+  if (navBound) return;
+  navBound = true;
+  try { window.addEventListener('popstate', () => c.setState({ sector: urlSector(), chosen: 1 })); } catch (e) {}
+};
+
 class Component extends DCLogic {
-  state = { sector: null, chosen: 1 };
-  componentDidMount() { initGallery(); }
-  componentDidUpdate() { initGallery(); }
+  state = { sector: urlSector(), chosen: 1 };
+  componentDidMount() { bindNav(this); initGallery(); }
+  componentDidUpdate() { bindNav(this); initGallery(); }
   renderVals() {
     const top = () => { try { window.scrollTo(0, 0); } catch (e) {} };
-    const sectors = SECTORS.map((x) => ({ label: x.label, pick: () => { this.setState({ sector: x.id, chosen: 1 }); top(); } }));
+    const sectors = SECTORS.map((x) => ({ label: x.label, pick: () => { syncUrl(x.id); this.setState({ sector: x.id, chosen: 1 }); top(); } }));
     const s = SECTORS.find((x) => x.id === this.state.sector) || SECTORS[0];
     const base = THEMES[this.state.sector] || THEMES.otro;
     const t = this.state.sector && this.state.sector !== 'otro' ? base : { ...base, a: this.props.accent ?? base.a, h: this.props.accent ?? base.h };
@@ -539,7 +552,7 @@ class Component extends DCLogic {
     const flow = s.flow.map((text, i) => ({ text,
       css: 'border-radius: 14px; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; ' + (i === last ? 'background: ' + t.a + '; color: ' + t.on : 'background: #FFFFFF') }));
     return { t, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
-      reset: () => { this.setState({ sector: null, chosen: 1 }); top(); } };
+      reset: () => { syncUrl(null); this.setState({ sector: null, chosen: 1 }); top(); } };
   }
 }
 
