@@ -12,6 +12,10 @@ html{scroll-behavior:smooth}
 body{margin:0;background:#FFEFE6}
 a{color:inherit}a:hover{opacity:.78}
 .sector{transition:background .15s,color .15s}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+#email-dialog{border:none;border-radius:20px;padding:28px;width:min(440px,calc(100vw - 32px));box-sizing:border-box;background:#FFFFFF}
+#email-dialog::backdrop{background:rgba(0,0,0,.55)}
+[hidden]{display:none!important}
 .sectors{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 @media (max-width:700px){.sectors{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .sector:hover{background:#3A120A!important;color:#FFFFFF!important}
@@ -252,11 +256,43 @@ a{color:inherit}a:hover{opacity:.78}
 <div style="display: flex; flex-wrap: wrap; gap: 12px">
 <a href="https://wa.me/447469892325?text=Hola%20Laura%2C%20tengo%20un%20negocio%20y%20me%20gustar%C3%ADa%20hablar%20contigo." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-weight: 600; text-decoration: none">WhatsApp</a>
 <a href="{{ calUrl }}" target="_blank" rel="noopener noreferrer" style="{{ calCss }}">Reservar 15 minutos</a>
-<a href="mailto:lrsmpdr@gmail.com?subject=Quiero%20mejorar%20mi%20negocio" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; border: 2px solid {{ t.on }}; box-sizing: border-box; color: {{ t.on }}; font-weight: 600; text-decoration: none">Email</a>
+<button type="button" onClick="{{ openEmail }}" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; border: 2px solid {{ t.on }}; box-sizing: border-box; background: transparent; color: {{ t.on }}; font: inherit; font-weight: 600; cursor: pointer">Email</button>
 </div>
 </div>
+<dialog id="email-dialog" aria-labelledby="email-title" style="color: {{ t.ink }}">
+<form id="email-form" style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<h3 id="email-title" style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">Escríbeme</h3>
+<button type="button" onClick="{{ closeEmail }}" aria-label="Cerrar" style="width: 44px; height: 44px; border: none; border-radius: 50%; background: {{ t.soft }}; color: {{ t.ink }}; font: inherit; font-size: 22px; line-height: 1; cursor: pointer">×</button>
+</div>
+<input class="hp" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="e-nombre" style="font-weight: 600; font-size: 16px">Tu nombre</label>
+<input id="e-nombre" name="nombre" required maxlength="120" autocomplete="name" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="e-email" style="font-weight: 600; font-size: 16px">Tu email</label>
+<input id="e-email" name="email" type="email" required maxlength="120" autocomplete="email" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="e-mensaje" style="font-weight: 600; font-size: 16px">Mensaje</label>
+<textarea id="e-mensaje" name="mensaje" required maxlength="1000" rows="4" style="box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit; resize: vertical"></textarea>
+</div>
+<button type="button" id="e-send" onClick="{{ sendEmail }}" style="min-height: 56px; border: none; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font: inherit; font-weight: 700; cursor: pointer">Enviar mensaje</button>
+<p id="e-error" hidden style="margin: 0; font-size: 15px; font-weight: 600">No se ha podido enviar. Inténtalo otra vez o escríbeme por WhatsApp.</p>
+<p style="margin: 0; font-size: 15px; color: {{ t.mut }}">Solo usaré estos datos para responderte.</p>
+</form>
+<div id="email-thanks" hidden>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">¡Mensaje enviado!</h3>
+<p style="margin: 0">Te contesto lo antes posible.</p>
+<button type="button" onClick="{{ closeEmail }}" style="min-height: 52px; border: none; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font: inherit; font-weight: 700; cursor: pointer">Cerrar</button>
+</div>
+</div>
+</dialog>
 <div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px">
 <form id="consulta" style="{{ formCss }}">
+<input class="hp" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
 <h3 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">Cuéntame tu caso</h3>
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="f-negocio" style="font-weight: 600; font-size: 16px">Nombre del negocio</label>
@@ -270,12 +306,13 @@ a{color:inherit}a:hover{opacity:.78}
 <label for="f-contacto" style="font-weight: 600; font-size: 16px">Email o teléfono</label>
 <input id="f-contacto" name="contacto" required maxlength="120" autocomplete="email" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
 </div>
-<button type="button" onClick="{{ submit }}" style="min-height: 56px; border: none; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font: inherit; font-weight: 700; cursor: pointer">Enviar consulta</button>
+<button type="button" id="f-send" onClick="{{ submit }}" style="min-height: 56px; border: none; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font: inherit; font-weight: 700; cursor: pointer">Enviar consulta</button>
+<p id="f-error" hidden style="margin: 0; font-size: 15px; font-weight: 600">No se ha podido enviar. Inténtalo otra vez o escríbeme por WhatsApp.</p>
 <p style="margin: 0; font-size: 15px; color: {{ t.mut }}">Solo usaré estos datos para responderte.</p>
 </form>
 <div style="{{ thanksCss }}">
 <h3 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">¡Gracias!</h3>
-<p style="margin: 0">WhatsApp se ha abierto con el mensaje preparado. Pulsa Enviar allí para que me llegue; si no se abrió, escríbeme por WhatsApp o a lrsmpdr@gmail.com.</p>
+<p style="margin: 0">He recibido tu consulta. Te contesto lo antes posible.</p>
 </div>
 </div>
 </div>
@@ -557,9 +594,19 @@ const initGallery = () => {
   layout();
 };
 
-const FORM_URL = '';
+const FORM_URL = 'https://script.google.com/macros/s/AKfycbyzG0kePIy7Br2kr5oX7gncFMFjbJXAxXtv6JI6gpeqZ8cgGsO2_MjK0cDdbmXMshV0/exec';
+const deliver = async (data, buttonId, errorId) => {
+  const button = document.getElementById(buttonId), error = document.getElementById(errorId), label = button.textContent;
+  button.disabled = true; button.textContent = 'Enviando…'; error.hidden = true;
+  let ok = false;
+  try {
+    const r = await fetch(FORM_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
+    ok = !!(await r.json()).ok;
+  } catch (e) {}
+  button.disabled = false; button.textContent = label; error.hidden = ok;
+  return ok;
+};
 const CALENDAR_URL = 'https://calendar.app.google/tx5x6KwxiNUhJSyn9';
-const WHATSAPP = '447469892325';
 const urlSector = () => {
   try { const v = new URLSearchParams(location.search).get('sector'); return SECTORS.some((x) => x.id === v) ? v : null; } catch (e) { return null; }
 };
@@ -575,18 +622,29 @@ const bindNav = (c) => {
 
 class Component extends DCLogic {
   state = { sector: urlSector(), chosen: 1, sent: false };
-  sendForm(label) {
+  async sendForm(label) {
     const form = document.getElementById('consulta');
     if (!form || !form.reportValidity()) return;
     const v = (k) => form.elements[k].value.trim();
-    const data = { negocio: v('negocio'), mejora: v('mejora'), contacto: v('contacto'), sector: label };
-    if (FORM_URL) {
-      fetch(FORM_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) }).catch(() => {});
-    } else {
-      const text = 'Hola Laura. Negocio: ' + data.negocio + ' (' + label + '). Quiero mejorar: ' + data.mejora + '. Contacto: ' + data.contacto;
-      window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-    }
-    this.setState({ sent: true });
+    const ok = await deliver({ origen: 'Formulario', sector: label, negocio: v('negocio'), mensaje: v('mejora'), contacto: v('contacto'), web: v('web') }, 'f-send', 'f-error');
+    if (ok) this.setState({ sent: true });
+  }
+  openEmail() {
+    document.getElementById('email-form').reset();
+    document.getElementById('email-form').hidden = false;
+    document.getElementById('email-thanks').hidden = true;
+    document.getElementById('e-error').hidden = true;
+    document.getElementById('email-dialog').showModal();
+  }
+  closeEmail() {
+    document.getElementById('email-dialog').close();
+  }
+  async sendEmail(label) {
+    const form = document.getElementById('email-form');
+    if (!form.reportValidity()) return;
+    const v = (k) => form.elements[k].value.trim();
+    const ok = await deliver({ origen: 'Email', sector: label, negocio: v('nombre'), mensaje: v('mensaje'), contacto: v('email'), web: v('web') }, 'e-send', 'e-error');
+    if (ok) { form.hidden = true; document.getElementById('email-thanks').hidden = false; }
   }
   componentDidMount() { bindNav(this); initGallery(); }
   componentDidUpdate() { bindNav(this); initGallery(); }
@@ -620,7 +678,7 @@ class Component extends DCLogic {
     const thanksCss = this.state.sent ? stack : 'display: none';
     const calUrl = CALENDAR_URL || '#contacto';
     const calCss = CALENDAR_URL ? 'display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; border: 2px solid ' + t.on + '; box-sizing: border-box; color: ' + t.on + '; font-weight: 600; text-decoration: none' : 'display: none';
-    return { formCss, thanksCss, calUrl, calCss, submit: () => this.sendForm(s.label), t, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
+    return { formCss, thanksCss, calUrl, calCss, submit: () => this.sendForm(s.label), openEmail: () => this.openEmail(), closeEmail: () => this.closeEmail(), sendEmail: () => this.sendEmail(s.label), t, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
       reset: () => { syncUrl(null); this.setState({ sector: null, chosen: 1 }); top(); } };
   }
 }
