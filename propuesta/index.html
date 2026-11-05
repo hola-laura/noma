@@ -170,6 +170,81 @@ h1{font-size:clamp(44px,min(7.6vw,12.4vh),100px);line-height:1.02;margin-bottom:
 .post p{position:absolute;z-index:1;left:26px;right:26px;bottom:24px;font:400 23px/1.14 var(--serif);text-wrap:balance}
 .post .pt{position:absolute;z-index:1;left:26px;top:26px;width:14px;height:14px;margin:0}
 
+/* trabajo */
+.trabajo{padding-bottom:clamp(64px,8vw,104px)}
+.nombres{display:flex;flex-wrap:wrap;gap:14px 36px;font:400 clamp(24px,2.6vw,32px)/1.2 var(--serif);padding-bottom:clamp(40px,5vw,64px);margin-bottom:clamp(64px,9vw,120px);border-bottom:1px solid var(--line)}
+.nombres span{display:inline-flex;align-items:baseline}
+.nombres span::after{content:"";width:.2em;height:.2em;margin-left:.04em;border-radius:50%;background:var(--a);transform:scale(0);transition:transform .35s var(--bote)}
+.nombres span:hover::after{transform:scale(1)}
+.caso{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(40px,7vw,96px);align-items:center;margin-bottom:clamp(96px,13vw,176px)}
+.caso.inv{grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr)}.caso.inv .txt{order:2}
+.caso .mono{display:block;margin-bottom:18px}
+.caso h3{font-size:clamp(32px,3.8vw,46px);line-height:1.06;margin-bottom:20px}
+.caso p{color:var(--mut)}
+.tuyo{margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
+.tuyo b{color:var(--ink);font-weight:600}
+.lks{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:28px}
+.lk{position:relative;display:inline-flex;align-items:center;gap:8px;padding:4px 0;font-weight:500;text-decoration:none}
+.lk::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform-origin:left;transition:transform .4s var(--punto)}
+.lk:hover::after{transform:scaleX(.3)}
+.lk i{width:8px;height:8px;border-radius:50%;background:var(--a);transition:transform .3s var(--bote)}.lk:hover i{transform:scale(1.6)}
+.lienzo{position:relative;background:var(--piedra);border-radius:28px;padding:clamp(28px,4.4vw,60px);min-height:clamp(320px,38vw,500px);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.web{width:100%;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 26px 60px -34px rgba(17,17,17,.5)}
+.web::before{content:"";display:block;height:26px;background:radial-gradient(circle 4px at 16px 13px,#D6D6D2 98%,#0000),radial-gradient(circle 4px at 32px 13px,#D6D6D2 98%,#0000),radial-gradient(circle 4px at 48px 13px,#D6D6D2 98%,#0000),#fff}
+.web img{width:100%}
+.flota{position:absolute;right:clamp(16px,2.4vw,32px);bottom:clamp(16px,2.4vw,32px);width:56%;will-change:transform}
+.lienzo.doble{align-items:flex-start;justify-content:flex-start}
+.lienzo.doble>.web:first-child{width:86%}
+.movil{width:clamp(150px,17vw,216px);border-radius:28px;box-shadow:0 26px 60px -30px rgba(17,17,17,.55);transition:transform .5s var(--punto)}
+.dos{gap:clamp(16px,2.4vw,32px)}.dos .movil:first-child{transform:rotate(-4deg)}.dos .movil:last-child{transform:rotate(4deg) translateY(20px)}
+.dos:hover .movil:first-child{transform:rotate(-7deg) translateX(-8px)}.dos:hover .movil:last-child{transform:rotate(7deg) translate(8px,20px)}
+.foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lienzo.foto-l .movil{position:relative;width:clamp(130px,14vw,180px);margin-left:auto}
+.lienzo.negro{background:var(--ink)}
+.lienzo.negro img{width:min(100%,420px);border-radius:14px}
+.nota-ui{position:absolute;left:clamp(16px,2.4vw,28px);bottom:14px;font:400 12px var(--mono);color:var(--mut)}
+.pres{width:100%;max-width:520px;background:#fff;border-radius:18px;padding:clamp(22px,2.8vw,34px);box-shadow:0 26px 60px -34px rgba(17,17,17,.5);margin-bottom:18px}
+.pres header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
+.pres h4{margin:0;font:400 22px/1.15 var(--serif)}
+.pres .fp{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line);font-size:15px;opacity:0;transform:translateX(-12px);transition:opacity .5s var(--punto),transform .5s var(--punto)}
+.en .pres .fp{opacity:1;transform:none}
+.pres .fp span:last-child{font-family:var(--mono);font-size:14px}
+.pres .fp:nth-of-type(2){transition-delay:.12s}.pres .fp:nth-of-type(3){transition-delay:.24s}.pres .fp:nth-of-type(4){transition-delay:.36s}.pres .fp:nth-of-type(5){transition-delay:.48s}
+.pres footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;padding-top:16px;border-top:2px solid var(--ink)}
+.pres .tot{font:400 clamp(28px,3vw,36px)/1 var(--serif);font-variant-numeric:tabular-nums}
+.pres .ui{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 15px;border-radius:999px;background:var(--ink);color:#fff;font-size:14px;font-weight:500;white-space:nowrap}
+.pres .ui::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--a)}
+.flujo{position:relative;width:100%;max-width:440px;list-style:none;margin:0 0 18px;padding:0}
+.flujo::before{content:"";position:absolute;left:21px;top:30px;bottom:30px;width:2px;background:var(--line)}
+.flujo::after{content:"";position:absolute;left:15px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--a);animation:baja 6s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes baja{0%,8%{transform:none}92%,100%{transform:translateY(var(--dist,246px))}}
+.flujo li{position:relative;display:flex;justify-content:space-between;align-items:center;gap:14px;margin:0 0 12px 58px;padding:15px 18px;background:#fff;border-radius:14px;font-size:15px;font-weight:500}
+.flujo li:last-child{margin-bottom:0}
+.flujo small{font:400 12px var(--mono);color:var(--mut);white-space:nowrap}
+.mini3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:clamp(96px,12vw,160px)}
+.mini{text-decoration:none;display:block}
+.mini figure{margin:0 0 22px;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:var(--piedra)}
+.mini img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--punto)}
+.mini:hover img{transform:scale(1.05)}
+.mini h4{margin:8px 0;font:400 25px/1.12 var(--serif)}
+.mini p{color:var(--mut);font-size:16px}
+.startups{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,7vw,96px);background:var(--ink);color:#fff;border-radius:28px;padding:clamp(36px,6vw,80px);margin-bottom:clamp(96px,13vw,176px)}
+.startups .mono{display:block;margin-bottom:18px;color:#B9B9B4}
+.startups h3{font-size:clamp(32px,3.8vw,46px);line-height:1.06;margin-bottom:20px}
+.startups .sn{color:#B9B9B4;font-size:clamp(18px,1.7vw,21px)}
+.startups ul{list-style:none;margin:0;padding:0}
+.startups li{display:flex;gap:14px;padding:13px 0;border-top:1px solid rgba(255,255,255,.16);font-size:17px}
+.startups li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--a);margin-top:.55em;flex:none}
+.ayuda{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(32px,5vw,72px);padding-top:clamp(48px,6vw,72px);border-top:1px solid var(--line)}
+.ayuda h3{font-size:clamp(25px,2.6vw,31px);line-height:1.1;margin-bottom:12px}
+.ayuda p{color:var(--mut)}
+.tit2{margin-bottom:clamp(48px,6vw,80px);font-size:clamp(36px,5.2vw,64px);line-height:1.04}
+@media (max-width:860px){
+.caso,.caso.inv,.mini3,.ayuda,.startups{grid-template-columns:minmax(0,1fr)}.caso.inv .txt{order:0}
+.flota{position:relative;right:auto;bottom:auto;width:100%;margin-top:16px;transform:none!important}
+.lienzo.doble{flex-direction:column}.lienzo.doble>.web:first-child{width:100%}
+}
+
 /* cómo */
 .como .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(48px,8vw,120px)}
 .pasos{position:relative;list-style:none;margin:0;padding:0 0 0 56px}
@@ -259,7 +334,7 @@ html{scroll-behavior:auto}
 <nav class="nav" aria-label="Principal">
 <i class="prog" id="prog"></i>
 <a class="logo" href="#inicio" aria-label="noma., inicio">noma<i class="pt"></i></a>
-<ul><li><a href="#prueba">Cómo funciona</a></li><li><a href="#precios">Precios</a></li><li><a href="#redes">Redes</a></li><li><a href="#laura">Quién soy</a></li></ul>
+<ul><li><a href="#prueba">Cómo funciona</a></li><li><a href="#trabajos">Trabajos</a></li><li><a href="#precios">Precios</a></li><li><a href="#laura">Quién soy</a></li></ul>
 <a class="btn" data-mag href="https://calendar.app.google/tx5x6KwxiNUhJSyn9" target="_blank" rel="noopener">Reservar 15 min</a>
 </nav>
 
@@ -291,6 +366,77 @@ html{scroll-behavior:auto}
 <h3>TU AGENDA DE HOY</h3>
 <div id="agenda"></div>
 <ol class="ruta" id="ruta"></ol>
+</div>
+</div></section>
+
+<section class="trabajo" id="trabajos"><div class="wrap">
+<div class="tit r"><h2>Trabajo real, para gente real<i class="pt"></i></h2><p class="lead">He diseñado para empresas grandes y para profesionales que trabajan solos. Esa experiencia es la que pongo al servicio de tu negocio.</p></div>
+<div class="nombres r"><span>Monzo</span><span>Just Eat</span><span>RLDatix</span><span>intu</span><span>Skippr</span><span>Pass the Jam</span><span>Erika</span><span>Correcto</span><span>Vennre</span><span>JOBBA</span><span>Mattern Guide</span><span>Drivo Test</span></div>
+
+<article class="caso">
+<div class="txt r"><span class="mono">WEB Y PANEL · GUÍA DE MONTAÑA</span><h3>Una web que su dueño cambia sin tocar código</h3>
+<p>Diseñé y construí la web de Mattern Guide, un gestor de contenidos y una primera automatización. Daniel puede actualizar sus salidas, plazas y textos él solo.</p>
+<p class="tuyo"><b>En tu negocio:</b> una web con tus servicios y horarios que puedes cambiar cuando quieras.</p>
+<div class="lks"><a class="lk" href="https://hola-laura.github.io/daniel-mattern-web/" target="_blank" rel="noopener"><i></i>Ver la web</a><a class="lk" href="https://hola-laura.github.io/daniel-mattern-web/admin.html" target="_blank" rel="noopener"><i></i>Ver el panel</a></div></div>
+<div class="lienzo doble r"><div class="web"><img loading="lazy" src="https://hola-laura.github.io/laura/assets/mountain-guide/website.webp" alt="Página de inicio de la web de Mattern Guide"></div><div class="web flota" data-par=".06"><img loading="lazy" src="https://hola-laura.github.io/laura/assets/mountain-guide/panel.webp" alt="Panel de gestión de contenidos de Mattern Guide"></div></div>
+</article>
+
+<article class="caso inv">
+<div class="txt r"><span class="mono">SOFTWARE A MEDIDA · EMPRESA DE CONSTRUCCIÓN</span><h3>Presupuestos en un solo sitio, no en mil hojas</h3>
+<p>Diseñé un software para que una empresa de construcción prepare sus presupuestos: partidas, cantidades, precios y total, listo para enviar al cliente.</p>
+<p class="tuyo"><b>En tu negocio:</b> si repites una tarea cada semana, puede tener su propia herramienta sencilla.</p></div>
+<div class="lienzo r"><div class="pres"><header><h4>Reforma de baño</h4><span class="mono" style="margin:0">Nº 204</span></header>
+<div class="fp"><span>Demolición y retirada</span><span>640€</span></div><div class="fp"><span>Fontanería</span><span>980€</span></div><div class="fp"><span>Alicatado, 18 m²</span><span>1.080€</span></div><div class="fp"><span>Pintura, 24 m²</span><span>288€</span></div><div class="fp"><span>IVA 21%</span><span>627,48€</span></div>
+<footer><div class="tot"><span data-de="0" data-a="3615">3.615</span>,48€</div><span class="ui">Enviar al cliente</span></footer></div><span class="nota-ui">Interfaz recreada como ejemplo</span></div>
+</article>
+
+<article class="caso">
+<div class="txt r"><span class="mono">AUTOMATIZACIÓN · AGENCIA DE MARKETING LOCAL</span><h3>Citas que se organizan solas</h3>
+<p>Automaticé la gestión de citas de una agencia de marketing local, desde que entra un contacto hasta el recordatorio.</p>
+<p class="tuyo"><b>En tu negocio:</b> menos mensajes de ida y vuelta, y menos citas olvidadas.</p></div>
+<div class="lienzo r" style="flex-direction:column"><ol class="flujo" id="flujo"><li>Entra un contacto<small>09:12</small></li><li>Recibe un mensaje<small>09:12</small></li><li>Elige su hora<small>09:30</small></li><li>Se guarda en el calendario<small>09:30</small></li><li>Recordatorio el día antes<small>Auto</small></li></ol><span class="nota-ui">Interfaz recreada como ejemplo</span></div>
+</article>
+
+<article class="caso inv">
+<div class="txt r"><span class="mono">FOUNDING DESIGNER · SKIPPR</span><h3>El diseño de una startup desde el principio</h3>
+<p>Fui founding designer de Skippr y les ayudé a diseñar su primera herramienta.</p>
+<p class="tuyo"><b>En tu negocio:</b> sé empezar de cero y convertir una idea en algo que la gente entiende.</p>
+<div class="lks"><a class="lk" href="https://www.skippr.ai/" target="_blank" rel="noopener"><i></i>Ver Skippr</a></div></div>
+<div class="lienzo negro r"><img loading="lazy" src="https://www.skippr.ai/og-image.png" alt="Logotipo de Skippr"></div>
+</article>
+
+<article class="caso">
+<div class="txt r"><span class="mono">DISEÑO · MONZO</span><h3>Diseño en Monzo</h3>
+<p>Trabajé como diseñadora de producto en Monzo, haciendo que cosas complicadas se entiendan a la primera.</p>
+<p class="tuyo"><b>En tu negocio:</b> lo mismo, aplicado a lo que tus clientes necesitan entender y hacer.</p>
+<div class="lks"><a class="lk" href="https://hola-laura.github.io/laura/index.html#case-studies" target="_blank" rel="noopener"><i></i>Ver mi portfolio</a></div></div>
+<div class="lienzo foto-l r"><img class="foto" loading="lazy" src="https://hola-laura.github.io/laura/assets/flex/flex-focus-view.jpg" alt="Persona usando la app de Monzo en el móvil"></div>
+</article>
+
+<article class="caso inv">
+<div class="txt r"><span class="mono">APP PROPIA · DRIVO TEST</span><h3>Mi propia app, publicada en el App Store</h3>
+<p>Investigué, diseñé y construí una app gratuita para ayudar a estudiantes en España a entender la teoría de conducir.</p>
+<p class="tuyo"><b>En tu negocio:</b> lo que te propongo, sé hacerlo y lanzarlo de principio a fin.</p>
+<div class="lks"><a class="lk" href="https://apps.apple.com/es/app/drivo-test/id6813126362" target="_blank" rel="noopener"><i></i>Ver en el App Store</a><a class="lk" href="https://hola-laura.github.io/laura/case-study-drivo.html" target="_blank" rel="noopener"><i></i>Leer la historia</a></div></div>
+<div class="lienzo dos r"><img class="movil" loading="lazy" src="https://hola-laura.github.io/laura/assets/drivo/home-ios.png" alt="Inicio de Drivo Test"><img class="movil" loading="lazy" src="https://hola-laura.github.io/laura/assets/drivo/library-ios.png" alt="Biblioteca de preguntas de Drivo Test"></div>
+</article>
+
+<div class="mini3">
+<a class="mini r" href="https://hola-laura.github.io/laura/case-study-rldatix.html" target="_blank" rel="noopener"><figure><img loading="lazy" src="https://hola-laura.github.io/laura/assets/rldatix/interface.png" alt="Interfaz de RLDatix"></figure><span class="mono">RLDATIX</span><h4>Herramientas sanitarias en un solo producto</h4><p>El 96% de los participantes completó las tareas clave sin ayuda.</p></a>
+<a class="mini r" href="https://hola-laura.github.io/laura/case-study-just-eat.html" target="_blank" rel="noopener"><figure><img loading="lazy" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/d2148e109663737.5fd8f758238b4.png" alt="Intranet de Just Eat"></figure><span class="mono">JUST EAT</span><h4>La primera intranet para toda la empresa</h4><p>Noticias, herramientas y conocimiento en un único espacio.</p></a>
+<a class="mini r" href="https://hola-laura.github.io/laura/case-study-intu.html" target="_blank" rel="noopener"><figure><img loading="lazy" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/39941f94922721.5fd8f70be9544.png" alt="Family Club de intu"></figure><span class="mono">INTU</span><h4>Más fácil unirse a Family Club</h4><p>Un club para familias que por fin se entendía.</p></a>
+</div>
+
+<div class="startups r">
+<div><span class="mono">STARTUPS</span><h3>Diseño desde el primer día</h3><p class="sn">Skippr · Pass the Jam · Erika · Correcto · Vennre · JOBBA</p></div>
+<ul><li>Founding designer: visión y conceptos para inversores</li><li>Rediseño de los recorridos clave</li><li>Prototipos interactivos, interacción y nueva UI</li><li>Design system</li><li>Evaluación heurística de los recorridos actuales</li><li>Mejoras de UX y de métricas según objetivos de negocio</li><li>Planes de investigación y test de usabilidad</li><li>Contratación de producto y diseño</li><li>Priorización y workshops</li></ul>
+</div>
+
+<h2 class="tit2 r">Cómo te puedo ayudar<i class="pt"></i></h2>
+<div class="ayuda">
+<div class="r"><h3>Que te encuentren</h3><p>Una web clara, hecha para el móvil y fácil de mantener.</p></div>
+<div class="r"><h3>Que te reserven</h3><p>Reservas, citas y recordatorios que funcionan sin que estés pendiente.</p></div>
+<div class="r"><h3>Que te ahorres tiempo</h3><p>Herramientas y automatizaciones para las tareas que repites cada semana.</p></div>
 </div>
 </div></section>
 
@@ -573,8 +719,9 @@ const z=$('agenda').getBoundingClientRect(),v=document.createElement('p');v.clas
 v.animate([{transform:'none'},{transform:'translate('+(z.left-a.left)*.5+'px,'+(z.top-a.top-60)+'px) rotate(-5deg) scale(1.08)',offset:.55},{transform:'translate('+(z.left-a.left)+'px,'+(z.top-a.top)+'px)'}],{duration:620,easing:'cubic-bezier(.3,.7,.2,1)'}).onfinish=()=>{v.remove();fin()};});
 
 /* los precios bajan a la mitad al entrar */
-const cuenta=(el)=>{const de=+el.dataset.de,a=+el.dataset.a;if(quieto){el.textContent=a;return}const t0=performance.now()+250;
-const paso=(t)=>{const p=Math.min(Math.max((t-t0)/800,0),1),e=1-Math.pow(1-p,3);el.textContent=Math.round(de+(a-de)*e);if(p<1)requestAnimationFrame(paso)};requestAnimationFrame(paso)};
+const mil=(n)=>String(n).replace(/\B(?=(\d{3})+$)/g,'.');
+const cuenta=(el)=>{const de=+el.dataset.de,a=+el.dataset.a;if(quieto){el.textContent=mil(a);return}const t0=performance.now()+250;
+const paso=(t)=>{const p=Math.min(Math.max((t-t0)/800,0),1),e=1-Math.pow(1-p,3);el.textContent=mil(Math.round(de+(a-de)*e));if(p<1)requestAnimationFrame(paso)};requestAnimationFrame(paso)};
 const io=new IntersectionObserver((es)=>es.forEach((e)=>{if(e.isIntersecting){e.target.classList.add('en');e.target.querySelectorAll('[data-de]').forEach(cuenta);io.unobserve(e.target)}}),{threshold:.18,rootMargin:'0px 0px -6% 0px'});
 document.querySelectorAll('.r').forEach((el)=>io.observe(el));
 
@@ -595,6 +742,9 @@ const pals=[...$('frase').children];
 /* tarjetas de precio que siguen al ratón */
 if(fino&&!quieto)document.querySelectorAll('.plan').forEach((c)=>{c.addEventListener('mousemove',(e)=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transition='transform .12s linear';c.style.transform='rotateY('+x*7+'deg) rotateX('+(-y*7)+'deg) translateZ(10px)'});c.addEventListener('mouseleave',()=>{c.style.transition='';c.style.transform=''})});
 
+/* recorrido de la automatizacion */
+const fl=$('flujo'),aj=()=>fl.style.setProperty('--dist',(fl.lastElementChild.offsetTop-fl.firstElementChild.offsetTop)+'px');aj();addEventListener('resize',aj);
+
 /* mazo de fotos */
 const fotos=[...$('mazo').querySelectorAll('img')];const pos=['-50%,-50%) rotate(0deg','-44%,-53%) rotate(4deg','-56%,-48%) rotate(-5deg','-50%,-46%) rotate(8deg'];
 let giro=0;const baraja=()=>fotos.forEach((f,i)=>{const k=(i+giro)%fotos.length,o=fotos.length-1-k;f.style.transform='translate('+pos[o===0?0:o]+')';f.style.zIndex=k});baraja();
@@ -612,6 +762,7 @@ const mr=$('marco').getBoundingClientRect(),mp=Math.min(Math.max((innerHeight-mr
 if(innerWidth>860){const r=$('pista').getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);
 if(p>-.1&&p<1.1){const w=$('posts').scrollWidth-innerWidth;$('posts').style.transform='translateX('+(-Math.max(w,0)*p)+'px)';$('fondo').style.transform='translate('+(-p*18)+'%,-50%)'}}
 const q=$('pasos').getBoundingClientRect(),m=Math.min(Math.max((innerHeight*.6-q.top)/q.height,0),1);$('bola').style.transform='translateY('+m*(q.height-16)+'px)';
+if(innerWidth>860)document.querySelectorAll('[data-par]').forEach((e)=>{const r=e.parentElement.getBoundingClientRect();e.style.transform='translateY('+(r.top+r.height/2-innerHeight/2)*+e.dataset.par+'px)'});
 const f=document.querySelector('.pie').getBoundingClientRect(),z=Math.min(Math.max((innerHeight-f.top)/f.height,0),1);$('gigante').style.transform='translateY('+(1-z)*42+'%)';};
 addEventListener('scroll',()=>{if(!pend){pend=true;requestAnimationFrame(scroll)}},{passive:true});
 
