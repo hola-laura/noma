@@ -3,344 +3,520 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>noma. · Web, reservas y redes para tu negocio</title>
+<title>noma. · Web, reservas y redes</title>
 <meta name="description" content="Web, reservas y redes para pequeños negocios de Urgel, Oporto y Marqués de Vadillo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Young+Serif&display=swap" rel="stylesheet">
 <style>
-html{scroll-behavior:smooth}
-body{margin:0;background:#FFEFE6}
-a{color:inherit}a:hover{opacity:.78}
-.sector{transition:background .15s,color .15s}
+:root{--a:#C93417;--on:#fff;--h:#C93417;--ink:#111111;--mut:#6B6B68;--soft:#F1E3DE;--dark:#111111;
+--yeso:#FFFFFF;--piedra:#F4F4F1;--line:rgba(17,17,17,.12);--rosa:#F4F4F1;
+--serif:'Young Serif',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',ui-monospace,monospace;
+--punto:cubic-bezier(.2,.8,.2,1);--bote:cubic-bezier(.34,1.56,.64,1);--g:clamp(24px,6vw,80px);--w:1240px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font:400 18px/1.5 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;text-wrap:balance}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--h);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:var(--w);margin:0 auto;padding:0 var(--g)}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--mut)}
+section{padding:clamp(104px,14vw,184px) 0}
+h2{font-size:clamp(36px,5.2vw,64px);line-height:1.04}
+.lead{font-size:clamp(18px,1.7vw,21px);color:var(--mut);max-width:32em;text-wrap:pretty}
+.pt{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--a);margin-left:.04em;vertical-align:baseline;transition:background .4s}
+
+/* botón punto: el punto crece y llena el botón */
+.btn{--bg:var(--ink);--fg:#fff;--fill:var(--a);--fgh:var(--on);position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 30px 0 26px;border:0;border-radius:999px;background:var(--bg);color:var(--fg);font-weight:500;font-size:17px;text-decoration:none;cursor:pointer;transition:color .28s,transform .25s var(--punto);will-change:transform}
+.btn::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--fill);flex:none;transition:transform .55s var(--punto);z-index:-1}
+.btn:hover{color:var(--fgh)}.btn:hover::before{transform:scale(70)}
+.btn:active{transform:scale(.97)}
+.btn.va{width:52px!important;padding:0;gap:0;justify-content:center;font-size:0;transition:width .4s var(--punto),padding .4s var(--punto)}.btn.va::before{animation:late .8s infinite}
+@keyframes late{50%{transform:scale(1.9)}}
+.btn.claro{--bg:#fff;--fg:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.inv{--bg:var(--ink);--fg:#fff;--fill:var(--a);--fgh:var(--on)}
+
+/* nav */
+.nav{position:fixed;z-index:30;top:20px;left:50%;transform:translateX(-50%);width:min(calc(100% - 24px),780px);display:flex;align-items:center;gap:6px;padding:8px 8px 8px 24px;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px;transition:transform .45s var(--punto)}
+.nav.fuera{transform:translate(-50%,-90px)}
+.logo{font:400 25px/1 var(--serif);letter-spacing:-.02em;text-decoration:none;display:inline-flex;align-items:baseline}
+.logo .pt{transition:transform .35s var(--bote),background .4s}.logo:hover .pt{transform:translateY(-.5em)}
+.nav ul{list-style:none;display:flex;gap:2px;margin:0 auto;padding:0}
+.nav ul a{display:block;padding:9px 13px;border-radius:999px;font-size:15px;text-decoration:none;transition:background .2s}
+.nav ul a:hover{background:var(--piedra)}
+.nav .btn{min-height:44px;font-size:15px;padding:0 18px 0 15px}
+
+/* hero */
+.hero{min-height:100svh;display:flex;align-items:center;padding:120px 0 56px}
+h1{font-size:clamp(44px,min(7.6vw,12.4vh),100px);line-height:1.02;margin-bottom:clamp(14px,2.6vh,24px)}
+.ln{display:block;overflow:hidden;padding-bottom:.13em;margin-bottom:-.13em}
+.ln>span{display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:0 .22em;transform:translateY(112%);transition:transform .8s var(--punto)}
+.ln:nth-child(2)>span{transition-delay:.08s}
+.vivo .ln>span{transform:none}
+.clip{display:inline-block;width:1.5em;height:.76em;border-radius:.4em;overflow:hidden;background:var(--soft);align-self:center;transition:width .3s var(--punto)}
+.clip video{width:100%;height:100%;object-fit:cover}
+.bajada{max-width:29em;font-size:clamp(17px,min(1.7vw,2.5vh),21px);color:var(--mut);margin-bottom:clamp(24px,4vh,40px);text-wrap:pretty}
+.elige{font-family:var(--mono);font-size:13px;color:var(--mut);margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:clamp(24px,4vh,40px)}
+.chip{position:relative;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:15px;cursor:pointer;transition:transform .25s var(--bote),background .25s,color .25s,border-color .25s}
+.chip:hover{transform:translateY(-2px);border-color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--a);color:var(--on);border-color:var(--a)}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero .wrap{position:relative}
+.aviso{position:absolute;right:24px;top:-6px;width:286px;padding:14px 16px;display:flex;gap:12px;background:#fff;border-radius:18px;box-shadow:0 22px 50px -26px rgba(23,18,15,.5),0 0 0 1px var(--line);transform:translateY(16px) scale(.92) rotate(2deg);opacity:0;transition:transform .7s var(--bote),opacity .3s}
+.aviso.sale{transform:rotate(2deg);opacity:1}
+.aviso i{width:12px;height:12px;border-radius:50%;background:var(--a);flex:none;margin-top:6px}
+.aviso b{display:block;font-weight:600;font-size:16px;line-height:1.3}.aviso span{font-size:14px;color:var(--mut)}
+@media (max-width:1180px){.aviso{display:none}}
+.barrido{position:fixed;z-index:40;left:0;top:0;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;pointer-events:none;transform:scale(0)}
+
+/* cinta de palabras */
+.cinta{overflow:hidden;border-block:1px solid var(--line);padding:22px 0}
+.cinta div{display:flex;align-items:center;gap:40px;width:max-content;font:400 clamp(24px,2.8vw,34px)/1.2 var(--serif);animation:corre 36s linear infinite}
+.cinta:hover div{animation-play-state:paused}
+.cinta i{width:12px;height:12px;border-radius:50%;background:var(--a);flex:none}
+@keyframes corre{to{transform:translateX(-50%)}}
+
+/* frase que se enciende y video que crece */
+.frase{padding-bottom:0}
+.frase p{font:400 clamp(32px,5vw,62px)/1.14 var(--serif);letter-spacing:-.015em;max-width:17em}
+.frase span{opacity:.14;transition:opacity .3s}.frase span.on{opacity:1}
+.gran{padding:clamp(72px,10vw,136px) 0}
+.marco{height:min(82vh,760px);overflow:hidden;will-change:clip-path;clip-path:inset(10% 24% round 28px)}
+.marco video{width:100%;height:100%;object-fit:cover;will-change:transform;transform:scale(1.18)}
+
+/* progreso en la barra */
+.prog{position:absolute;left:32px;right:32px;bottom:-1px;height:2px;background:var(--a);transform:scaleX(0);transform-origin:left}
+
+/* demo */
+.demo{background:var(--piedra)}
+.demo .wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(40px,7vw,104px);align-items:start}
+.tarj{background:#fff;border-radius:24px;padding:clamp(28px,3.6vw,44px)}
+.tarj h3{font-size:25px;line-height:1.15;margin-bottom:2px}
+.horas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:28px 0 0}
+.hora{min-height:56px;border-radius:12px;border:1px solid var(--line);background:#fff;font-family:var(--mono);font-size:15px;cursor:pointer;transition:transform .2s var(--bote),background .2s,color .2s,border-color .2s}
+.hora:hover{transform:translateY(-2px);border-color:var(--ink)}
+.hora.si{background:var(--a);color:var(--on);border-color:var(--a)}
+.hora:disabled{cursor:default}
+.agenda{margin-top:0}
+.agenda h3{font:500 13px var(--mono);color:var(--mut);letter-spacing:.02em;margin-bottom:8px}
+.fila{display:flex;gap:20px;padding:18px 0;border-top:1px solid var(--line)}
+.fila b{font:400 15px var(--mono);min-width:3.3em}
+.fila.nueva{overflow:hidden;animation:abre .5s var(--punto)}
+.fila.nueva span{font-weight:600}
+@keyframes abre{from{max-height:0;padding:0;opacity:0}to{max-height:70px;opacity:1}}
+.vuelo{position:fixed;z-index:35;margin:0;padding:8px 14px;border-radius:10px;background:var(--a);color:var(--on);font:500 15px var(--mono);pointer-events:none}
+.ruta{list-style:none;display:grid;gap:4px;margin:36px 0 0;padding:0}
+.ruta li{display:flex;gap:12px;align-items:center;padding:7px 0;color:var(--mut);font-size:16px;transition:color .3s}
+.ruta i{width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);flex:none;transition:background .3s,box-shadow .3s,transform .4s var(--bote)}
+.ruta li.ok{color:var(--ink)}.ruta li.ok i{background:var(--a);box-shadow:none;transform:scale(1.25)}
+.nota{min-height:1.5em;margin-top:8px;font-size:15px;color:var(--mut)}
+
+/* precios */
+.tit{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 56px;margin-bottom:clamp(48px,7vw,88px)}
+.planes{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:24px;align-items:stretch;padding:18px 0;perspective:1400px}
+.plan{display:flex;flex-direction:column}.plan ul{margin-top:auto}.plan .btn{margin-bottom:32px}
+.plan{background:#fff;border:1px solid var(--line);border-radius:28px;padding:clamp(32px,3.4vw,44px);transition:transform .4s var(--punto),box-shadow .4s;transform-style:preserve-3d}
+.plan:hover{transform:translateY(-6px)}
+.plan.top{margin:-18px 0;padding:clamp(44px,4.4vw,56px) clamp(32px,3.4vw,44px);background:var(--ink);color:#fff;border-color:var(--ink)}
+.plan.top .que,.plan.top .mono,.plan.top .antes,.plan.top ul{color:#B9B9B4}.plan.top ul{border-color:rgba(255,255,255,.18)}.plan.top .btn{--bg:#fff;--fg:var(--ink)}
+.plan header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;min-height:30px}
+.plan h3{font-size:26px;line-height:1.1}
+.pop{padding:5px 10px;border-radius:999px;background:var(--rosa);color:var(--ink);font:500 12px var(--mono)}
+.plan .que{color:var(--mut);margin:12px 0 28px;min-height:3em}
+.precio{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px;font-family:var(--serif);font-size:clamp(44px,4.4vw,56px);line-height:1;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.antes{position:relative;font-size:21px;color:var(--mut)}
+.antes::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:2px;background:var(--a);transform:scaleX(0);transform-origin:left;transition:transform .6s .25s var(--punto)}
+.en .antes::after{transform:scaleX(1)}
+#rec{background:linear-gradient(var(--soft),var(--soft)) left/0 100% no-repeat;padding:0 4px;border-radius:4px;transition:background-size .8s .3s var(--punto)}
+.en #rec{background-size:100% 100%}
+.plan .mono{display:block;margin-bottom:30px}
+.plan .btn{width:100%;justify-content:center}
+.plan ul{list-style:none;padding:28px 0 0;border-top:1px solid var(--line);font-size:16px;color:var(--mut)}
+.plan li{display:flex;gap:12px;padding:6px 0}.plan li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--a);margin-top:.6em;flex:none}
+.extras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:24px}
+.extra{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:96px;padding:22px 28px;border-radius:22px;background:var(--piedra);text-align:left;border:0;cursor:pointer;transition:transform .3s var(--punto),background .3s}
+.extra:hover{transform:translateY(-3px);background:var(--soft)}
+.extra small{display:block;font-size:14px;color:var(--mut)}
+.extra span:last-child{font:400 22px var(--serif);white-space:nowrap}
+.sinIva{margin-top:28px}
+
+/* oferta */
+.oferta{background:#fff}
+.oferta .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(48px,8vw,120px);align-items:center}
+.oferta h2{margin-bottom:24px}
+.oferta p{max-width:29em;font-size:clamp(18px,1.7vw,21px);margin-bottom:36px;color:var(--mut)}
+.veinte{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,18px);max-width:250px;justify-self:end;width:100%}
+.veinte i{aspect-ratio:1;border-radius:50%;background:var(--a);transform:scale(0);transition:transform .55s var(--bote)}
+.veinte.en i{transform:none}
+.veinte.en i:hover{transform:translateY(-8px)}
+
+/* redes */
+.redes{overflow:hidden;padding-bottom:clamp(64px,8vw,104px)}
+.pista{position:relative;margin-top:clamp(48px,6vw,80px);height:clamp(300px,33vw,400px)}
+.fondo{position:absolute;inset:50% 0 auto;transform:translateY(-50%);white-space:nowrap;font:400 clamp(110px,16vw,210px)/1 var(--serif);color:var(--piedra);will-change:transform;letter-spacing:-.03em}
+.posts{position:relative;display:flex;gap:32px;width:max-content;padding:0 max(var(--g),calc((100vw - 1080px)/2));height:100%;align-items:center;will-change:transform}
+.post{position:relative;flex:none;width:clamp(230px,24vw,290px);aspect-ratio:1;border-radius:16px;overflow:hidden;background:var(--ink);color:#fff;transition:transform .45s var(--punto),box-shadow .45s;box-shadow:0 18px 40px -22px rgba(23,18,15,.6)}
+.post:nth-child(odd){transform:rotate(-2.4deg)}.post:nth-child(even){transform:rotate(1.8deg) translateY(10px)}
+.post:hover{transform:rotate(0) scale(1.04);z-index:2}
+.post img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:circle(0 at 33px 33px);transition:clip-path 1s var(--punto)}
+.vista .post img{clip-path:circle(150% at 33px 33px)}
+.post:nth-child(2) img{transition-delay:.12s}.post:nth-child(3) img{transition-delay:.24s}.post:nth-child(4) img{transition-delay:.36s}.post:nth-child(5) img{transition-delay:.48s}.post:nth-child(6) img{transition-delay:.6s}
+.post::after{content:"";position:absolute;inset:0;background:rgba(23,18,15,.42)}
+.post p{position:absolute;z-index:1;left:26px;right:26px;bottom:24px;font:400 23px/1.14 var(--serif);text-wrap:balance}
+.post .pt{position:absolute;z-index:1;left:26px;top:26px;width:14px;height:14px;margin:0}
+
+/* trabajo */
+.trabajo{padding-bottom:clamp(64px,8vw,104px)}
+.nombres{display:flex;flex-wrap:wrap;gap:14px 36px;font:400 clamp(24px,2.6vw,32px)/1.2 var(--serif);padding-bottom:clamp(40px,5vw,64px);margin-bottom:clamp(64px,9vw,120px);border-bottom:1px solid var(--line)}
+.nombres span{display:inline-flex;align-items:baseline}
+.nombres span::after{content:"";width:.2em;height:.2em;margin-left:.04em;border-radius:50%;background:var(--a);transform:scale(0);transition:transform .35s var(--bote)}
+.nombres span:hover::after{transform:scale(1)}
+.caso{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(40px,7vw,96px);align-items:center;margin-bottom:clamp(96px,13vw,176px)}
+.caso.inv{grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr)}.caso.inv .txt{order:2}
+.caso .mono{display:block;margin-bottom:18px}
+.caso h3{font-size:clamp(32px,3.8vw,46px);line-height:1.06;margin-bottom:20px}
+.caso p{color:var(--mut)}
+.tuyo{margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
+.tuyo b{color:var(--ink);font-weight:600}
+.lks{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:28px}
+.lk{position:relative;display:inline-flex;align-items:center;gap:8px;padding:4px 0;font-weight:500;text-decoration:none}
+.lk::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform-origin:left;transition:transform .4s var(--punto)}
+.lk:hover::after{transform:scaleX(.3)}
+.lk i{width:8px;height:8px;border-radius:50%;background:var(--a);transition:transform .3s var(--bote)}.lk:hover i{transform:scale(1.6)}
+.lienzo{position:relative;background:var(--piedra);border-radius:28px;padding:clamp(28px,4.4vw,60px);min-height:clamp(320px,38vw,500px);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.web{width:100%;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 26px 60px -34px rgba(17,17,17,.5)}
+.web::before{content:"";display:block;height:26px;background:radial-gradient(circle 4px at 16px 13px,#D6D6D2 98%,#0000),radial-gradient(circle 4px at 32px 13px,#D6D6D2 98%,#0000),radial-gradient(circle 4px at 48px 13px,#D6D6D2 98%,#0000),#fff}
+.web img{width:100%}
+.flota{position:absolute;right:clamp(16px,2.4vw,32px);bottom:clamp(16px,2.4vw,32px);width:56%;will-change:transform}
+.lienzo.doble{align-items:flex-start;justify-content:flex-start}
+.lienzo.doble>.web:first-child{width:86%}
+.movil{width:clamp(150px,17vw,216px);border-radius:28px;box-shadow:0 26px 60px -30px rgba(17,17,17,.55);transition:transform .5s var(--punto)}
+.dos{gap:clamp(16px,2.4vw,32px)}.dos .movil:first-child{transform:rotate(-4deg)}.dos .movil:last-child{transform:rotate(4deg) translateY(20px)}
+.dos:hover .movil:first-child{transform:rotate(-7deg) translateX(-8px)}.dos:hover .movil:last-child{transform:rotate(7deg) translate(8px,20px)}
+.foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lienzo.foto-l .movil{position:relative;width:clamp(130px,14vw,180px);margin-left:auto}
+.lienzo.negro{background:var(--ink)}
+.lienzo.negro img{width:min(100%,420px);border-radius:14px}
+.nota-ui{position:absolute;left:clamp(16px,2.4vw,28px);bottom:14px;font:400 12px var(--mono);color:var(--mut)}
+.pres{width:100%;max-width:520px;background:#fff;border-radius:18px;padding:clamp(22px,2.8vw,34px);box-shadow:0 26px 60px -34px rgba(17,17,17,.5);margin-bottom:18px}
+.pres header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
+.pres h4{margin:0;font:400 22px/1.15 var(--serif)}
+.pres .fp{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line);font-size:15px;opacity:0;transform:translateX(-12px);transition:opacity .5s var(--punto),transform .5s var(--punto)}
+.en .pres .fp{opacity:1;transform:none}
+.pres .fp span:last-child{font-family:var(--mono);font-size:14px}
+.pres .fp:nth-of-type(2){transition-delay:.12s}.pres .fp:nth-of-type(3){transition-delay:.24s}.pres .fp:nth-of-type(4){transition-delay:.36s}.pres .fp:nth-of-type(5){transition-delay:.48s}
+.pres footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;padding-top:16px;border-top:2px solid var(--ink)}
+.pres .tot{font:400 clamp(28px,3vw,36px)/1 var(--serif);font-variant-numeric:tabular-nums}
+.pres .ui{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 15px;border-radius:999px;background:var(--ink);color:#fff;font-size:14px;font-weight:500;white-space:nowrap}
+.pres .ui::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--a)}
+.flujo{position:relative;width:100%;max-width:440px;list-style:none;margin:0 0 18px;padding:0}
+.flujo::before{content:"";position:absolute;left:21px;top:30px;bottom:30px;width:2px;background:var(--line)}
+.flujo::after{content:"";position:absolute;left:15px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--a);animation:baja 6s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes baja{0%,8%{transform:none}92%,100%{transform:translateY(var(--dist,246px))}}
+.flujo li{position:relative;display:flex;justify-content:space-between;align-items:center;gap:14px;margin:0 0 12px 58px;padding:15px 18px;background:#fff;border-radius:14px;font-size:15px;font-weight:500}
+.flujo li:last-child{margin-bottom:0}
+.flujo small{font:400 12px var(--mono);color:var(--mut);white-space:nowrap}
+.mini3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:clamp(96px,12vw,160px)}
+.mini{text-decoration:none;display:block}
+.mini figure{margin:0 0 22px;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:var(--piedra)}
+.mini img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--punto)}
+.mini:hover img{transform:scale(1.05)}
+.mini h4{margin:8px 0;font:400 25px/1.12 var(--serif)}
+.mini p{color:var(--mut);font-size:16px}
+.startups{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,7vw,96px);background:var(--ink);color:#fff;border-radius:28px;padding:clamp(36px,6vw,80px);margin-bottom:clamp(96px,13vw,176px)}
+.startups .mono{display:block;margin-bottom:18px;color:#B9B9B4}
+.startups h3{font-size:clamp(32px,3.8vw,46px);line-height:1.06;margin-bottom:20px}
+.startups .sn{color:#B9B9B4;font-size:clamp(18px,1.7vw,21px)}
+.startups ul{list-style:none;margin:0;padding:0}
+.startups li{display:flex;gap:14px;padding:13px 0;border-top:1px solid rgba(255,255,255,.16);font-size:17px}
+.startups li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--a);margin-top:.55em;flex:none}
+.ayuda{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(32px,5vw,72px);padding-top:clamp(48px,6vw,72px);border-top:1px solid var(--line)}
+.ayuda h3{font-size:clamp(25px,2.6vw,31px);line-height:1.1;margin-bottom:12px}
+.ayuda p{color:var(--mut)}
+.tit2{margin-bottom:clamp(48px,6vw,80px);font-size:clamp(36px,5.2vw,64px);line-height:1.04}
+@media (max-width:860px){
+.caso,.caso.inv,.mini3,.ayuda,.startups{grid-template-columns:minmax(0,1fr)}.caso.inv .txt{order:0}
+.flota{position:relative;right:auto;bottom:auto;width:100%;margin-top:16px;transform:none!important}
+.lienzo.doble{flex-direction:column}.lienzo.doble>.web:first-child{width:100%}
+}
+
+/* lista de proyectos */
+.lista{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(40px,6vw,88px);align-items:start;margin-bottom:clamp(48px,6vw,72px)}
+#pl{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--line)}
+.pb{position:relative;width:100%;min-height:58px;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 0;border:0;border-top:1px solid var(--line);background:none;color:var(--ink);text-align:left;cursor:pointer;font:400 clamp(25px,2.7vw,34px)/1.15 var(--serif);transition:padding .35s var(--punto),color .25s}
+.pb small{font:400 12px var(--mono);letter-spacing:.02em;color:var(--mut);text-align:right;flex:none}
+.pb::before{content:"";position:absolute;left:0;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--a);transform:scale(0);transition:transform .35s var(--bote)}
+.pb.on{padding-left:26px}.pb.on::before{transform:none}
+#pl:hover .pb:not(.on){color:#A8A8A3}
+.vis{position:sticky;top:104px;aspect-ratio:1/1.04;max-height:calc(100vh - 136px);width:100%;border-radius:28px;overflow:hidden;background:var(--piedra)}
+.capa{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:clamp(24px,3vw,44px);background:var(--piedra);clip-path:circle(0 at 42px 42px);transition:clip-path .8s var(--punto)}
+.capa.on{clip-path:circle(150% at 42px 42px)}
+.capa.negro,.pm-v.negro{background:var(--ink)}
+.capa.negro img,.pm-v.negro img{width:min(100%,380px);border-radius:14px}
+.capa.tipo,.pm-v.tipo{flex-direction:column;background:var(--ink);color:#fff}
+.tn{font:400 clamp(38px,5vw,64px)/1 var(--serif);letter-spacing:-.02em;text-align:center}
+.capa .web{max-width:100%}.capa.dos,.pm-v.dos{gap:16px}.capa.dos .movil,.pm-v.dos .movil{width:min(44%,190px)}
+.capa .pres,.pm-v .pres{margin-bottom:22px}.capa .flujo,.pm-v .flujo{margin-bottom:22px}
+.todos{margin-bottom:clamp(96px,13vw,176px)}
+html:has(dialog[open]){overflow:hidden}
+#pm{width:min(1000px,calc(100% - 32px));max-height:calc(100dvh - 40px);padding:0;border:0;border-radius:28px;overflow:auto;background:#fff;color:var(--ink)}
+#pm::backdrop{background:rgba(17,17,17,.56);backdrop-filter:blur(5px)}
+#pm[open]{animation:pop .5s var(--bote)}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}}
+.pm-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(600px,calc(100dvh - 40px))}
+.pm-v{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(24px,3vw,40px);background:var(--piedra);min-height:260px}
+.pm-t{padding:clamp(32px,4.4vw,60px) clamp(28px,4vw,56px);display:flex;flex-direction:column;align-items:flex-start}
+.pm-t .mono{display:block;margin-bottom:16px}
+.pm-t h3{font-size:clamp(30px,3.4vw,42px);line-height:1.06;margin-bottom:18px;padding-right:32px}
+.pm-t p{color:var(--mut)}.pm-t .tuyo{width:100%}.pm-t .tuyo:empty{display:none}
+#pmS ul{list-style:none;margin:16px 0 0;padding:0;font-size:15px;color:var(--mut)}
+#pmS li{display:flex;gap:10px;padding:4px 0}#pmS li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--a);margin-top:.6em;flex:none}
+.sig{margin-top:auto;padding-top:32px;border:0;background:none;cursor:pointer;font:500 16px var(--sans);color:var(--ink)}.sig::after{display:none}
+.pm-x{position:absolute;right:16px;top:16px;z-index:2;width:44px;height:44px;border:0;border-radius:50%;background:var(--piedra);cursor:pointer;transition:transform .35s var(--punto)}
+.pm-x:hover{transform:rotate(90deg)}
+.pm-x::before,.pm-x::after{content:"";position:absolute;left:14px;right:14px;top:21px;height:2px;background:var(--ink);transform:rotate(45deg)}.pm-x::after{transform:rotate(-45deg)}
+@media (max-width:860px){.lista{grid-template-columns:minmax(0,1fr)}.vis{display:none}.pm-g{grid-template-columns:minmax(0,1fr);min-height:0}}
+
+/* cómo */
+.como .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(48px,8vw,120px)}
+.pasos{position:relative;list-style:none;margin:0;padding:0 0 0 56px}
+.pasos::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.bola{position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:var(--a);will-change:transform}
+.paso{padding:0 0 clamp(48px,7vw,88px)}.paso:last-child{padding-bottom:0}
+.paso h3{font-size:clamp(25px,2.6vw,32px);line-height:1.1;margin-bottom:6px}
+.paso p{color:var(--mut)}
+
+/* sobre */
+.sobre{background:var(--piedra)}
+.sobre .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,8vw,120px);align-items:center}
+.mazo{position:relative;height:clamp(340px,40vw,480px);border:0;background:none;padding:0;cursor:pointer;width:100%}
+.mazo img{position:absolute;left:50%;top:50%;width:70%;height:92%;object-fit:cover;object-position:50% 22%;border-radius:18px;background:var(--soft);box-shadow:0 18px 40px -24px rgba(23,18,15,.6);transition:transform .6s var(--punto),opacity .4s}
+.sobre p{margin-top:20px;color:var(--mut);max-width:30em}
+
+/* faq */
+.faq .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,7vw,104px)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:84px;cursor:pointer;font-size:19px}
+summary::-webkit-details-marker{display:none}
+summary i{position:relative;width:16px;height:16px;flex:none}
+summary i::before,summary i::after{content:"";position:absolute;left:0;right:0;top:7px;height:2px;background:var(--ink);transition:transform .35s var(--punto)}
+summary i::after{transform:rotate(90deg)}
+details[open] summary i::after{transform:rotate(0)}
+details p{padding:0 40px 30px 0;color:var(--mut);animation:sube .35s var(--punto)}
+@keyframes sube{from{opacity:0;transform:translateY(-6px)}}
+
+/* contacto */
+.contacto{background:var(--dark);color:#fff}
+.contacto .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,8vw,120px)}
+.contacto .lead{color:#BDB5AD;margin-top:14px}
+.salidas{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.salidas .btn{--bg:#fff;--fg:var(--ink)}
+.campo{display:block;position:relative;margin-bottom:22px}
+.campo span{display:block;font-size:15px;color:#BDB5AD;margin-bottom:5px}
+.campo input,.campo textarea{width:100%;min-height:58px;padding:16px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.06);color:#fff;transition:border-color .2s,background .2s;resize:vertical}
+.campo input:focus,.campo textarea:focus{outline:0;border-color:#fff;background:rgba(255,255,255,.11)}
+.priv{font-size:15px;color:#B9B9B4;margin-bottom:16px}.priv a{color:#fff}
+.ack{display:flex;align-items:flex-start;gap:12px;font-size:15px;margin-bottom:28px;color:#fff}.ack input{width:20px;height:20px;flex:none;margin:2px 0 0;accent-color:var(--a)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-#email-dialog{border:none;border-radius:20px;padding:28px;width:min(440px,calc(100vw - 32px));box-sizing:border-box;background:#FFFFFF}
-#email-dialog::backdrop{background:rgba(0,0,0,.55)}
-[hidden]{display:none!important}
-.sectors{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
-@media (max-width:700px){.sectors{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.sector:hover{background:#3A120A!important;color:#FFFFFF!important}
-.gallery-stage{position:relative;width:100%;max-width:440px;margin-inline:auto;aspect-ratio:528/606;min-width:0}
-.gallery{isolation:isolate;position:absolute;left:0;top:0;width:528px;height:606px;transform:scale(var(--gallery-scale,.6));transform-origin:top left}
-.gallery-card{position:absolute;padding:0;background:#FFFFFF;border:0;border-radius:24px;overflow:hidden;will-change:translate,rotate,transform;backface-visibility:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;-webkit-tap-highlight-color:transparent}
-.gallery-card[data-slot="0"]{left:56px;top:43px;width:388px;height:484px;transform:rotate(-15.35deg)}
-.gallery-card[data-slot="1"]{left:56px;top:48px;width:388px;height:493px;transform:rotate(-7.8deg)}
-.gallery-card[data-slot="2"]{left:62px;top:45px;width:398px;height:501px;transform:rotate(7deg)}
-.gallery-card[data-slot="3"]{left:54px;top:49px;width:398px;height:501px}
-.gallery-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
-.gallery-card img[src$="laura-speaking.jpg"]{inset:auto;width:1987px;height:663px;left:-738px;top:-78px;max-width:none}
-.gallery-card.is-dragging{cursor:grabbing;box-shadow:0 24px 40px -16px rgba(0,0,0,.3)}
-.gallery-card:focus-visible{outline:3px solid currentColor;outline-offset:6px}
-.gallery-sticker{position:absolute;z-index:100;top:85px;left:337px;padding:7px 19px;border-radius:24px;border:2px solid;background:#FFFFFF;font-size:21px;line-height:26px;white-space:nowrap;font-weight:700;pointer-events:none;transform:translateZ(0) rotate(-7.74deg)}
-.gallery-help{position:absolute;top:574px;left:72px;width:380px;text-align:center;font-size:15px;pointer-events:none}
+.err{margin-top:10px;color:#FFB9A6;font-size:15px}
+.gracias{font:400 clamp(28px,3.4vw,40px)/1.1 var(--serif)}
+
+/* pie */
+.pie{background:var(--dark);color:#fff;overflow:hidden;padding:clamp(32px,5vw,64px) 0 40px}
+.gigante{font:400 clamp(92px,25vw,310px)/.86 var(--serif);letter-spacing:-.035em;display:flex;align-items:baseline;justify-content:center;background:linear-gradient(#fff 30%,rgba(255,255,255,.16));-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform}
+.gigante .pt{background:var(--a);width:.19em;height:.19em}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:40px}
+.legal .mono{color:#A9A198}
+
+/* entrada */
+.r{opacity:0;transform:translateY(22px);transition:opacity .75s var(--punto),transform .75s var(--punto)}
+.r.en{opacity:1;transform:none}
+.cursor{position:fixed;left:0;top:0;z-index:50;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--a);pointer-events:none;mix-blend-mode:multiply;opacity:0;transition:opacity .2s,width .25s var(--punto),height .25s var(--punto),margin .25s var(--punto)}
+.cursor.gr{width:44px;height:44px;margin:-22px 0 0 -22px}
+.carga{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:var(--yeso);transition:transform .7s var(--punto)}
+.carga.ya{transform:translateY(-100%)}
+.carga div{font:400 clamp(56px,12vw,96px)/1 var(--serif);letter-spacing:-.025em;display:flex;align-items:baseline}
+.carga i{display:block;width:.2em;height:.2em;margin-left:.04em;border-radius:50%;background:#C93417;animation:cae .85s .1s both}
+@keyframes cae{0%{transform:translateY(-70vh) scale(.9,1.2)}48%{transform:translateY(0) scale(.92,1.1)}56%{transform:translateY(0) scale(1.35,.65)}74%{transform:translateY(-.42em) scale(.95,1.06)}90%{transform:translateY(0) scale(1.14,.86)}100%{transform:none}}
+
+@media (max-width:860px){
+h1{font-size:clamp(46px,13vw,76px)}
+.nav ul{display:none}.nav{justify-content:space-between}
+.hero{min-height:auto;padding-top:92px}
+.demo .wrap,.oferta .wrap,.como .wrap,.sobre .wrap,.faq .wrap,.contacto .wrap{grid-template-columns:minmax(0,1fr)}
+.planes,.extras{grid-template-columns:minmax(0,1fr)}.plan .que{min-height:0}
+.plan.top{order:-1}
+.chips{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(var(--g)*-1);padding:2px var(--g);scrollbar-width:none}
+.chip{flex:none}.chips::-webkit-scrollbar{display:none}
+.pista{height:auto;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;padding:22px 0}
+.posts{transform:none!important;padding:0 24px}.post{scroll-snap-align:center}
+.fondo{display:none}
+.veinte{justify-self:start;max-width:280px}
+.horas{grid-template-columns:repeat(2,minmax(0,1fr))}
+.plan.top{margin:0}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
+.r{opacity:1;transform:none}.ln>span{transform:none}.veinte i{transform:none}.post img,.marco{clip-path:none}.marco video{transform:none}.frase span{opacity:1}.cursor{display:none}
+}
 </style>
 </head>
 <body>
-<div id="app"></div>
-<script type="text/plain" id="tpl"><div style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; color: {{ t.ink }}; background: {{ t.bg }}; font-size: 18px; line-height: 1.5">
-
-<sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
-<div style="min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column">
-<header>
-<div style="max-width: 1120px; margin: 0 auto; padding: 20px 24px">
-<span style="font-size: 32px; font-weight: 700; line-height: 1; letter-spacing: -0.03em">noma.</span>
-</div>
-</header>
-<section style="flex: 1; display: flex; align-items: center">
-<div style="flex: 1; min-width: 0; max-width: 1120px; margin: 0 auto; padding: clamp(8px, 2.5vh, 32px) 24px; display: flex; flex-direction: column; gap: clamp(12px, 2.4vh, 24px)">
-<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(38px, min(6.6vw, 10vh), 84px); line-height: 1.04; letter-spacing: -0.02em; color: {{ t.h }}">Hola, soy Laura.</h1>
-<p style="margin: 0; max-width: 32em; font-size: clamp(16px, min(1.6vw, 2.4vh), 22px); line-height: 1.35; text-wrap: pretty">Vivo en Carabanchel y llevo años diseñando productos digitales para banca, ecommerce y food delivery. Ahora ayudo a los negocios del barrio a ganar clientes y tiempo.</p>
-<h2 style="margin: clamp(2px, 1.6vh, 16px) 0 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(23px, min(2.6vw, 3.8vh), 34px); line-height: 1.1">¿Qué negocio tienes?</h2>
-<div role="group" aria-label="Elige tu tipo de negocio" class="sectors">
-<sc-for list="{{ sectors }}" as="item" hint-placeholder-count="10">
-<button type="button" class="sector" onClick="{{ item.pick }}" style="min-height: clamp(52px, 9vh, 84px); padding: 8px 14px; border: none; border-radius: 14px; background: #FFFFFF; color: {{ t.ink }}; font-family: 'Young Serif', Georgia, serif; font-size: clamp(16px, min(1.6vw, 2.5vh), 20px); line-height: 1.15; text-align: left; cursor: pointer">{{ item.label }}</button>
-</sc-for>
-</div>
-</div>
-</section>
-<section aria-label="Oferta" style="background: {{ t.a }}; color: {{ t.on }}">
-<div style="max-width: 1120px; margin: 0 auto; padding: clamp(12px, 2.4vh, 24px) 24px">
-<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(16px, 2vw, 26px); line-height: 1.2">Los 20 primeros negocios del barrio pagan la mitad en su primer servicio.</p>
-</div>
-</section>
-</div>
-</sc-if>
-
-<sc-if value="{{ isPage }}" hint-placeholder-val="{{ false }}">
-<header>
-<nav aria-label="Principal" style="max-width: 1120px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
-<a href="#inicio" aria-label="noma, inicio" style="font-size: 32px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; text-decoration: none">noma.</a>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; font-weight: 500; font-size: 17px">
-<a href="#servicios" style="text-decoration: none; padding: 10px 0">Servicios</a>
-<a href="#precios" style="text-decoration: none; padding: 10px 0">Precios</a>
-<a href="#laura" style="text-decoration: none; padding: 10px 0">Quién soy</a>
-<a href="#contacto" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font-weight: 600">Hablemos</a>
-</div>
+<nav class="nav" aria-label="Principal">
+<i class="prog" id="prog"></i>
+<a class="logo" href="#inicio" aria-label="noma., inicio">noma<i class="pt"></i></a>
+<ul><li><a href="#prueba">Cómo funciona</a></li><li><a href="#trabajos">Trabajos</a></li><li><a href="#precios">Precios</a></li><li><a href="#laura">Quién soy</a></li></ul>
+<a class="btn" data-mag href="https://calendar.app.google/tx5x6KwxiNUhJSyn9" target="_blank" rel="noopener">Reservar 15 min</a>
 </nav>
-</header>
 
-<section id="inicio">
-<div style="max-width: 1120px; margin: 0 auto; padding: 32px 24px 40px; display: flex; flex-direction: column; gap: 28px">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px">
-<span style="font-weight: 600">{{ s.label }}</span>
-<button type="button" onClick="{{ reset }}" style="min-height: 44px; padding: 0; border: none; background: none; color: {{ t.ink }}; font: inherit; text-decoration: underline; cursor: pointer">Cambiar de negocio</button>
-</div>
-<h1 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(46px, 6.6vw, 84px); line-height: 1.04; letter-spacing: -0.02em; color: {{ t.h }}">{{ s.h1a }}<br>{{ s.h1b }}</h1>
-<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 48px">
-<p style="margin: 0; flex: 1 1 420px; max-width: 30em; font-size: clamp(18px, 1.5vw, 20px); line-height: 1.4; text-wrap: pretty">{{ s.sub }}</p>
-<a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font-weight: 600; text-decoration: none">Cuéntame tu negocio</a>
-</div>
-</div>
+<main id="inicio">
+<section class="hero"><div class="wrap">
+<aside class="aviso" id="aviso" aria-hidden="true"><i></i><div><b id="avT"></b><span id="avS"></span></div></aside>
+<h1 id="h1" aria-live="polite"><span class="ln"><span id="l1"></span></span><span class="ln"><span id="l2"></span></span></h1>
+<p class="bajada" id="sub"></p>
+<p class="elige">¿Qué negocio tienes?</p>
+<div class="chips" id="chips" role="group" aria-label="Elige tu negocio"></div>
+<div class="cta"><a class="btn" data-mag href="#contacto">Cuéntame tu caso</a><a class="btn claro" href="#precios">Ver precios</a></div>
+</div></section>
 
-<div style="max-width: 1120px; margin: 0 auto; padding: 0 24px">
-<div style="background: {{ t.a }}; color: {{ t.on }}; border-radius: 28px; padding: clamp(20px, 3.4vw, 40px); display: flex; flex-direction: column; gap: 28px">
-<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(24px, 2.2vw, 30px); line-height: 1.15">{{ s.dh }}</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 20px">
+<div class="cinta" aria-hidden="true"><div id="cinta"></div></div>
 
-<div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px {{ t.line }}">
-<p style="margin: 0; font-size: 15px; font-weight: 600; color: {{ t.mut }}">Lo que ve tu cliente</p>
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 26px; font-weight: 400; line-height: 1.15">{{ s.c1 }}</h2>
-<p style="margin: 0; color: {{ t.mut }}">{{ s.c2 }}</p>
-<div role="group" aria-label="Opciones" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
-<sc-for list="{{ opts }}" as="item" hint-placeholder-count="4">
-<button type="button" aria-pressed="{{ item.pressed }}" onClick="{{ item.pick }}" style="{{ item.css }}">{{ item.text }}</button>
-</sc-for>
-</div>
-<p style="margin: auto 0 0; padding: 14px 20px; text-align: center; line-height: 24px; border-radius: 999px; background: {{ t.ink }}; color: #FFFFFF; font-weight: 600">{{ s.btn }} {{ chosen }}</p>
-</div>
+<section class="frase"><div class="wrap"><p id="frase">Menos llamadas perdidas. Menos papeles. Menos cosas pendientes al cerrar. Tu negocio, funcionando. Y punto.</p></div></section>
+<section class="gran" aria-hidden="true"><div class="marco" id="marco"><video id="granV" muted loop playsinline autoplay preload="metadata"></video></div></section>
 
-<div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 24px 60px {{ t.line }}">
-<p style="margin: 0; font-size: 15px; font-weight: 600; color: {{ t.mut }}">Lo que te llega a ti</p>
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: 26px; font-weight: 400; line-height: 1.15">{{ s.got }} {{ chosen }}</h2>
-<p style="margin: 0; color: {{ t.mut }}">{{ s.note }}</p>
-<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
-<sc-for list="{{ agenda }}" as="row" hint-placeholder-count="4">
-<li style="{{ row.css }}"><span style="flex: none; width: 3.2em; font-weight: 600; font-variant-numeric: tabular-nums">{{ row.t }}</span><span>{{ row.w }}</span></li>
-</sc-for>
-</ul>
+<section class="demo" id="prueba"><div class="wrap">
+<div class="r">
+<h2 id="dh" style="margin-bottom:36px"></h2>
+<div class="tarj">
+<h3 id="c1"></h3><p class="mono" id="c2"></p>
+<div class="horas" id="horas"></div>
+<p class="nota" id="nota" role="status"></p>
 </div>
+</div>
+<div class="r agenda" id="agendaBox">
+<h3>TU AGENDA DE HOY</h3>
+<div id="agenda"></div>
+<ol class="ruta" id="ruta"></ol>
+</div>
+</div></section>
 
+<section class="trabajo" id="trabajos"><div class="wrap">
+<div class="tit r"><h2>Trabajo real, para gente real<i class="pt"></i></h2><p class="lead">He diseñado para empresas grandes y para profesionales que trabajan solos. Pasa por cada nombre para verlo, o púlsalo para saber más.</p></div>
+<div class="lista r"><ul id="pl"></ul><div class="vis" id="vis" aria-hidden="true"></div></div>
+<div class="todos r"><a class="btn" data-mag href="propuesta/proyectos.html">Ver todos los proyectos</a></div>
+<h2 class="tit2 r">Cómo te puedo ayudar<i class="pt"></i></h2>
+<div class="ayuda">
+<div class="r"><h3>Que te encuentren</h3><p>Una web clara, hecha para el móvil y fácil de mantener.</p></div>
+<div class="r"><h3>Que te reserven</h3><p>Reservas, citas y recordatorios que funcionan sin que estés pendiente.</p></div>
+<div class="r"><h3>Que te ahorres tiempo</h3><p>Herramientas y automatizaciones para las tareas que repites cada semana.</p></div>
 </div>
 </div>
-</div>
+<template id="t-pres"><div class="pres"><header><h4>Reforma de baño</h4><span class="mono" style="margin:0">Nº 204</span></header>
+<div class="fp"><span>Demolición y retirada</span><span>640€</span></div><div class="fp"><span>Fontanería</span><span>980€</span></div><div class="fp"><span>Alicatado, 18 m²</span><span>1.080€</span></div><div class="fp"><span>Pintura, 24 m²</span><span>288€</span></div><div class="fp"><span>IVA 21%</span><span>627,48€</span></div>
+<footer><div class="tot"><span data-de="0" data-a="3615">3.615</span>,48€</div><span class="ui">Enviar al cliente</span></footer></div></template>
+<template id="t-flujo"><ol class="flujo"><li>Entra un contacto<small>09:12</small></li><li>Recibe un mensaje<small>09:12</small></li><li>Elige su hora<small>09:30</small></li><li>Se guarda en el calendario<small>09:30</small></li><li>Recordatorio el día antes<small>Auto</small></li></ol></template>
 </section>
 
-<section id="servicios">
-<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px 0; display: flex; flex-direction: column; gap: 96px">
+<dialog id="pm" aria-labelledby="pmT"><button class="pm-x" id="pmX" type="button" aria-label="Cerrar"></button><div class="pm-g"><div class="pm-v en" id="pmV"></div><div class="pm-t"><span class="mono" id="pmR"></span><h3 id="pmT"></h3><p id="pmP"></p><div id="pmS"></div><p class="tuyo" id="pmY"></p><div class="lks" id="pmL"></div><button class="lk sig" id="pmN" type="button"><i></i>Siguiente proyecto</button></div></div></dialog>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
-<div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Una web que te representa</h2>
-<p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.wText }}</p>
+<section id="precios"><div class="wrap">
+<div class="tit r"><h2>Precios claros<i class="pt"></i></h2><p class="lead">Para empezar, te recomendaría: <strong id="rec" style="color:var(--ink);font-weight:600"></strong>.</p></div>
+<div class="planes">
+<article class="plan r"><header><h3>Que te encuentren</h3></header><p class="que">Una web sencilla con lo que tus clientes buscan.</p>
+<div class="precio"><b style="font-weight:400"><span data-de="800" data-a="400">800</span>€</b><span class="antes">800€</span></div><span class="mono">primer servicio</span>
+<button class="btn claro" data-pide="Web sencilla">Quiero esta</button>
+<ul><li>Tus servicios, precios y horario</li><li>Pensada para el móvil</li><li>Un botón claro para contactar</li></ul></article>
+<article class="plan top r"><header><h3>Que te reserven</h3><span class="pop">PARA EMPEZAR</span></header><p class="que">Reservas online con calendario y emails automáticos.</p>
+<div class="precio"><b style="font-weight:400"><span data-de="600" data-a="300">600</span>€</b><span class="antes">600€</span></div><span class="mono">primer servicio</span>
+<button class="btn" data-mag data-pide="Reservas online">Quiero esta</button>
+<ul><li>Tus clientes reservan desde el móvil</li><li>La cita llega sola a tu calendario</li><li>Confirmación automática</li></ul></article>
+<article class="plan r"><header><h3>Que te sigan</h3></header><p class="que">Gestión básica de redes, con 8 publicaciones al mes.</p>
+<div class="precio"><b style="font-weight:400"><span data-de="350" data-a="175">350</span>€</b><span class="antes">350€</span></div><span class="mono">primer mes · luego 350€/mes</span>
+<button class="btn claro" data-pide="Gestión básica de redes">Quiero esta</button>
+<ul><li>Decidimos juntas qué publicar</li><li>Lo diseño con tu marca</li><li>Lo dejo programado</li></ul></article>
 </div>
-<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 2.6vw, 32px)">
-<div style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px {{ t.line }}">
-<div style="padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; font-size: 15px"><strong>Tu negocio</strong><span style="color: {{ t.mut }}">{{ s.wNav }}</span></div>
-<div style="background: {{ t.a }}; color: {{ t.on }}; padding: 44px 24px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start">
-<p style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-size: clamp(26px, 2.4vw, 32px); line-height: 1.08">{{ s.wHead }}</p>
-<span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-size: 16px; font-weight: 600">{{ s.wBtn }}</span>
+<div class="extras r">
+<button class="extra" data-pide="Automatización sencilla"><span>Automatización sencilla<small>Una tarea, de principio a fin</small></span><span>175€</span></button>
+<button class="extra" data-pide="Calendario de contenidos"><span>Calendario de contenidos<small>Todo el mes planificado</small></span><span>100€</span></button>
+<button class="extra" data-pide="4 publicaciones"><span>4 publicaciones<small>Listas para publicar</small></span><span>80€</span></button>
 </div>
-</div>
-</div>
-</div>
+<p class="mono sinIva">Precio de lanzamiento para los 20 primeros negocios. Precio normal de los extras: 350€, 200€ y 160€. Todos los precios son sin IVA.</p>
+</div></section>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
-<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 2.6vw, 32px)">
-<div role="img" aria-label="Ejemplo de perfil de Instagram con seis publicaciones diseñadas" style="background: #FFFFFF; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 40px {{ t.line }}">
-<div style="padding: 14px 16px; display: flex; align-items: center; gap: 12px">
-<div style="width: 44px; height: 44px; flex: none; border-radius: 50%; background: {{ t.a }}; color: {{ t.on }}; display: flex; align-items: center; justify-content: center; font-family: 'Young Serif', Georgia, serif; font-size: 22px">T</div>
-<div style="display: flex; flex-direction: column; line-height: 1.25; font-size: 15px"><strong>tu_negocio</strong><span style="color: {{ t.mut }}">Publicaciones de este mes</span></div>
-</div>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; font-family: 'Young Serif', Georgia, serif; font-size: clamp(11px, 1.5vw, 21px); line-height: 1.15">
-<sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
-<div style="{{ p.css }}"><span style="padding: 9%">{{ p.text }}</span></div>
-</sc-for>
-</div>
-</div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Tus redes, resueltas todo el mes</h2>
-<p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.sText }}</p>
-</div>
-</div>
+<section class="oferta"><div class="wrap">
+<div class="r"><h2>Los 20 primeros del barrio pagan la mitad<i class="pt"></i></h2>
+<p>Urgel, Oporto y Marqués de Vadillo. Cuéntame qué necesitas y hablamos de tu primer servicio.</p>
+<a class="btn inv" data-mag href="#contacto">Quiero mi descuento</a></div>
+<div class="veinte r" id="veinte" aria-hidden="true"></div>
+</div></section>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
-<div style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Lo repetitivo, que se haga solo</h2>
-<p style="margin: 0; max-width: 28em; text-wrap: pretty">{{ s.fText }}</p>
-</div>
-<div style="background: {{ t.soft }}; border-radius: 24px; padding: clamp(20px, 2.6vw, 32px); display: flex; flex-direction: column; gap: 10px">
-<sc-for list="{{ flow }}" as="f" hint-placeholder-count="4">
-<div style="{{ f.css }}"><span style="font-weight: 600">{{ f.text }}</span><span style="font-size: 16px">Automático</span></div>
-</sc-for>
-</div>
-</div>
-
-</div>
+<section class="redes" id="redes"><div class="wrap r"><div class="tit" style="margin:0"><h2>Tus redes, sin pensar en ellas<i class="pt"></i></h2><p class="lead" id="sText"></p></div></div>
+<div class="pista" id="pista"><div class="fondo" id="fondo" aria-hidden="true">Urgel · Oporto · Marqués de Vadillo · Urgel · Oporto ·</div><div class="posts" id="posts"></div></div>
 </section>
 
-<section id="precios">
-<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px">
-<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 72px">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Precios claros</h2>
-<p style="margin: 0; flex: 0 1 26em; text-wrap: pretty">Los 20 primeros negocios del barrio pagan la mitad en su primer servicio. Para empezar, te recomendaría: <strong>{{ s.rec }}</strong>.</p>
-</div>
-<table style="width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums">
-<thead>
-<tr style="font-size: 16px; color: {{ t.mut }}; text-align: left">
-<th scope="col" style="padding: 12px 6px 12px 0; font-weight: 500">Servicio</th>
-<th scope="col" style="padding: 12px 6px; font-weight: 500; text-align: right">Precio</th>
-<th scope="col" style="padding: 12px 0 12px 6px; font-weight: 500; text-align: right">Primer servicio</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-top: 1px solid {{ t.line }}">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Reservas online</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">Con calendario y emails automáticos</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">600 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">300 €</span></td>
-</tr>
-<tr style="border-top: 1px solid {{ t.line }}">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Web sencilla</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">Una página</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">800 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">400 €</span></td>
-</tr>
-<tr style="border-top: 1px solid {{ t.line }}">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Automatización sencilla</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">Una tarea, de principio a fin</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">350 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">175 €</span></td>
-</tr>
-<tr style="border-top: 1px solid {{ t.line }}">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Gestión básica de redes</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">8 publicaciones al mes</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">350 €/mes</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">175 €</span></td>
-</tr>
-<tr style="border-top: 1px solid {{ t.line }}">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Calendario de contenidos</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">Todo el mes planificado</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">200 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">100 €</span></td>
-</tr>
-<tr style="border-top: 1px solid {{ t.line }}">
-<th scope="row" style="padding: 20px 6px 20px 0; text-align: left; font-weight: 400"><span style="display: block; font-family: 'Young Serif', Georgia, serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.2">Diseño de publicaciones</span><span style="display: block; color: {{ t.mut }}; font-size: 17px">4 piezas listas para subir</span></th>
-<td style="padding: 20px 6px; text-align: right; white-space: nowrap; color: {{ t.mut }}">160 €</td>
-<td style="padding: 20px 0 20px 6px; text-align: right; white-space: nowrap"><span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background: {{ t.soft }}; font-weight: 700">80 €</span></td>
-</tr>
-</tbody>
-</table>
-<p style="margin: 0; max-width: 46em; font-size: 16px; color: {{ t.mut }}; text-wrap: pretty">Precios orientativos para servicios sencillos, sin IVA. El descuento mensual se aplica solo al primer mes. Dominios, hosting, licencias y herramientas de terceros no incluidos. Webs avanzadas y software a medida: presupuesto personalizado.</p>
-</div>
-</section>
+<section class="como"><div class="wrap">
+<div class="r"><h2>Tres pasos. Y punto<i class="pt"></i></h2></div>
+<ol class="pasos" id="pasos"><i class="bola" id="bola"></i>
+<li class="paso r"><h3>Hablamos 15 minutos</h3><p>Me cuentas qué te quita tiempo o clientes.</p></li>
+<li class="paso r"><h3>Te digo qué haría</h3><p>Con un precio claro, antes de empezar.</p></li>
+<li class="paso r"><h3>Lo dejo funcionando</h3><p>Y tú sigues con lo tuyo.</p></li>
+</ol>
+</div></section>
 
-<section id="laura" style="background: {{ t.soft }}; overflow-x: clip">
-<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
-<div class="gallery-stage" style="color: {{ t.h }}"><div class="gallery" aria-label="Algunas fotos de Laura">
-<button type="button" class="gallery-card" data-slot="3" aria-label="Foto 1, Laura trabajando con su portátil. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-working.jpg" alt="" width="768" height="511"></button>
-<button type="button" class="gallery-card" data-slot="2" aria-label="Foto 2, Laura hablando en un evento. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-speaking.jpg" alt="" width="1987" height="663"></button>
-<button type="button" class="gallery-card" data-slot="1" aria-label="Foto 3, retrato de Laura. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-portrait.jpg" alt="" width="506" height="506"></button>
-<button type="button" class="gallery-card" data-slot="0" aria-label="Foto 4, Laura junto a un mural pintado. Arrastra o pulsa Intro para barajar"><img src="https://hola-laura.github.io/laura/assets/home/laura-mural.jpg" alt="" width="487" height="599"></button>
-<span class="gallery-sticker">Hola, soy Laura</span>
-<span class="gallery-help" style="color: {{ t.mut }}">Arrastra o toca para barajar ↔</span>
-</div></div>
-<div style="display: flex; flex-direction: column; gap: 24px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.06; letter-spacing: -0.015em">Tu vecina, no una agencia</h2>
-<p style="margin: 0; max-width: 28em; text-wrap: pretty">He diseñado productos digitales para Monzo, Just Eat y RLDatix. También he publicado mi propia app, Drivo Test, y construyo webs con gestor de contenido para pequeños profesionales.</p>
-<p style="margin: 0; max-width: 28em; text-wrap: pretty">Hablas siempre conmigo, y te lo dejo preparado para que no dependas de nadie.</p>
-<a href="https://hola-laura.github.io/laura/" style="font-weight: 600; padding: 10px 0">Ver mi portfolio</a>
-</div>
-</div>
-</section>
+<section class="sobre" id="laura"><div class="wrap">
+<button class="mazo r" id="mazo" aria-label="Pasar a la siguiente foto de Laura">
+<img src="propuesta/laura-mural.jpg" alt=""><img src="propuesta/laura-speaking.jpg" alt=""><img src="propuesta/laura-working.jpg" alt=""><img src="propuesta/laura-portrait.jpg" alt="Laura">
+</button>
+<div class="r"><h2>Una vecina que sabe de esto<i class="pt"></i></h2>
+<p>Hola, soy Laura. Vivo en Carabanchel y llevo años diseñando productos digitales para banca, ecommerce y food delivery.</p>
+<p>He diseñado productos digitales para Monzo, Just Eat y RLDatix. También he publicado mi propia app, Drivo Test, y construyo webs con gestor de contenido para pequeños profesionales.</p></div>
+</div></section>
 
-<section id="contacto" style="background: {{ t.a }}; color: {{ t.on }}">
-<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
-<div style="display: flex; flex-direction: column; gap: 24px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(40px, 5vw, 64px); line-height: 1.06; letter-spacing: -0.02em">¿Qué te quita tiempo?</h2>
-<p style="margin: 0; max-width: 28em; font-size: clamp(18px, 1.5vw, 20px); line-height: 1.4; text-wrap: pretty">Cuéntamelo y lo vemos en 15 minutos, por teléfono o videollamada. Gratis y sin compromiso.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px">
-<a href="https://wa.me/447469892325?text=Hola%20Laura%2C%20tengo%20un%20negocio%20y%20me%20gustar%C3%ADa%20hablar%20contigo." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-weight: 600; text-decoration: none">WhatsApp</a>
-<a href="{{ calUrl }}" target="_blank" rel="noopener noreferrer" style="{{ calCss }}">Reservar 15 minutos</a>
-<button type="button" onClick="{{ openEmail }}" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; border: 2px solid {{ t.on }}; box-sizing: border-box; background: transparent; color: {{ t.on }}; font: inherit; font-weight: 600; cursor: pointer">Email</button>
+<section class="faq"><div class="wrap">
+<h2 class="r">Preguntas normales<i class="pt"></i></h2>
+<div class="r">
+<details open><summary>¿Tengo que entender de tecnología?<i></i></summary><p>No. Me cuentas cómo trabajas y yo me encargo del resto.</p></details>
+<details><summary>¿Cómo funciona el 50%?<i></i></summary><p>Los 20 primeros negocios del barrio pagan la mitad en su primer servicio.</p></details>
+<details><summary>¿Los precios llevan IVA?<i></i></summary><p>No, todos los precios son sin IVA.</p></details>
+<details><summary>¿Y si no sé qué necesito?<i></i></summary><p>Reserva 15 minutos, me cuentas tu caso y te digo por dónde empezaría.</p></details>
 </div>
-</div>
-<dialog id="email-dialog" aria-labelledby="email-title" style="color: {{ t.ink }}">
-<form id="email-form" style="display: flex; flex-direction: column; gap: 14px">
-<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
-<h3 id="email-title" style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">Escríbeme</h3>
-<button type="button" onClick="{{ closeEmail }}" aria-label="Cerrar" style="width: 44px; height: 44px; border: none; border-radius: 50%; background: {{ t.soft }}; color: {{ t.ink }}; font: inherit; font-size: 22px; line-height: 1; cursor: pointer">×</button>
-</div>
+</div></section>
+</main>
+
+<section class="contacto" id="contacto"><div class="wrap">
+<div class="r"><h2>Cuéntame tu caso<i class="pt"></i></h2>
+<p class="lead">Dime qué quieres mejorar y te contesto lo antes posible.</p>
+<div class="salidas"><a class="btn" href="https://calendar.app.google/tx5x6KwxiNUhJSyn9" target="_blank" rel="noopener">Reservar 15 minutos</a><a class="btn" href="https://wa.me/447469892325?text=Hola%20Laura%2C%20tengo%20un%20negocio%20en%20el%20barrio" target="_blank" rel="noopener">WhatsApp</a></div></div>
+<form class="r" id="f" novalidate>
 <input class="hp" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="e-nombre" style="font-weight: 600; font-size: 16px">Tu nombre</label>
-<input id="e-nombre" name="nombre" required maxlength="120" autocomplete="name" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="e-email" style="font-weight: 600; font-size: 16px">Tu email</label>
-<input id="e-email" name="email" type="email" required maxlength="120" autocomplete="email" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="e-mensaje" style="font-weight: 600; font-size: 16px">Mensaje</label>
-<textarea id="e-mensaje" name="mensaje" required maxlength="1000" rows="4" style="box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit; resize: vertical"></textarea>
-</div>
-<button type="button" id="e-send" onClick="{{ sendEmail }}" style="min-height: 56px; border: none; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font: inherit; font-weight: 700; cursor: pointer">Enviar mensaje</button>
-<p id="e-error" hidden style="margin: 0; font-size: 15px; font-weight: 600">No se ha podido enviar. Inténtalo otra vez o escríbeme por WhatsApp.</p>
-<p style="margin: 0; font-size: 15px; color: {{ t.mut }}">Responsable: Laura Sampedro de la Rosa. Usaré estos datos solo para responderte y los conservaré hasta seis meses después del último contacto. <a href="/noma/privacidad.html" target="_blank" rel="noopener">Lee la política de privacidad</a>.</p>
-<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 15px"><input type="checkbox" name="privacy_ack" required style="width: 20px; height: 20px; flex: none; margin: 2px 0 0"><span>He leído la información de privacidad.</span></label>
+<label class="campo"><span>Tu negocio</span><input name="negocio" required autocomplete="organization"></label>
+<label class="campo"><span>Qué quieres mejorar</span><textarea name="mejora" rows="3" required></textarea></label>
+<label class="campo"><span>Tu teléfono o email</span><input name="contacto" required></label>
+<p class="priv">Responsable: Laura Sampedro de la Rosa. Usaré estos datos solo para responderte y los conservaré hasta seis meses después del último contacto. <a href="/noma/privacidad.html" target="_blank" rel="noopener">Lee la política de privacidad</a>.</p>
+<label class="ack"><input type="checkbox" name="privacy_ack" required><span>He leído la información de privacidad.</span></label>
+<button class="btn" data-mag id="enviar" type="submit" style="--bg:#fff;--fg:var(--ink)">Enviar</button>
+<p class="err" id="err" hidden role="alert"></p>
 </form>
-<div id="email-thanks" hidden>
-<div style="display: flex; flex-direction: column; gap: 14px">
-<h3 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">¡Mensaje enviado!</h3>
-<p style="margin: 0">Te contesto lo antes posible.</p>
-<button type="button" onClick="{{ closeEmail }}" style="min-height: 52px; border: none; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font: inherit; font-weight: 700; cursor: pointer">Cerrar</button>
-</div>
-</div>
-</dialog>
-<div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px">
-<form id="consulta" style="{{ formCss }}">
-<input class="hp" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
-<h3 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">Cuéntame tu caso</h3>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="f-negocio" style="font-weight: 600; font-size: 16px">Nombre del negocio</label>
-<input id="f-negocio" name="negocio" required maxlength="120" autocomplete="organization" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="f-mejora" style="font-weight: 600; font-size: 16px">¿Qué necesitas mejorar?</label>
-<textarea id="f-mejora" name="mejora" required maxlength="1000" rows="3" style="box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit; resize: vertical"></textarea>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="f-contacto" style="font-weight: 600; font-size: 16px">Email o teléfono</label>
-<input id="f-contacto" name="contacto" required maxlength="120" autocomplete="email" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
-</div>
-<button type="button" id="f-send" onClick="{{ submit }}" style="min-height: 56px; border: none; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font: inherit; font-weight: 700; cursor: pointer">Enviar consulta</button>
-<p id="f-error" hidden style="margin: 0; font-size: 15px; font-weight: 600">No se ha podido enviar. Inténtalo otra vez o escríbeme por WhatsApp.</p>
-<p style="margin: 0; font-size: 15px; color: {{ t.mut }}">Responsable: Laura Sampedro de la Rosa. Usaré estos datos solo para responderte y los conservaré hasta seis meses después del último contacto. <a href="/noma/privacidad.html" target="_blank" rel="noopener">Lee la política de privacidad</a>.</p>
-<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 15px"><input type="checkbox" name="privacy_ack" required style="width: 20px; height: 20px; flex: none; margin: 2px 0 0"><span>He leído la información de privacidad.</span></label>
-</form>
-<div style="{{ thanksCss }}">
-<h3 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">¡Gracias!</h3>
-<p style="margin: 0">He recibido tu consulta. Te contesto lo antes posible.</p>
-</div>
-</div>
-</div>
-<div style="max-width: 1120px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 32px; font-size: 16px">
-<div style="display: flex; flex-direction: column; gap: 4px">
-<span style="font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: -0.03em">noma.</span>
-<span style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em">DESIGN · AI · AUTOMATION</span>
-<span style="padding-top: 8px">Laura Sampedro de la Rosa</span>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 4px 24px">
-<a href="mailto:lrsmpdr@gmail.com" style="padding: 10px 0">lrsmpdr@gmail.com</a>
-<a href="/noma/privacidad.html" style="padding: 10px 0">Privacidad</a>
-<a href="https://www.linkedin.com/in/laura-sampedro/" style="padding: 10px 0">LinkedIn</a>
-</div>
-</div>
-</section>
-</sc-if>
+</div></section>
 
-</div></script>
+<footer class="pie"><div class="wrap">
+<div class="gigante" id="gigante" aria-hidden="true">noma<i class="pt"></i></div>
+<div class="legal"><span class="mono">Design · AI · Automation</span><a class="mono" href="/noma/privacidad.html">Privacidad</a><span class="mono">Urgel · Oporto · Marqués de Vadillo, Madrid</span></div>
+</div></footer>
+
+<div class="barrido" id="barrido"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
 <script>
-class DCLogic{constructor(){this.props={}}setState(s){Object.assign(this.state,s);draw()}}
-
 const SECTORS = [
   { id: 'pelu', label: 'Peluquería o estética', h1a: 'Menos teléfono.', h1b: 'Más clientes.',
     sub: 'Tus clientas reservan desde el móvil, la cita llega sola a tu agenda y tú sigues con las manos en lo tuyo.',
-    dh: 'Así llega una reserva. Elige una hora.', c1: 'Corte y color', c2: 'Salón de ejemplo · Jueves · 1 hora',
+    dh: 'Así llega una reserva. Elige una hora.', c1: 'Corte y color', c2: 'Jueves · 1 hora',
     opts: ['11:30', '12:30', '17:00', '18:30'], btn: 'Reservar jueves a las', got: 'Nueva reserva, jueves', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['10:00', 'Marta, mechas'], ['13:30', 'Lucía, corte'], ['16:00', 'Elena, color']], newRow: 'Tu clienta, corte y color',
     wText: 'Con tus servicios, tus precios y tu horario, y un botón para reservar desde el móvil.', wNav: 'Servicios · Precios · Reservar', wHead: 'Abierto hoy hasta las 20:00', wBtn: 'Reservar cita',
@@ -350,7 +526,7 @@ const SECTORS = [
     flow: ['Entra una reserva', 'Se añade a tu calendario', 'Tu clienta recibe la confirmación', 'Recordatorio el día antes'], rec: 'Reservas online' },
   { id: 'rest', label: 'Restaurante o bar', h1a: 'Mesas llenas.', h1b: 'Menos llamadas.',
     sub: 'Tu carta en el móvil, reservas sin coger el teléfono en pleno servicio y redes que abren el apetito.',
-    dh: 'Así llega una reserva de mesa. Elige una hora.', c1: 'Mesa para 4', c2: 'Restaurante de ejemplo · Sábado · Cena',
+    dh: 'Así llega una reserva de mesa. Elige una hora.', c1: 'Mesa para 4', c2: 'Sábado · Cena',
     opts: ['20:30', '21:00', '21:30', '22:00'], btn: 'Reservar sábado a las', got: 'Nueva mesa, sábado', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['20:00', 'Ana, 2 personas'], ['20:30', 'Pablo, 6 personas'], ['22:00', 'Sara, 4 personas']], newRow: 'Mesa para 4',
     wText: 'Con tu carta siempre al día, tu horario, cómo llegar y un botón para reservar mesa.', wNav: 'Carta · Horario · Reservar', wHead: 'Menú del día, hoy a las 13:30', wBtn: 'Ver la carta',
@@ -360,7 +536,7 @@ const SECTORS = [
     flow: ['Entra una reserva de mesa', 'Se añade a tu calendario', 'Tu cliente recibe la confirmación', 'Recordatorio el mismo día'], rec: 'Web sencilla con tu carta' },
   { id: 'idio', label: 'Academia de idiomas', h1a: 'Más alumnos.', h1b: 'Menos papeleo.',
     sub: 'Que cada interesado encuentre su grupo, pida su prueba de nivel y se inscriba sin que tengas que contestar uno a uno.',
-    dh: 'Así llega un alumno nuevo. Elige un horario.', c1: 'Prueba de nivel de inglés', c2: 'Academia de ejemplo · Lunes · 20 minutos',
+    dh: 'Así llega un alumno nuevo. Elige un horario.', c1: 'Prueba de nivel de inglés', c2: 'Lunes · 20 minutos',
     opts: ['10:00', '12:00', '17:30', '19:00'], btn: 'Reservar lunes a las', got: 'Nueva prueba, lunes', note: 'En tu correo y en tu calendario. Instrucciones ya enviadas.',
     agenda: [['09:00', 'Javier, francés B1'], ['11:00', 'Clara, inglés A2'], ['18:00', 'Hugo, inglés B2']], newRow: 'Nuevo alumno, inglés',
     wText: 'Con tus cursos, niveles y horarios claros, y un formulario para pedir la prueba de nivel.', wNav: 'Cursos · Horarios · Prueba de nivel', wHead: 'Empieza el nuevo trimestre', wBtn: 'Pedir prueba de nivel',
@@ -370,7 +546,7 @@ const SECTORS = [
     flow: ['Entra una solicitud', 'Se añade a tu lista de alumnos', 'El alumno recibe la información', 'Recordatorio antes de la prueba'], rec: 'Automatización sencilla' },
   { id: 'elec', label: 'Electricista', h1a: 'Que te encuentren.', h1b: 'Que te llamen.',
     sub: 'Una web clara para que te elijan cuando busquen electricista cerca y un formulario para no perder avisos mientras trabajas.',
-    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Revisar cuadro eléctrico', c2: 'Electricista de ejemplo · Con foto de la avería',
+    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Revisar cuadro eléctrico', c2: 'Con foto de la avería',
     opts: ['Hoy, 17:00', 'Mañana, 9:00', 'Mañana, 12:00', 'Viernes, 10:00'], btn: 'Pedir visita:', got: 'Nuevo aviso:', note: 'En tu correo, con la dirección y la foto. Respuesta ya enviada.',
     agenda: [['09:30', 'Reforma de cocina'], ['12:00', 'Enchufes, Oporto'], ['16:00', 'Boletín eléctrico']], newRow: 'Cuadro eléctrico',
     wText: 'Con tus servicios, tu zona de trabajo, trabajos hechos y un botón para llamar o pedir presupuesto.', wNav: 'Servicios · Zona · Presupuesto', wHead: 'Tu electricista en el barrio', wBtn: 'Pedir presupuesto',
@@ -380,7 +556,7 @@ const SECTORS = [
     flow: ['Entra un aviso con foto', 'Se guarda en tu lista de trabajos', 'Tu cliente recibe la confirmación', 'Recordatorio del presupuesto'], rec: 'Web sencilla' },
   { id: 'font', label: 'Fontanero', h1a: 'Una fuga.', h1b: 'Y te llaman a ti.',
     sub: 'Que seas el primero al que encuentran cuando hay una urgencia, y que ningún aviso se pierda mientras tienes las manos ocupadas.',
-    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Fuga en el baño', c2: 'Fontanero de ejemplo · Con foto de la avería',
+    dh: 'Así llega un aviso. Elige cuándo.', c1: 'Fuga en el baño', c2: 'Con foto de la avería',
     opts: ['Lo antes posible', 'Hoy, 18:00', 'Mañana, 9:00', 'Mañana, 12:00'], btn: 'Pedir visita:', got: 'Nuevo aviso:', note: 'En tu correo, con la dirección y la foto. Respuesta ya enviada.',
     agenda: [['09:00', 'Cambio de grifo'], ['11:30', 'Calentador, Urgel'], ['16:30', 'Desatasco']], newRow: 'Fuga en el baño',
     wText: 'Con tus servicios, tu zona, tus horarios de urgencias y tu teléfono siempre a la vista.', wNav: 'Servicios · Urgencias · Contacto', wHead: 'Fugas y averías en tu barrio', wBtn: 'Llamar ahora',
@@ -390,7 +566,7 @@ const SECTORS = [
     flow: ['Entra un aviso con foto', 'Se guarda en tu lista de trabajos', 'Tu cliente recibe respuesta', 'Recordatorio del presupuesto'], rec: 'Web sencilla' },
   { id: 'tall', label: 'Taller mecánico', h1a: 'Menos papeles.', h1b: 'Más coches.',
     sub: 'Citas para revisión desde el móvil, avisos cuando el coche está listo y menos llamadas para preguntar cómo va.',
-    dh: 'Así llega una cita. Elige una hora.', c1: 'Revisión y cambio de aceite', c2: 'Taller de ejemplo · Miércoles',
+    dh: 'Así llega una cita. Elige una hora.', c1: 'Revisión y cambio de aceite', c2: 'Miércoles',
     opts: ['8:30', '10:00', '12:00', '16:00'], btn: 'Reservar miércoles a las', got: 'Nueva cita, miércoles', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['09:00', 'Seat Ibiza, frenos'], ['11:00', 'Ford Focus, ITV'], ['15:00', 'Renault Clio, aceite']], newRow: 'Revisión y aceite',
     wText: 'Con tus servicios, tus precios orientativos, opiniones reales y un botón para pedir cita.', wNav: 'Servicios · Precios · Cita', wHead: 'Tu coche, en buenas manos', wBtn: 'Pedir cita',
@@ -400,7 +576,7 @@ const SECTORS = [
     flow: ['Entra una cita', 'Se añade a tu calendario', 'Aviso de coche listo', 'Recordatorio de próxima revisión'], rec: 'Reservas online' },
   { id: 'clin', label: 'Fisio o clínica', h1a: 'Agenda llena.', h1b: 'Menos ausencias.',
     sub: 'Tus pacientes piden cita sin llamar, reciben su recordatorio y tu consulta deja de vivir pegada al teléfono.',
-    dh: 'Así llega una cita. Elige una hora.', c1: 'Sesión de fisioterapia', c2: 'Clínica de ejemplo · Martes · 50 minutos',
+    dh: 'Así llega una cita. Elige una hora.', c1: 'Sesión de fisioterapia', c2: 'Martes · 50 minutos',
     opts: ['9:00', '11:00', '16:30', '18:00'], btn: 'Reservar martes a las', got: 'Nueva cita, martes', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['10:00', 'Paciente, primera visita'], ['12:00', 'Paciente, revisión'], ['17:30', 'Paciente, sesión']], newRow: 'Paciente, sesión',
     wText: 'Con tus tratamientos, tu equipo y un botón para pedir cita, explicado en palabras sencillas.', wNav: 'Tratamientos · Equipo · Cita', wHead: 'Vuelve a moverte sin dolor', wBtn: 'Pedir cita',
@@ -410,7 +586,7 @@ const SECTORS = [
     flow: ['Entra una cita', 'Se añade a tu calendario', 'El paciente recibe la confirmación', 'Recordatorio el día antes'], rec: 'Reservas online' },
   { id: 'gym', label: 'Gimnasio o estudio', h1a: 'Más socios.', h1b: 'Menos gestiones.',
     sub: 'Clases que se reservan solas, avisos cuando cambia un horario y redes que hacen ganas de empezar.',
-    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Clase de pilates', c2: 'Estudio de ejemplo · Jueves · 50 minutos',
+    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Clase de pilates', c2: 'Jueves · 50 minutos',
     opts: ['9:00', '12:00', '18:00', '20:00'], btn: 'Reservar jueves a las', got: 'Nueva plaza, jueves', note: 'En tu correo y en tu lista de clase. Confirmación ya enviada.',
     agenda: [['10:00', 'Yoga, 8 plazas'], ['13:00', 'Fuerza, 6 plazas'], ['19:00', 'Pilates, 10 plazas']], newRow: 'Pilates, 1 plaza',
     wText: 'Con tus clases, tu horario, tus tarifas y un botón para probar una clase.', wNav: 'Clases · Horario · Tarifas', wHead: 'Tu primera clase te espera', wBtn: 'Reservar clase',
@@ -418,9 +594,9 @@ const SECTORS = [
     posts: [['Horario de la semana', 3838705], ['Un ejercicio para hoy', 16996376], ['Nueva clase de fuerza', 32610333], ['Plazas libres por la tarde', 32695898], ['Empieza esta semana', 2261483], ['Reserva desde el móvil', 4853333]],
     fText: 'Reservas de clases, listas de espera y avisos de cambios sin escribir a cada persona.',
     flow: ['Entra una reserva de clase', 'Se añade a tu lista', 'Recibe la confirmación', 'Recordatorio antes de clase'], rec: 'Reservas online' },
-  { id: 'tien', label: 'Tienda de barrio', h1a: 'Tu tienda,', h1b: 'también online.',
+  { id: 'tien', label: 'Tienda local', h1a: 'Tu tienda,', h1b: 'también online.',
     sub: 'Que te encuentren en Google, vean lo que tienes y puedan encargártelo sin venir antes a preguntar.',
-    dh: 'Así llega un encargo. Elige cuándo recogerlo.', c1: 'Encargo para recoger', c2: 'Tienda de ejemplo · Pago en tienda',
+    dh: 'Así llega un encargo. Elige cuándo recogerlo.', c1: 'Encargo para recoger', c2: 'Pago en tienda',
     opts: ['Hoy, 19:00', 'Mañana, 11:00', 'Mañana, 18:00', 'Sábado, 12:00'], btn: 'Encargar para', got: 'Nuevo encargo:', note: 'En tu correo, con el detalle del pedido. Confirmación ya enviada.',
     agenda: [['10:30', 'Encargo de Rosa'], ['13:00', 'Recogida de Tomás'], ['18:30', 'Encargo de Inés']], newRow: 'Nuevo encargo',
     wText: 'Con tu catálogo, tu horario, cómo llegar y un formulario para hacer encargos.', wNav: 'Catálogo · Horario · Encargos', wHead: 'Lo de siempre, también desde el móvil', wBtn: 'Ver catálogo',
@@ -430,7 +606,7 @@ const SECTORS = [
     flow: ['Entra un encargo', 'Se guarda en tu lista', 'Tu cliente recibe la confirmación', 'Aviso cuando esté listo'], rec: 'Web sencilla' },
   { id: 'otro', label: 'Otro negocio', h1a: 'Menos tareas.', h1b: 'Más clientes.',
     sub: 'Cuéntame qué haces y buscamos juntos qué te ayudaría más: tu web, tus reservas, tus redes o quitarte tareas repetitivas.',
-    dh: 'Así llega un cliente nuevo. Elige cuándo.', c1: 'Primera consulta', c2: 'Negocio de ejemplo · Jueves · 30 minutos',
+    dh: 'Así llega un cliente nuevo. Elige cuándo.', c1: 'Primera consulta', c2: 'Jueves · 30 minutos',
     opts: ['10:00', '12:00', '16:00', '18:00'], btn: 'Reservar jueves a las', got: 'Nueva solicitud, jueves', note: 'En tu correo y en tu calendario. Confirmación ya enviada.',
     agenda: [['09:30', 'Reunión con cliente'], ['13:00', 'Presupuesto pendiente'], ['17:00', 'Entrega de pedido']], newRow: 'Cliente nuevo',
     wText: 'Clara, rápida en el móvil y fácil de cambiar, con un gestor para que la lleves tú.', wNav: 'Servicios · Quiénes somos · Contacto', wHead: 'Lo que haces, bien explicado', wBtn: 'Contactar',
@@ -440,7 +616,7 @@ const SECTORS = [
     flow: ['Entra una solicitud', 'Se guarda en tu lista', 'Tu cliente recibe la respuesta', 'Recordatorio de seguimiento'], rec: 'lo vemos juntas según tu negocio' },
   { id: 'pilates', hidden: true, label: 'Centro de pilates', h1a: 'Clases llenas.', h1b: 'Menos mensajes.',
     sub: 'Tus alumnos reservan su clase desde el móvil y reciben los cambios de horario sin que tengas que escribir a cada uno.',
-    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Pilates reformer', c2: 'Estudio de ejemplo · Jueves · 50 minutos',
+    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Pilates reformer', c2: 'Jueves · 50 minutos',
     opts: ['9:00', '12:00', '18:00', '20:00'], btn: 'Reservar jueves a las', got: 'Nueva plaza, jueves', note: 'En tu lista de clase y en tu correo. Confirmación ya enviada.',
     agenda: [['10:00', 'Reformer, 5 plazas'], ['13:00', 'Suelo, 8 plazas'], ['19:00', 'Reformer, 6 plazas']], newRow: 'Reformer, 1 plaza',
     wText: 'Con tus clases, tu horario, tus tarifas y un botón para reservar la primera clase.', wNav: 'Clases · Horario · Tarifas', wHead: 'Tu primera clase te espera', wBtn: 'Reservar clase',
@@ -450,7 +626,7 @@ const SECTORS = [
     flow: ['Entra una reserva de clase', 'Se añade a tu lista', 'Recibe la confirmación', 'Recordatorio antes de clase'], rec: 'Reservas online' },
   { id: 'academiapeluqueria', hidden: true, label: 'Academia de peluquería', h1a: 'Cursos llenos.', h1b: 'Menos consultas.',
     sub: 'Que cada interesado vea tus cursos, pida información y reciba respuesta al momento, aunque estés en clase.',
-    dh: 'Así llega una solicitud. Elige un curso.', c1: 'Información de cursos', c2: 'Academia de ejemplo · Respuesta automática',
+    dh: 'Así llega una solicitud. Elige un curso.', c1: 'Información de cursos', c2: 'Respuesta automática',
     opts: ['Peluquería', 'Barbería', 'Colorimetría', 'Intensivo'], btn: 'Pedir información:', got: 'Nueva solicitud:', note: 'En tu correo, con sus datos. Información ya enviada.',
     agenda: [['10:00', 'Nuria, intensivo'], ['12:30', 'Óscar, barbería'], ['17:00', 'Sonia, colorimetría']], newRow: 'Solicitud de curso',
     wText: 'Con tus cursos, fechas, precios e instalaciones, y un formulario para pedir información.', wNav: 'Cursos · Fechas · Inscripción', wHead: 'Aprende peluquería con práctica real', wBtn: 'Ver cursos',
@@ -459,7 +635,6 @@ const SECTORS = [
     fText: 'Cada solicitud recibe respuesta automática con la información del curso y tú ves a quién hacer seguimiento.',
     flow: ['Entra una solicitud de curso', 'Se guarda en tu lista de interesados', 'Recibe la información del curso', 'Recordatorio de seguimiento'], rec: 'Automatización sencilla' }
 ];
-
 const mkTheme = (a, on, h, ink, mut, soft, bg, rgb) => ({ a, on, h, ink, mut, soft, bg, rgb, line: 'rgba(' + rgb + ', 0.18)' });
 const THEMES = {
   pelu: mkTheme('#B8325F', '#FFFFFF', '#B8325F', '#3D0F22', '#6F4657', '#FBD5E1', '#FFF0F5', '61, 15, 34'),
@@ -475,227 +650,162 @@ const THEMES = {
   pilates: mkTheme('#3F7265', '#FFFFFF', '#3F7265', '#14302A', '#47635C', '#D5E8E2', '#F1F8F5', '20, 48, 42'),
   academiapeluqueria: mkTheme('#8E2D6F', '#FFFFFF', '#8E2D6F', '#340D29', '#68445E', '#F3D3E9', '#FCF0F8', '52, 13, 41')
 };
+const FORM_URL='https://script.google.com/macros/s/AKfycbyzG0kePIy7Br2kr5oX7gncFMFjbJXAxXtv6JI6gpeqZ8cgGsO2_MjK0cDdbmXMshV0/exec';
+const VID='https://videos.pexels.com/video-files/';
+const CLIPS={pelu:'8830235/8830235-hd_1920_1080_25fps.mp4',rest:'8428490/8428490-hd_1366_720_25fps.mp4',idio:'6671805/6671805-hd_1920_1080_24fps.mp4',elec:'18780266/18780266-hd_1920_1080_30fps.mp4',font:'7584762/7584762-hd_1920_1080_25fps.mp4',tall:'8986894/8986894-hd_1920_1080_30fps.mp4',clin:'5793444/5793444-hd_1920_1080_25fps.mp4',gym:'4944087/4944087-hd_1366_720_24fps.mp4',tien:'12511385/12511385-hd_1366_720_24fps.mp4',otro:'5893642/5893642-hd_1920_1080_24fps.mp4',pilates:'6023196/6023196-hd_1920_1080_25fps.mp4',academiapeluqueria:'4177954/4177954-hd_1920_1080_30fps.mp4'};
+const $=(id)=>document.getElementById(id);
+const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fino=matchMedia('(hover:hover) and (pointer:fine)').matches;
+let cur=null;
 
-const initGallery = () => {
-  const deck = document.querySelector('.gallery');
-  if (!deck || deck.dataset.ready) return;
-  deck.dataset.ready = '1';
-  const stage = deck.closest('.gallery-stage');
-  const fit = () => stage.style.setProperty('--gallery-scale', stage.clientWidth / 528);
-  fit();
-  const cards = [...deck.querySelectorAll('.gallery-card')];
-  deck.querySelectorAll('img').forEach((img) => {
-    if (img.complete && !img.naturalWidth) img.remove(); else img.addEventListener('error', () => img.remove());
-  });
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let order = [...cards].reverse(), drag = null, busy = false, paintFrame = 0, generation = 0;
-  const animations = new Map();
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-  const layout = () => order.forEach((card, i) => { card.dataset.slot = i; card.style.zIndex = i + 1; });
-  const stop = (card) => { const a = animations.get(card); if (a) a.cancel(); animations.delete(card); };
-  const position = (card, x, y, angle) => { card.style.translate = x + 'px ' + y + 'px'; card.style.rotate = angle + 'deg'; };
-  const animate = async (card, frames, duration, easing = 'linear') => {
-    stop(card);
-    if (reduced.matches) return;
-    const animation = card.animate(frames, { duration, easing, fill: 'forwards' });
-    animations.set(card, animation);
-    try { await animation.finished; } catch (e) {}
-    if (animations.get(card) === animation) {
-      const last = frames[frames.length - 1];
-      card.style.translate = last.translate; card.style.rotate = last.rotate;
-      animations.delete(card); animation.cancel();
-    }
-  };
-  const spring = (card, x, y, angle = 0) => {
-    if (reduced.matches) { position(card, 0, 0, 0); return Promise.resolve(); }
-    const frames = [], frequency = 17, damping = 0.78, damped = frequency * Math.sqrt(1 - damping * damping);
-    for (let i = 0; i <= 48; i++) {
-      const t = i / 48 * 0.68;
-      const remaining = Math.exp(-damping * frequency * t) * (Math.cos(damped * t) + damping * frequency / damped * Math.sin(damped * t));
-      frames.push({ translate: (x * remaining) + 'px ' + (y * remaining) + 'px', rotate: (angle * remaining) + 'deg', offset: i / 48 });
-    }
-    frames[48] = { translate: '0px 0px', rotate: '0deg', offset: 1 };
-    return animate(card, frames, 680);
-  };
-  const reorder = (card) => {
-    const top = order[order.length - 1] === card;
-    order = order.filter((item) => item !== card);
-    if (top) order.unshift(card); else order.push(card);
-    layout();
-  };
-  const shuffle = async (card, x = 0, y = 0, angle = 0) => {
-    if (busy) return;
-    busy = true;
-    const token = ++generation;
-    if (order[order.length - 1] === card && !reduced.matches) {
-      card.style.zIndex = 5;
-      const scale = deck.getBoundingClientRect().width / deck.offsetWidth;
-      const direction = Math.abs(x) > 5 ? Math.sign(x) : -1;
-      const outX = direction * Math.max(Math.abs(x) + 36, card.getBoundingClientRect().width / scale + 28);
-      const outY = y - 18, outAngle = direction * 9;
-      await animate(card, [{ translate: x + 'px ' + y + 'px', rotate: angle + 'deg' }, { translate: outX + 'px ' + outY + 'px', rotate: outAngle + 'deg' }], Math.abs(x) > 5 ? 140 : 220, 'cubic-bezier(.2,.65,.3,1)');
-      if (token !== generation) return;
-      reorder(card);
-      busy = false;
-      await spring(card, outX, outY, outAngle);
-    } else {
-      reorder(card);
-      await spring(card, x, y, angle);
-    }
-    if (token === generation) busy = false;
-  };
-  const paint = () => { paintFrame = 0; if (drag && drag.moved) position(drag.card, drag.x, drag.y, drag.angle); };
-  const release = (event, cancelled = false) => {
-    if (!drag || (event && event.pointerId !== drag.id)) return;
-    cancelAnimationFrame(paintFrame); paintFrame = 0;
-    const active = drag;
-    drag = null;
-    active.card.classList.remove('is-dragging');
-    if (active.card.hasPointerCapture(active.id)) active.card.releasePointerCapture(active.id);
-    position(active.card, active.x, active.y, active.angle);
-    if (!cancelled && (!active.moved || Math.abs(active.dx) > 52 || (active.type !== 'touch' && Math.abs(active.dy) > 65))) {
-      shuffle(active.card, active.x, active.y, active.angle);
-    } else { layout(); spring(active.card, active.x, active.y, active.angle); }
-  };
-  cards.forEach((card) => {
-    card.addEventListener('dragstart', (e) => e.preventDefault());
-    card.addEventListener('pointerdown', (e) => {
-      if (!e.isPrimary || e.button !== 0 || drag || busy) return;
-      const visual = getComputedStyle(card);
-      const coordinates = visual.translate.split(/\s+/).map(parseFloat);
-      const baseX = Number.isFinite(coordinates[0]) ? coordinates[0] : 0;
-      const baseY = Number.isFinite(coordinates[1]) ? coordinates[1] : 0;
-      const baseAngle = parseFloat(visual.rotate) || 0;
-      stop(card);
-      position(card, baseX, baseY, baseAngle);
-      drag = { baseX, baseY, baseAngle, card, id: e.pointerId, startX: e.clientX, startY: e.clientY, x: baseX, y: baseY, dx: 0, dy: 0, angle: baseAngle, scale: deck.getBoundingClientRect().width / deck.offsetWidth, type: e.pointerType, moved: false };
-      card.setPointerCapture(e.pointerId);
-    });
-    card.addEventListener('pointermove', (e) => {
-      if (!drag || drag.id !== e.pointerId) return;
-      const dx = e.clientX - drag.startX, dy = e.clientY - drag.startY;
-      if (drag.type === 'touch' && !drag.moved && Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { release(e, true); return; }
-      if (!drag.moved && Math.hypot(dx, dy) < 4) return;
-      drag.moved = true; drag.dx = dx; drag.dy = dy;
-      const resist = (value, limit) => Math.abs(value) <= limit ? value : Math.sign(value) * (limit + (Math.abs(value) - limit) * 0.18);
-      drag.x = drag.baseX + resist(dx, 210) / drag.scale;
-      drag.y = drag.baseY + resist(dy, 140) / drag.scale;
-      drag.angle = reduced.matches ? 0 : clamp(drag.baseAngle + dx * 0.035, -9, 9);
-      card.classList.add('is-dragging');
-      card.style.zIndex = 5;
-      if (!paintFrame) paintFrame = requestAnimationFrame(paint);
-    });
-    card.addEventListener('pointerup', release);
-    card.addEventListener('pointercancel', (e) => release(e, true));
-    card.addEventListener('lostpointercapture', (e) => release(e, true));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!drag) shuffle(card); }
-      if (e.key === 'Escape') release(null, true);
-    });
-  });
-  new ResizeObserver(() => { fit(); release(null, true); generation++; busy = false; cards.forEach((card) => { stop(card); position(card, 0, 0, 0); }); layout(); }).observe(stage);
-  layout();
+const conPunto=(t)=>t.endsWith('.')?t.slice(0,-1)+'<i class="pt"></i>':t;
+const clip=()=>'<span class="clip"><video muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video></span>';
+const pintaTema=(id)=>{const t=THEMES[id]||THEMES.otro,r=document.documentElement.style;
+r.setProperty('--a',t.a);r.setProperty('--on',t.on);r.setProperty('--h',t.h);r.setProperty('--soft',id==='otro'?'#F1E3DE':t.soft);};
+const pinta=(id)=>{const s=SECTORS.find((x)=>x.id===id)||SECTORS.find((x)=>x.id==='otro');cur=s;
+pintaTema(s.id);
+$('l1').innerHTML='<span>'+conPunto(s.h1a)+'</span>';$('l2').innerHTML=clip()+'<span>'+conPunto(s.h1b)+'</span>';
+$('avT').textContent=s.got;$('avS').textContent=s.newRow;$('aviso').classList.remove('sale');$('aviso').style.visibility=(s.h1a.length>16||s.h1b.length>16)?'hidden':'visible';setTimeout(()=>$('aviso').classList.add('sale'),quieto?0:1300);
+const v=$('l2').querySelector('video');v.src=VID+(CLIPS[s.id]||CLIPS.otro);v.play&&v.play().catch(()=>{});
+const g=$('granV');g.src=v.src;g.play&&g.play().catch(()=>{});
+$('sub').textContent=s.sub;$('dh').textContent=s.dh;$('c1').textContent=s.c1;$('c2').textContent=s.c2;$('nota').textContent='';
+$('rec').textContent=s.rec;$('sText').textContent=s.sText;
+$('horas').innerHTML=s.opts.map((o)=>'<button class="hora" type="button">'+o+'</button>').join('');
+$('agenda').innerHTML=s.agenda.map((a)=>'<div class="fila"><b>'+a[0]+'</b><span>'+a[1]+'</span></div>').join('');
+$('ruta').innerHTML=s.flow.map((f)=>'<li><i></i>'+f+'</li>').join('');
+$('posts').innerHTML=s.posts.map((p)=>'<article class="post"><img loading="lazy" alt="" src="https://images.pexels.com/photos/'+p[1]+'/pexels-photo-'+p[1]+'.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop"><i class="pt"></i><p>'+p[0]+'</p></article>').join('');
+document.querySelectorAll('.chip').forEach((c)=>{const on=c.dataset.id===s.id;c.setAttribute('aria-pressed',on);if(on&&innerWidth<=860)$('chips').scrollLeft=c.offsetLeft-$('chips').clientWidth/2+c.clientWidth/2});
+try{const u=new URL(location.href);u.searchParams.set('sector',s.id);history.replaceState(null,'',u)}catch(e){}
 };
 
-const FORM_URL = 'https://script.google.com/macros/s/AKfycbyzG0kePIy7Br2kr5oX7gncFMFjbJXAxXtv6JI6gpeqZ8cgGsO2_MjK0cDdbmXMshV0/exec';
-const deliver = async (data, buttonId, errorId) => {
-  const button = document.getElementById(buttonId), error = document.getElementById(errorId), label = button.textContent;
-  button.disabled = true; button.textContent = 'Enviando…'; error.hidden = true;
-  let ok = false;
-  try {
-    const r = await fetch(FORM_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
-    ok = !!(await r.json()).ok;
-  } catch (e) {}
-  button.disabled = false; button.textContent = label; error.hidden = ok;
-  return ok;
-};
-const CALENDAR_URL = 'https://calendar.app.google/tx5x6KwxiNUhJSyn9';
-const urlSector = () => {
-  try { const v = new URLSearchParams(location.search).get('sector'); return SECTORS.some((x) => x.id === v) ? v : null; } catch (e) { return null; }
-};
-const syncUrl = (id) => {
-  try { const u = new URL(location.href); if (id) u.searchParams.set('sector', id); else u.searchParams.delete('sector'); history.pushState(null, '', u); } catch (e) {}
-};
-let navBound = false;
-const bindNav = (c) => {
-  if (navBound) return;
-  navBound = true;
-  try { window.addEventListener('popstate', () => c.setState({ sector: urlSector(), chosen: 1 })); } catch (e) {}
-};
+/* cambio de sector: el punto crece, cubre la pantalla y vuelve */
+const barre=(x,y,id)=>{const t=THEMES[id]||THEMES.otro,b=$('barrido');
+if(quieto){pinta(id);return}
+const R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y))/20+1;
+b.style.left=x+'px';b.style.top=y+'px';b.style.background=t.a;
+b.animate([{transform:'scale(0)'},{transform:'scale('+R+')'}],{duration:440,easing:'cubic-bezier(.6,0,.3,1)',fill:'forwards'}).onfinish=()=>{
+pinta(id);$('h1').classList.remove('vivo');void $('h1').offsetWidth;
+b.animate([{transform:'scale('+R+')',opacity:1},{transform:'scale('+R+')',opacity:0}],{duration:300,fill:'forwards'}).onfinish=()=>b.getAnimations().forEach((a)=>a.cancel());
+requestAnimationFrame(()=>requestAnimationFrame(()=>$('h1').classList.add('vivo')));};};
 
-class Component extends DCLogic {
-  state = { sector: urlSector(), chosen: 1, sent: false };
-  async sendForm(label) {
-    const form = document.getElementById('consulta');
-    if (!form || !form.reportValidity()) return;
-    const v = (k) => form.elements[k].value.trim();
-    const ok = await deliver({ origen: 'Formulario', sector: label, negocio: v('negocio'), mensaje: v('mejora'), contacto: v('contacto'), web: v('web') }, 'f-send', 'f-error');
-    if (ok) this.setState({ sent: true });
-  }
-  openEmail() {
-    document.getElementById('email-form').reset();
-    document.getElementById('email-form').hidden = false;
-    document.getElementById('email-thanks').hidden = true;
-    document.getElementById('e-error').hidden = true;
-    document.getElementById('email-dialog').showModal();
-  }
-  closeEmail() {
-    document.getElementById('email-dialog').close();
-  }
-  async sendEmail(label) {
-    const form = document.getElementById('email-form');
-    if (!form.reportValidity()) return;
-    const v = (k) => form.elements[k].value.trim();
-    const ok = await deliver({ origen: 'Email', sector: label, negocio: v('nombre'), mensaje: v('mensaje'), contacto: v('email'), web: v('web') }, 'e-send', 'e-error');
-    if (ok) { form.hidden = true; document.getElementById('email-thanks').hidden = false; }
-  }
-  componentDidMount() { bindNav(this); initGallery(); }
-  componentDidUpdate() { bindNav(this); initGallery(); }
-  renderVals() {
-    const top = () => { try { window.scrollTo(0, 0); } catch (e) {} };
-    const sectors = SECTORS.filter((x) => !x.hidden).map((x) => ({ label: x.label, pick: () => { syncUrl(x.id); this.setState({ sector: x.id, chosen: 1 }); top(); } }));
-    const s = SECTORS.find((x) => x.id === this.state.sector) || SECTORS[0];
-    const base = THEMES[this.state.sector] || THEMES.otro;
-    const t = this.state.sector && this.state.sector !== 'otro' ? base : { ...base, a: this.props.accent ?? base.a, h: this.props.accent ?? base.h };
-    const chosen = s.opts[this.state.chosen];
-    const optBase = 'min-height: 52px; padding: 6px 8px; border-radius: 14px; font: inherit; font-size: 17px; font-weight: 600; cursor: pointer; border: 2px solid; transition: background 0.15s; ';
-    const opts = s.opts.map((text, i) => {
-      const on = i === this.state.chosen;
-      return { text, pressed: on ? 'true' : 'false',
-        css: optBase + (on ? 'background: ' + t.a + '; border-color: ' + t.a + '; color: ' + t.on : 'background: #FFFFFF; border-color: ' + t.soft + '; color: ' + t.ink),
-        pick: () => this.setState({ chosen: i }) };
-    });
-    const rowBase = 'display: flex; gap: 14px; padding: 12px 14px; border-radius: 12px; ';
-    const agenda = s.agenda.map((r) => ({ t: r[0], w: r[1], css: rowBase + 'background: transparent' }))
-      .concat([{ t: 'Nuevo', w: s.newRow, css: rowBase + 'background: ' + t.soft }]);
-    const posts = s.posts.map((p) => {
-      const veil = 'rgba(' + t.rgb + ', 0.52)';
-      const photo = p[1] ? 'linear-gradient(' + veil + ', ' + veil + '), url(https://images.pexels.com/photos/' + p[1] + '/pexels-photo-' + p[1] + '.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop) center / cover, ' : '';
-      return { text: p[0], css: 'aspect-ratio: 1; overflow: hidden; color: #FFFFFF; display: flex; align-items: flex-end; background: ' + photo + t.ink };
-    });
-    const last = s.flow.length - 1;
-    const flow = s.flow.map((text, i) => ({ text,
-      css: 'border-radius: 14px; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; ' + (i === last ? 'background: ' + t.a + '; color: ' + t.on : 'background: #FFFFFF') }));
-    const stack = 'display: flex; flex-direction: column; gap: 14px';
-    const formCss = this.state.sent ? 'display: none' : stack;
-    const thanksCss = this.state.sent ? stack : 'display: none';
-    const calUrl = CALENDAR_URL || '#contacto';
-    const calCss = CALENDAR_URL ? 'display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; border: 2px solid ' + t.on + '; box-sizing: border-box; color: ' + t.on + '; font-weight: 600; text-decoration: none' : 'display: none';
-    return { formCss, thanksCss, calUrl, calCss, submit: () => this.sendForm(s.label), openEmail: () => this.openEmail(), closeEmail: () => this.closeEmail(), sendEmail: () => this.sendEmail(s.label), t, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
-      reset: () => { syncUrl(null); this.setState({ sector: null, chosen: 1 }); top(); } };
-  }
-}
+$('chips').innerHTML=SECTORS.filter((s)=>!s.hidden).map((s)=>'<button class="chip" type="button" data-id="'+s.id+'" aria-pressed="false">'+s.label+'</button>').join('');
+$('chips').addEventListener('click',(e)=>{const c=e.target.closest('.chip');if(!c||c.dataset.id===(cur&&cur.id))return;barre(e.clientX||innerWidth/2,e.clientY||innerHeight/2,c.dataset.id)});
 
-const TPL=document.getElementById('tpl').textContent;
-const get=(o,p)=>p.split('.').reduce((a,k)=>a==null?a:a[k],o);
-const c=new Component(),root=document.getElementById('app'),acts=[];
-const esc=v=>String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
-function holes(h,v){return h.replace(/onClick="\{\{\s*([\w.$]+)\s*\}\}"/g,(m,p)=>{acts.push(get(v,p));return 'data-act="'+(acts.length-1)+'"'}).replace(/\{\{\s*([\w.$]+)\s*\}\}/g,(m,p)=>{const x=get(v,p);return x==null?m:esc(x)})}
-function draw(){const v=c.renderVals();acts.length=0;let h=TPL.replace(/<sc-if value="\{\{\s*(\w+)\s*\}\}"[^>]*>([\s\S]*?)<\/sc-if>/g,(m,n,b)=>v[n]?b:'');
-h=h.replace(/<sc-for list="\{\{\s*(\w+)\s*\}\}" as="(\w+)"[^>]*>([\s\S]*?)<\/sc-for>/g,(m,l,as,b)=>v[l].map(it=>holes(b,{...v,[as]:it})).join(''));
-root.innerHTML=holes(h,v);if(c.componentDidUpdate)c.componentDidUpdate()}
-root.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b)acts[+b.dataset.act]()});
-draw();
+/* demo: la hora vuela a la agenda y se enciende el recorrido */
+$('horas').addEventListener('click',(e)=>{const b=e.target.closest('.hora');if(!b)return;
+const a=b.getBoundingClientRect();b.classList.add('si');$('horas').querySelectorAll('.hora').forEach((h)=>h.disabled=true);
+const fila=document.createElement('div');fila.className='fila nueva';fila.innerHTML='<b>'+b.textContent+'</b><span>'+cur.newRow+'</span>';
+const fin=()=>{$('agenda').prepend(fila);$('nota').textContent=cur.note;
+[...$('ruta').children].forEach((li,i)=>setTimeout(()=>li.classList.add('ok'),quieto?0:i*320));
+setTimeout(()=>{if(cur)$('horas').querySelectorAll('.hora').forEach((h)=>{h.disabled=false;h.classList.remove('si')})},4200)};
+if(quieto){fin();return}
+const z=$('agenda').getBoundingClientRect(),v=document.createElement('p');v.className='vuelo';v.textContent=b.textContent;v.style.left=a.left+'px';v.style.top=a.top+'px';document.body.append(v);
+v.animate([{transform:'none'},{transform:'translate('+(z.left-a.left)*.5+'px,'+(z.top-a.top-60)+'px) rotate(-5deg) scale(1.08)',offset:.55},{transform:'translate('+(z.left-a.left)+'px,'+(z.top-a.top)+'px)'}],{duration:620,easing:'cubic-bezier(.3,.7,.2,1)'}).onfinish=()=>{v.remove();fin()};});
+
+/* los precios bajan a la mitad al entrar */
+const mil=(n)=>String(n).replace(/\B(?=(\d{3})+$)/g,'.');
+const cuenta=(el)=>{const de=+el.dataset.de,a=+el.dataset.a;if(quieto){el.textContent=mil(a);return}const t0=performance.now()+250;
+const paso=(t)=>{const p=Math.min(Math.max((t-t0)/800,0),1),e=1-Math.pow(1-p,3);el.textContent=mil(Math.round(de+(a-de)*e));if(p<1)requestAnimationFrame(paso)};requestAnimationFrame(paso)};
+const io=new IntersectionObserver((es)=>es.forEach((e)=>{if(e.isIntersecting){e.target.classList.add('en');e.target.querySelectorAll('[data-de]').forEach(cuenta);io.unobserve(e.target)}}),{threshold:.18,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.r').forEach((el)=>io.observe(el));
+
+/* pedir un servicio rellena el formulario */
+document.addEventListener('click',(e)=>{const b=e.target.closest('[data-pide]');if(!b)return;const f=$('f');
+f.elements.mejora.value='Me interesa: '+b.dataset.pide;$('contacto').scrollIntoView({behavior:quieto?'auto':'smooth'});setTimeout(()=>f.elements.negocio.focus({preventScroll:true}),700)});
+
+/* veinte puntos, uno por negocio */
+$('veinte').innerHTML=Array.from({length:20},(_,i)=>'<i style="transition-delay:'+i*35+'ms"></i>').join('');
+
+/* cinta de palabras y fotos que nacen del punto */
+const pal=['Webs','Reservas','Redes','Automatización','Diseño'].map((w)=>'<span>'+w+'</span><i></i>').join('');$('cinta').innerHTML=pal+pal+pal+pal;
+new IntersectionObserver((es,o)=>es.forEach((e)=>{if(e.isIntersecting){e.target.classList.add('vista');o.disconnect()}}),{threshold:.25}).observe($('pista'));
+
+/* frase palabra a palabra */
+$('frase').innerHTML=$('frase').textContent.split(' ').map((w)=>'<span>'+w+'</span>').join(' ');
+const pals=[...$('frase').children];
+/* tarjetas de precio que siguen al ratón */
+if(fino&&!quieto)document.querySelectorAll('.plan').forEach((c)=>{c.addEventListener('mousemove',(e)=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transition='transform .12s linear';c.style.transform='rotateY('+x*7+'deg) rotateX('+(-y*7)+'deg) translateZ(10px)'});c.addEventListener('mouseleave',()=>{c.style.transition='';c.style.transform=''})});
+
+/* proyectos: lista, visual y modal */
+const PF='https://hola-laura.github.io/laura/';
+const wb=(u,a)=>'<div class="web"><img loading="lazy" src="'+u+'" alt="'+a+'"></div>';
+const fo=(u,a)=>'<img class="foto" loading="lazy" src="'+u+'" alt="'+a+'">';
+const SV=['Founding designer: visión y conceptos para inversores','Rediseño de los recorridos clave','Prototipos interactivos, interacción y nueva UI','Design system','Evaluación heurística de los recorridos actuales','Mejoras de UX y de métricas según objetivos de negocio','Planes de investigación y test de usabilidad','Contratación de producto y diseño','Priorización y workshops'];
+const skI=(u,a)=>'<img loading="lazy" src="'+u+'" alt="'+a+'" onerror="this.onerror=null;this.src=\'https://www.skippr.ai/og-image.png\'">';
+const SK='<div class="web" style="width:86%;align-self:flex-start">'+skI('propuesta/skippr-web.jpg','Web de Skippr')+'</div><div class="web flota">'+skI('propuesta/skippr-producto.jpg','Producto de Skippr')+'</div>';
+const st=(n)=>({n,r:'STARTUP',c:'tipo',t:'Diseño para startups',p:n+' es una de las startups con las que he trabajado. Estos son algunos de los servicios que he hecho para startups:',serv:1,l:[['Ver todos los proyectos','propuesta/proyectos.html']]});
+const CO='<img class="movil" style="width:min(48%,260px)" loading="lazy" src="propuesta/correcto-gramatica.jpg" alt="Corrector de Correcto" onerror="this.remove()"><img class="movil" style="width:min(48%,260px)" loading="lazy" src="propuesta/correcto-reescribir.jpg" alt="Parafraseador de Correcto" onerror="this.remove()">';
+const PROY=[
+{n:'Mattern Guide',r:'WEB Y PANEL',v:wb(PF+'assets/mountain-guide/website.webp','Web de Mattern Guide'),t:'Una web que su dueño cambia sin tocar código',p:'Diseñé y construí la web de Mattern Guide, un gestor de contenidos y una primera automatización.',y:'una web con tus servicios y horarios que puedes cambiar cuando quieras.',l:[['Ver la web','https://hola-laura.github.io/daniel-mattern-web/'],['Ver el panel','https://hola-laura.github.io/daniel-mattern-web/admin.html'],['Leer la historia',PF+'case-study-mountain-guide.html']]},
+{n:'Empresa de construcción',r:'SOFTWARE',tpl:'t-pres',t:'Presupuestos en un solo sitio',p:'Diseñé un software para que una empresa de construcción prepare sus presupuestos: partidas, cantidades, precios y total.',y:'si repites una tarea cada semana, puede tener su propia herramienta sencilla.',l:[]},
+{n:'Agencia de marketing local',r:'AUTOMATIZACIÓN',tpl:'t-flujo',t:'Citas que se organizan solas',p:'Automaticé la gestión de citas de una agencia de marketing local, desde que entra un contacto hasta el recordatorio.',y:'menos mensajes de ida y vuelta, y menos citas olvidadas.',l:[]},
+{n:'Monzo',r:'DISEÑO',v:fo(PF+'assets/flex/flex-focus-view.jpg','Persona usando la app de Monzo'),t:'Diseño en Monzo',p:'Trabajé como diseñadora de producto en Monzo, haciendo que cosas complicadas se entiendan a la primera.',y:'lo mismo, aplicado a lo que tus clientes necesitan entender y hacer.',l:[['Ver mi portfolio',PF+'index.html#case-studies']]},
+{n:'Skippr',r:'FOUNDING DESIGNER',v:SK,t:'El diseño de una startup desde el principio',p:'Fui founding designer de Skippr y les ayudé a diseñar su primera herramienta.',y:'sé empezar de cero y convertir una idea en algo que la gente entiende.',l:[['Ver Skippr','https://www.skippr.ai/']]},
+{n:'Drivo Test',r:'APP PROPIA',c:'dos',v:'<img class="movil" loading="lazy" src="'+PF+'assets/drivo/home-ios.png" alt="Inicio de Drivo Test"><img class="movil" loading="lazy" src="'+PF+'assets/drivo/library-ios.png" alt="Preguntas de Drivo Test">',t:'Mi propia app, publicada en el App Store',p:'Investigué, diseñé y construí una app gratuita para ayudar a estudiantes en España a entender la teoría de conducir.',y:'lo que te propongo, sé hacerlo y lanzarlo de principio a fin.',l:[['Ver en el App Store','https://apps.apple.com/es/app/drivo-test/id6813126362'],['Leer la historia',PF+'case-study-drivo.html']]},
+{n:'Just Eat',r:'INTRANET',v:fo('https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/d2148e109663737.5fd8f758238b4.png','Intranet de Just Eat'),t:'La primera intranet para toda la empresa',p:'Diseñé The Kitchen, un único espacio con las noticias, las herramientas y el conocimiento de la empresa.',l:[['Leer la historia',PF+'case-study-just-eat.html']]},
+{n:'RLDatix',r:'SOFTWARE SANITARIO',v:fo(PF+'assets/rldatix/interface.png','Interfaz de RLDatix'),t:'Herramientas sanitarias en un solo producto',p:'Rediseñé un flujo complejo de gestión de riesgos sanitarios. En las pruebas, el 96% de los participantes completó las tareas clave sin ayuda.',l:[['Leer la historia',PF+'case-study-rldatix.html']]},
+{n:'intu',r:'WEB',v:wb('https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/39941f94922721.5fd8f70be9544.png','Family Club de intu'),t:'Más fácil unirse a Family Club',p:'Rediseñé el club para familias de intu para que la gente entendiera sus ventajas y se animara a unirse.',l:[['Leer la historia',PF+'case-study-intu.html']]},
+st('Pass the Jam'),st('Erika'),{...st('Correcto'),c:'dos',v:CO,t:'Un corrector especializado en español',p:'Trabajé con Correcto, un corrector ortográfico y parafraseador especializado en español. Estos son algunos de los servicios que he hecho para startups:'},st('Vennre'),st('JOBBA')];
+const visP=(p)=>p.tpl?$(p.tpl).innerHTML:p.v||('<p class="tn">'+p.n+'<i class="pt"></i></p>');
+const ajF=(r)=>r.querySelectorAll('.flujo').forEach((f)=>f.style.setProperty('--dist',(f.lastElementChild.offsetTop-f.firstElementChild.offsetTop)+'px'));
+$('pl').innerHTML=PROY.map((p,i)=>'<li><button class="pb" type="button" data-i="'+i+'"><span>'+p.n+'</span><small>'+p.r+'</small></button></li>').join('');
+$('vis').innerHTML=PROY.map((p)=>'<div class="capa en '+(p.c||'')+'">'+visP(p)+'</div>').join('');
+const capas=[...$('vis').children],pbs=[...$('pl').querySelectorAll('.pb')];let act=-1,zz=1;
+const activa=(i)=>{if(i===act)return;const c=capas[i];pbs.forEach((b,k)=>b.classList.toggle('on',k===i));const prev=capas[act];act=i;c.style.zIndex=++zz;c.classList.add('on');if(prev)setTimeout(()=>{if(capas[act]!==prev)prev.classList.remove('on')},820)};
+activa(0);ajF($('vis'));addEventListener('resize',()=>ajF($('vis')));
+$('pl').addEventListener('pointerover',(e)=>{const b=e.target.closest('.pb');if(b&&e.pointerType!=='touch')activa(+b.dataset.i)});
+$('pl').addEventListener('focusin',(e)=>{const b=e.target.closest('.pb');if(b)activa(+b.dataset.i)});
+let pmI=0;const abre=(i)=>{pmI=i;const p=PROY[i],m=$('pm');$('pmV').className='pm-v en '+(p.c||'');$('pmV').innerHTML=visP(p);$('pmR').textContent=p.r;$('pmT').textContent=p.t;$('pmP').textContent=p.p;$('pmS').innerHTML=p.serv?'<ul>'+SV.map((x)=>'<li>'+x+'</li>').join('')+'</ul>':'';$('pmY').innerHTML=p.y?'<b>En tu negocio:</b> '+p.y:'';$('pmL').innerHTML=p.l.map((l)=>'<a class="lk" href="'+l[1]+'"'+(l[1].startsWith('http')?' target="_blank" rel="noopener"':'')+'><i></i>'+l[0]+'</a>').join('');if(!m.open)m.showModal();m.scrollTop=0;ajF($('pmV'))};
+$('pl').addEventListener('click',(e)=>{const b=e.target.closest('.pb');if(b)abre(+b.dataset.i)});
+$('pmX').addEventListener('click',()=>$('pm').close());$('pmN').addEventListener('click',()=>abre((pmI+1)%PROY.length));
+$('pm').addEventListener('click',(e)=>{if(e.target===$('pm'))$('pm').close()});
+
+/* mazo de fotos */
+const fotos=[...$('mazo').querySelectorAll('img')];const pos=['-50%,-50%) rotate(0deg','-44%,-53%) rotate(4deg','-56%,-48%) rotate(-5deg','-50%,-46%) rotate(8deg'];
+let giro=0;const baraja=()=>fotos.forEach((f,i)=>{const k=(i+giro)%fotos.length,o=fotos.length-1-k;f.style.transform='translate('+pos[o===0?0:o]+')';f.style.zIndex=k});baraja();
+$('mazo').addEventListener('click',()=>{giro++;baraja()});
+if(fino&&!quieto){$('mazo').addEventListener('mouseenter',()=>fotos.forEach((f,i)=>{const o=fotos.length-1-(i+giro)%fotos.length;if(o)f.style.transform='translate('+pos[o].replace(/-?\d+%,/,(m)=>(parseInt(m)+(o===2?-34:o===1?28:0))+'%,').replace(/(-?\d+)deg/,(m,d)=>(+d*2.4)+'deg')+')'}));$('mazo').addEventListener('mouseleave',baraja)}
+
+/* scroll: nav, cinta de redes, bola de pasos, gigante */
+let ult=0,pend=false;
+const scroll=()=>{pend=false;const y=scrollY;
+document.querySelector('.nav').classList.toggle('fuera',y>ult&&y>500);ult=y;
+$('prog').style.transform='scaleX('+Math.min(y/Math.max(document.documentElement.scrollHeight-innerHeight,1),1)+')';
+if(quieto){pals.forEach((w)=>w.classList.add('on'));return}
+const fr=$('frase').getBoundingClientRect(),fp=Math.min(Math.max((innerHeight*.82-fr.top)/(fr.height+innerHeight*.34),0),1);pals.forEach((w,i)=>w.classList.toggle('on',i<fp*pals.length));
+const mr=$('marco').getBoundingClientRect(),mp=Math.min(Math.max((innerHeight-mr.top)/(innerHeight*.9),0),1);$('marco').style.clipPath='inset('+(10-10*mp)+'% '+(24-24*mp)+'% round '+(28-20*mp)+'px)';$('granV').style.transform='scale('+(1.18-.18*mp)+')';
+if(innerWidth>860){const r=$('pista').getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight+r.height);
+if(p>-.1&&p<1.1){const w=$('posts').scrollWidth-innerWidth;$('posts').style.transform='translateX('+(-Math.max(w,0)*p)+'px)';$('fondo').style.transform='translate('+(-p*18)+'%,-50%)'}}
+const q=$('pasos').getBoundingClientRect(),m=Math.min(Math.max((innerHeight*.6-q.top)/q.height,0),1);$('bola').style.transform='translateY('+m*(q.height-16)+'px)';
+if(innerWidth>860)document.querySelectorAll('[data-par]').forEach((e)=>{const r=e.parentElement.getBoundingClientRect();e.style.transform='translateY('+(r.top+r.height/2-innerHeight/2)*+e.dataset.par+'px)'});
+const f=document.querySelector('.pie').getBoundingClientRect(),z=Math.min(Math.max((innerHeight-f.top)/f.height,0),1);$('gigante').style.transform='translateY('+(1-z)*42+'%)';};
+addEventListener('scroll',()=>{if(!pend){pend=true;requestAnimationFrame(scroll)}},{passive:true});
+
+/* cursor punto y botones magnéticos, solo con ratón */
+if(fino&&!quieto){const c=$('cursor');let x=0,y=0,cx=0,cy=0;
+addEventListener('mousemove',(e)=>{x=e.clientX;y=e.clientY;c.style.opacity=1;c.classList.toggle('gr',!!e.target.closest('a,button,summary,input,textarea'))},{passive:true});
+const anda=()=>{cx+=(x-cx)*.2;cy+=(y-cy)*.2;c.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(anda)};anda();
+document.querySelectorAll('[data-mag]').forEach((b)=>{b.addEventListener('mousemove',(e)=>{const r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.14+'px,'+(e.clientY-r.top-r.height/2)*.22+'px)'});b.addEventListener('mouseleave',()=>{b.style.transform=''})});}
+
+/* formulario real */
+$('f').addEventListener('submit',async(e)=>{e.preventDefault();const f=e.target,er=$('err'),b=$('enviar');er.hidden=true;
+const v=(k)=>f.elements[k].value.trim();
+if(!v('negocio')||!v('mejora')||!v('contacto')){er.textContent='Rellena los tres campos, por favor.';er.hidden=false;return}
+if(!f.elements.privacy_ack.checked){er.textContent='Marca la casilla de privacidad, por favor.';er.hidden=false;return}
+b.disabled=true;b.style.width=b.offsetWidth+'px';void b.offsetWidth;b.classList.add('va');b.lastChild.textContent='Enviando…';
+try{const r=await fetch(FORM_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({origen:'Formulario',sector:cur.label,negocio:v('negocio'),mensaje:v('mejora'),contacto:v('contacto'),web:v('web')})});
+const d=await r.json();if(!d.ok)throw 0;f.innerHTML='<p class="gracias">He recibido tu consulta<i class="pt"></i></p><p class="lead" style="margin-top:10px;color:#BDB5AD">Te contesto lo antes posible.</p>'}
+catch(x){b.disabled=false;b.classList.remove('va');b.style.width='';b.lastChild.textContent='Enviar';er.textContent='No se ha podido enviar. Inténtalo otra vez o escríbeme por WhatsApp.';er.hidden=false}});
+
+/* inicio */
+const q=new URLSearchParams(location.search).get('sector');
+pinta(SECTORS.some((s)=>s.id===q)?q:'otro');
+const arranca=()=>{$('h1').classList.add('vivo')};
+let visto=false;try{visto=!!sessionStorage.getItem('noma-v')}catch(e){}
+if(quieto||visto){arranca()}else{
+const l=document.createElement('div');l.className='carga';l.innerHTML='<div>noma<i></i></div>';document.body.append(l);
+setTimeout(()=>{l.classList.add('ya');arranca();try{sessionStorage.setItem('noma-v','1')}catch(e){}},1050);setTimeout(()=>l.remove(),1800);}
+scroll();
 </script>
 </body>
 </html>
