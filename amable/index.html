@@ -368,15 +368,14 @@ html{scroll-behavior:auto}
 }
 
 /* amable: paleta alternativa */
-.hero{background:#FDE480}.nav{background:rgba(255,255,255,.92)}
+.hero{background:var(--soft);transition:background .4s}.nav{background:rgba(255,255,255,.92)}
 .demo{background:#A8C8F8}.demo .lead,.demo .tit p{color:#111}
 .oferta{background:#FCB0F8}.oferta,.oferta p{color:#111}
 .sobre{background:#FDE480}.sobre p{color:#111}
 .lienzo,#vis .capa{background:#A8C8F8}.lienzo.negro{background:#004833}
 .plan.top{background:#004833;border-color:#004833;--a:#FDE480}.startups{background:#004833}
 .contacto,.pie{--a:#FDE480}
-.btn{--bg:#004833;--fill:#FDE480;--fgh:#111}
-.btn.inv{--bg:#004833;--fill:#FDE480;--fgh:#111}
+.btn,.btn.inv{--bg:var(--a);--fg:var(--on);--fill:var(--on);--fgh:var(--a)}
 .btn.claro{--bg:#fff;--fill:#004833;--fgh:#fff}
 .plan.top .btn,.salidas .btn,.btn[style*="--bg:#fff"]{--bg:#fff;--fg:#111;--fill:#004833;--fgh:#fff}
 </style>
@@ -661,7 +660,7 @@ const THEMES = {
   clin: mkTheme('#0F766E', '#FFFFFF', '#0F766E', '#06332F', '#3D6460', '#C9EFE9', '#EFFAF8', '6, 51, 47'),
   gym: mkTheme('#C8102E', '#FFFFFF', '#C8102E', '#3A0710', '#70404A', '#FFD3D9', '#FFF1F2', '58, 7, 16'),
   tien: mkTheme('#2E7D32', '#FFFFFF', '#2E7D32', '#12331A', '#47644C', '#D3EBCF', '#F2FAF0', '18, 51, 26'),
-  otro: mkTheme('#C93417', '#FFFFFF', '#C93417', '#3A120A', '#6E4A40', '#FFD9C7', '#FFEFE6', '58, 18, 10'),
+  otro: mkTheme('#004833', '#FFFFFF', '#004833', '#3A120A', '#6E4A40', '#FFD9C7', '#FFEFE6', '58, 18, 10'),
   pilates: mkTheme('#3F7265', '#FFFFFF', '#3F7265', '#14302A', '#47635C', '#D5E8E2', '#F1F8F5', '20, 48, 42'),
   academiapeluqueria: mkTheme('#8E2D6F', '#FFFFFF', '#8E2D6F', '#340D29', '#68445E', '#F3D3E9', '#FCF0F8', '52, 13, 41')
 };
@@ -676,7 +675,7 @@ let cur=null;
 const conPunto=(t)=>t.endsWith('.')?t.slice(0,-1)+'<i class="pt"></i>':t;
 const clip=()=>'<span class="clip"><video muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video></span>';
 const pintaTema=(id)=>{const t=THEMES[id]||THEMES.otro,r=document.documentElement.style;
-};
+r.setProperty('--a',t.a);r.setProperty('--on',t.on);r.setProperty('--h',t.h);r.setProperty('--soft',id==='otro'?'#FDE480':t.soft);};
 const pinta=(id)=>{const s=SECTORS.find((x)=>x.id===id)||SECTORS.find((x)=>x.id==='otro');cur=s;
 pintaTema(s.id);
 $('l1').innerHTML='<span>'+conPunto(s.h1a)+'</span>';$('l2').innerHTML=clip()+'<span>'+conPunto(s.h1b)+'</span>';
