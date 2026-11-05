@@ -245,12 +245,38 @@ a{color:inherit}a:hover{opacity:.78}
 </section>
 
 <section id="contacto" style="background: {{ t.a }}; color: {{ t.on }}">
-<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start">
-<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(46px, 6.6vw, 84px); line-height: 1.04; letter-spacing: -0.02em">¿Qué te quita tiempo?</h2>
-<p style="margin: 0; max-width: 30em; font-size: clamp(18px, 1.5vw, 20px); line-height: 1.4; text-wrap: pretty">Cuéntamelo en 15 minutos, por teléfono o videollamada. Gratis y sin compromiso.</p>
+<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px 56px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 24px; align-items: flex-start">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: clamp(40px, 5vw, 64px); line-height: 1.06; letter-spacing: -0.02em">¿Qué te quita tiempo?</h2>
+<p style="margin: 0; max-width: 28em; font-size: clamp(18px, 1.5vw, 20px); line-height: 1.4; text-wrap: pretty">Cuéntamelo y lo vemos en 15 minutos, por teléfono o videollamada. Gratis y sin compromiso.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px">
-<a href="mailto:lrsmpdr@gmail.com?subject=Quiero%20mejorar%20mi%20negocio" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-weight: 600; text-decoration: none">Escríbeme</a>
-<a href="#contacto" style="display: inline-flex; align-items: center; min-height: 60px; padding: 0 34px; border-radius: 999px; border: 2px solid {{ t.on }}; box-sizing: border-box; color: {{ t.on }}; font-weight: 600; text-decoration: none">WhatsApp [TU NÚMERO]</a>
+<a href="https://wa.me/447469892325?text=Hola%20Laura%2C%20tengo%20un%20negocio%20y%20me%20gustar%C3%ADa%20hablar%20contigo." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; background: #FFFFFF; color: {{ t.ink }}; font-weight: 600; text-decoration: none">WhatsApp</a>
+<a href="{{ calUrl }}" target="_blank" rel="noopener noreferrer" style="{{ calCss }}">Reservar 15 minutos</a>
+<a href="mailto:lrsmpdr@gmail.com?subject=Quiero%20mejorar%20mi%20negocio" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; border: 2px solid {{ t.on }}; box-sizing: border-box; color: {{ t.on }}; font-weight: 600; text-decoration: none">Email</a>
+</div>
+</div>
+<div style="background: #FFFFFF; color: {{ t.ink }}; border-radius: 20px; padding: 28px">
+<form id="consulta" style="{{ formCss }}">
+<h3 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">Cuéntame tu caso</h3>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-negocio" style="font-weight: 600; font-size: 16px">Nombre del negocio</label>
+<input id="f-negocio" name="negocio" required maxlength="120" autocomplete="organization" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-mejora" style="font-weight: 600; font-size: 16px">¿Qué necesitas mejorar?</label>
+<textarea id="f-mejora" name="mejora" required maxlength="1000" rows="3" style="box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit; resize: vertical"></textarea>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-contacto" style="font-weight: 600; font-size: 16px">Email o teléfono</label>
+<input id="f-contacto" name="contacto" required maxlength="120" autocomplete="email" style="min-height: 48px; box-sizing: border-box; width: 100%; padding: 10px 14px; border: 2px solid {{ t.soft }}; border-radius: 12px; background: #FFFFFF; color: {{ t.ink }}; font: inherit">
+</div>
+<button type="button" onClick="{{ submit }}" style="min-height: 56px; border: none; border-radius: 999px; background: {{ t.a }}; color: {{ t.on }}; font: inherit; font-weight: 700; cursor: pointer">Enviar consulta</button>
+<p style="margin: 0; font-size: 15px; color: {{ t.mut }}">Solo usaré estos datos para responderte.</p>
+</form>
+<div style="{{ thanksCss }}">
+<h3 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15">¡Gracias!</h3>
+<p style="margin: 0">He recibido tu consulta. Te contesto lo antes posible.</p>
+</div>
 </div>
 </div>
 <div style="max-width: 1120px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 32px; font-size: 16px">
@@ -371,7 +397,27 @@ const SECTORS = [
     sText: 'Decido contigo qué publicar, lo diseño y lo dejo programado en Instagram o Facebook. Tú sigues a lo tuyo.',
     posts: [['Así trabajamos', 36729740], ['3 cosas que no sabías', 7437087], ['Nuestro equipo', 8117465], ['Novedades del mes', 6893890], ['En tu barrio', 18999439], ['Escríbenos sin compromiso', 4872028]],
     fText: 'Si copias los mismos datos cada día o contestas siempre lo mismo, buscamos cómo quitártelo de encima.',
-    flow: ['Entra una solicitud', 'Se guarda en tu lista', 'Tu cliente recibe la respuesta', 'Recordatorio de seguimiento'], rec: 'lo vemos juntas según tu negocio' }
+    flow: ['Entra una solicitud', 'Se guarda en tu lista', 'Tu cliente recibe la respuesta', 'Recordatorio de seguimiento'], rec: 'lo vemos juntas según tu negocio' },
+  { id: 'pilates', hidden: true, label: 'Centro de pilates', h1a: 'Clases llenas.', h1b: 'Menos mensajes.',
+    sub: 'Tus alumnos reservan su clase desde el móvil y reciben los cambios de horario sin que tengas que escribir a cada uno.',
+    dh: 'Así se reserva una clase. Elige una hora.', c1: 'Pilates reformer', c2: 'Estudio de ejemplo · Jueves · 50 minutos',
+    opts: ['9:00', '12:00', '18:00', '20:00'], btn: 'Reservar jueves a las', got: 'Nueva plaza, jueves', note: 'En tu lista de clase y en tu correo. Confirmación ya enviada.',
+    agenda: [['10:00', 'Reformer, 5 plazas'], ['13:00', 'Suelo, 8 plazas'], ['19:00', 'Reformer, 6 plazas']], newRow: 'Reformer, 1 plaza',
+    wText: 'Con tus clases, tu horario, tus tarifas y un botón para reservar la primera clase.', wNav: 'Clases · Horario · Tarifas', wHead: 'Tu primera clase te espera', wBtn: 'Reservar clase',
+    sText: 'Ejercicios, consejos de postura y plazas libres para que tu comunidad siga activa entre clases.',
+    posts: [['Horario de la semana', 25599832], ['Un ejercicio para tu espalda', 15641820], ['Plazas libres en reformer', 6111606], ['Clases en grupos reducidos', 25596885], ['Empieza esta semana', 29490926], ['Reserva desde el móvil', 2261483]],
+    fText: 'Reservas de clases y avisos de cambios de horario, sin escribir a cada alumno.',
+    flow: ['Entra una reserva de clase', 'Se añade a tu lista', 'Recibe la confirmación', 'Recordatorio antes de clase'], rec: 'Reservas online' },
+  { id: 'academiapeluqueria', hidden: true, label: 'Academia de peluquería', h1a: 'Cursos llenos.', h1b: 'Menos consultas.',
+    sub: 'Que cada interesado vea tus cursos, pida información y reciba respuesta al momento, aunque estés en clase.',
+    dh: 'Así llega una solicitud. Elige un curso.', c1: 'Información de cursos', c2: 'Academia de ejemplo · Respuesta automática',
+    opts: ['Peluquería', 'Barbería', 'Colorimetría', 'Intensivo'], btn: 'Pedir información:', got: 'Nueva solicitud:', note: 'En tu correo, con sus datos. Información ya enviada.',
+    agenda: [['10:00', 'Nuria, intensivo'], ['12:30', 'Óscar, barbería'], ['17:00', 'Sonia, colorimetría']], newRow: 'Solicitud de curso',
+    wText: 'Con tus cursos, fechas, precios e instalaciones, y un formulario para pedir información.', wNav: 'Cursos · Fechas · Inscripción', wHead: 'Aprende peluquería con práctica real', wBtn: 'Ver cursos',
+    sText: 'Trabajos de tus alumnos, fechas de cursos y consejos para que te encuentren quienes quieren dedicarse a esto.',
+    posts: [['Abierta la inscripción', 5368632], ['Trabajos de alumnos', 17320163], ['Práctica desde el primer día', 7702774], ['Curso de barbería', 32329615], ['Aprende con profesionales', 8867400], ['Pide información', 8468134]],
+    fText: 'Cada solicitud recibe respuesta automática con la información del curso y tú ves a quién hacer seguimiento.',
+    flow: ['Entra una solicitud de curso', 'Se guarda en tu lista de interesados', 'Recibe la información del curso', 'Recordatorio de seguimiento'], rec: 'Automatización sencilla' }
 ];
 
 const mkTheme = (a, on, h, ink, mut, soft, bg, rgb) => ({ a, on, h, ink, mut, soft, bg, rgb, line: 'rgba(' + rgb + ', 0.18)' });
@@ -385,7 +431,9 @@ const THEMES = {
   clin: mkTheme('#0F766E', '#FFFFFF', '#0F766E', '#06332F', '#3D6460', '#C9EFE9', '#EFFAF8', '6, 51, 47'),
   gym: mkTheme('#C8102E', '#FFFFFF', '#C8102E', '#3A0710', '#70404A', '#FFD3D9', '#FFF1F2', '58, 7, 16'),
   tien: mkTheme('#2E7D32', '#FFFFFF', '#2E7D32', '#12331A', '#47644C', '#D3EBCF', '#F2FAF0', '18, 51, 26'),
-  otro: mkTheme('#C93417', '#FFFFFF', '#C93417', '#3A120A', '#6E4A40', '#FFD9C7', '#FFEFE6', '58, 18, 10')
+  otro: mkTheme('#C93417', '#FFFFFF', '#C93417', '#3A120A', '#6E4A40', '#FFD9C7', '#FFEFE6', '58, 18, 10'),
+  pilates: mkTheme('#3F7265', '#FFFFFF', '#3F7265', '#14302A', '#47635C', '#D5E8E2', '#F1F8F5', '20, 48, 42'),
+  academiapeluqueria: mkTheme('#8E2D6F', '#FFFFFF', '#8E2D6F', '#340D29', '#68445E', '#F3D3E9', '#FCF0F8', '52, 13, 41')
 };
 
 const initGallery = () => {
@@ -509,6 +557,9 @@ const initGallery = () => {
   layout();
 };
 
+const FORM_URL = '';
+const CALENDAR_URL = '';
+const WHATSAPP = '447469892325';
 const urlSector = () => {
   try { const v = new URLSearchParams(location.search).get('sector'); return SECTORS.some((x) => x.id === v) ? v : null; } catch (e) { return null; }
 };
@@ -523,12 +574,25 @@ const bindNav = (c) => {
 };
 
 class Component extends DCLogic {
-  state = { sector: urlSector(), chosen: 1 };
+  state = { sector: urlSector(), chosen: 1, sent: false };
+  sendForm(label) {
+    const form = document.getElementById('consulta');
+    if (!form || !form.reportValidity()) return;
+    const v = (k) => form.elements[k].value.trim();
+    const data = { negocio: v('negocio'), mejora: v('mejora'), contacto: v('contacto'), sector: label };
+    if (FORM_URL) {
+      fetch(FORM_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) }).catch(() => {});
+    } else {
+      const text = 'Hola Laura. Negocio: ' + data.negocio + ' (' + label + '). Quiero mejorar: ' + data.mejora + '. Contacto: ' + data.contacto;
+      window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    }
+    this.setState({ sent: true });
+  }
   componentDidMount() { bindNav(this); initGallery(); }
   componentDidUpdate() { bindNav(this); initGallery(); }
   renderVals() {
     const top = () => { try { window.scrollTo(0, 0); } catch (e) {} };
-    const sectors = SECTORS.map((x) => ({ label: x.label, pick: () => { syncUrl(x.id); this.setState({ sector: x.id, chosen: 1 }); top(); } }));
+    const sectors = SECTORS.filter((x) => !x.hidden).map((x) => ({ label: x.label, pick: () => { syncUrl(x.id); this.setState({ sector: x.id, chosen: 1 }); top(); } }));
     const s = SECTORS.find((x) => x.id === this.state.sector) || SECTORS[0];
     const base = THEMES[this.state.sector] || THEMES.otro;
     const t = this.state.sector && this.state.sector !== 'otro' ? base : { ...base, a: this.props.accent ?? base.a, h: this.props.accent ?? base.h };
@@ -551,7 +615,12 @@ class Component extends DCLogic {
     const last = s.flow.length - 1;
     const flow = s.flow.map((text, i) => ({ text,
       css: 'border-radius: 14px; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 16px; ' + (i === last ? 'background: ' + t.a + '; color: ' + t.on : 'background: #FFFFFF') }));
-    return { t, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
+    const stack = 'display: flex; flex-direction: column; gap: 14px';
+    const formCss = this.state.sent ? 'display: none' : stack;
+    const thanksCss = this.state.sent ? stack : 'display: none';
+    const calUrl = CALENDAR_URL || '#contacto';
+    const calCss = CALENDAR_URL ? 'display: inline-flex; align-items: center; min-height: 56px; padding: 0 30px; border-radius: 999px; border: 2px solid ' + t.on + '; box-sizing: border-box; color: ' + t.on + '; font-weight: 600; text-decoration: none' : 'display: none';
+    return { formCss, thanksCss, calUrl, calCss, submit: () => this.sendForm(s.label), t, isIntro: !this.state.sector, isPage: !!this.state.sector, sectors, s, chosen, opts, agenda, posts, flow,
       reset: () => { syncUrl(null); this.setState({ sector: null, chosen: 1 }); top(); } };
   }
 }
