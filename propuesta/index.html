@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>noma. · Web, reservas y redes</title>
+<title>Madre · Web, reservas y redes</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23111%22%2F%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M41.2%2028.6V38.2Q41.2%2041.4%2042.2%2042.5Q43.2%2043.6%2044.8%2043.6H45.2Q46.1%2043.6%2046.1%2044.5V46.2Q46.1%2047%2045.2%2047H30.2Q29.4%2047%2029.4%2046.2V44.5Q29.4%2043.6%2030.2%2043.6H30.6Q31.8%2043.6%2032.5%2042.5Q33.3%2041.4%2033.3%2038.2V28.6Q33.3%2025.9%2032.4%2024.4Q31.6%2023%2029.2%2023Q27.8%2023%2026.4%2023.7Q25%2024.4%2023.9%2025.5Q22.8%2026.6%2022.3%2027.8V38.2Q22.3%2040.5%2023.3%2042.1Q24.3%2043.6%2025.9%2043.6H26Q26.9%2043.6%2026.9%2044.5V46.2Q26.9%2047%2026%2047H10.2Q9.3%2047%209.3%2046.2V44.5Q9.3%2043.6%2010.2%2043.6H10.3Q12.4%2043.6%2013.4%2042.1Q14.4%2040.5%2014.4%2038.2V31.1Q14.4%2029.6%2014.2%2028.2Q14%2026.8%2013.3%2025.8Q12.6%2024.8%2011%2024.6Q10.4%2024.6%2010.4%2023.9V22Q10.4%2021.4%2011.2%2021.2Q15.2%2020.6%2018.2%2019.3Q21.1%2018%2022.2%2017.2Q22.5%2017%2022.6%2017H22.7Q22.8%2017%2022.8%2017.1Q22.8%2017.2%2022.8%2017.6L21.8%2024.5Q22.6%2023.2%2023.9%2021.7Q25.2%2020.2%2027.1%2019.1Q29%2018%2031.6%2018Q34.6%2018%2036.5%2018.9Q38.5%2019.8%2039.5%2021.4Q40.4%2022.9%2040.8%2024.7Q41.2%2026.6%2041.2%2028.6Z%22%2F%3E%3Ccircle%20cx%3D%2251.1%22%20cy%3D%2243.4%22%20r%3D%223.6%22%20fill%3D%22%23C93417%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta name="description" content="Web, reservas y redes para pequeños negocios de Urgel, Oporto y Marqués de Vadillo.">
@@ -372,7 +372,7 @@ html{scroll-behavior:auto}
 <body>
 <nav class="nav" aria-label="Principal">
 <i class="prog" id="prog"></i>
-<a class="logo" href="#inicio" aria-label="noma., inicio">noma<i class="pt"></i></a>
+<a class="logo" href="#inicio" aria-label="Madre, inicio">Madre<i class="pt"></i></a>
 <ul><li><a href="#prueba">Cómo funciona</a></li><li><a href="#trabajos">Trabajos</a></li><li><a href="#precios">Precios</a></li><li><a href="#laura">Quién soy</a></li></ul>
 <a class="btn" data-mag href="https://calendar.app.google/tx5x6KwxiNUhJSyn9" target="_blank" rel="noopener">Reservar 15 min</a>
 </nav>
@@ -508,7 +508,7 @@ html{scroll-behavior:auto}
 </div></section>
 
 <footer class="pie"><div class="wrap">
-<div class="gigante" id="gigante" aria-hidden="true">noma<i class="pt"></i></div>
+<div class="gigante" id="gigante" aria-hidden="true">Madre<i class="pt"></i></div>
 <div class="legal"><span class="mono">Design · AI · Automation</span><a class="mono" href="/noma/privacidad.html">Privacidad</a><span class="mono">Urgel · Oporto · Marqués de Vadillo, Madrid</span></div>
 </div></footer>
 
@@ -804,10 +804,10 @@ catch(x){b.disabled=false;b.classList.remove('va');b.style.width='';b.lastChild.
 const q=new URLSearchParams(location.search).get('sector');
 pinta(SECTORS.some((s)=>s.id===q)?q:'otro');
 const arranca=()=>{$('h1').classList.add('vivo')};
-let visto=false;try{visto=!!sessionStorage.getItem('noma-v')}catch(e){}
+let visto=false;try{visto=!!sessionStorage.getItem('madre-v')}catch(e){}
 if(quieto||visto){arranca()}else{
-const l=document.createElement('div');l.className='carga';l.innerHTML='<div>noma<i></i></div>';document.body.append(l);
-setTimeout(()=>{l.classList.add('ya');arranca();try{sessionStorage.setItem('noma-v','1')}catch(e){}},1050);setTimeout(()=>l.remove(),1800);}
+const l=document.createElement('div');l.className='carga';l.innerHTML='<div>Madre<i></i></div>';document.body.append(l);
+setTimeout(()=>{l.classList.add('ya');arranca();try{sessionStorage.setItem('madre-v','1')}catch(e){}},1050);setTimeout(()=>l.remove(),1800);}
 scroll();
 </script>
 </body>
